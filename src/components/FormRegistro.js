@@ -23,8 +23,8 @@ const manejarClic = () => {
                     estado={'nombre'}
                     cambiarEstado={'cambiarNombre'} 
                     expresionRegular = {'expresiones.nombreEquipo'}   
-                    label="jgffgfgfghfg"
-                    placeholder="Isdfsfdsdfsd"
+                    label="Apellido:"
+                    placeholder="Ingrese su apellido"
                 />
 
             <div class="mb-3">

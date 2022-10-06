@@ -27,8 +27,8 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
     }
 
     return(
-        <div className="mb-3 d-flex ">
-            <label className="w-25 text-start">{label}</label>
+        <div className="mb-3 d-block ">
+            <label className="w-100">{label}</label>
             <input
                 className="form-control"
                 type="text"
