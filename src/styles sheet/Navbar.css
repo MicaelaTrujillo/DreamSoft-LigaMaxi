@@ -1,0 +1,32 @@
+.nav-background{
+    background-blend-mode: multiply;
+    background-image: url('../assets/background-two.jpg');
+    height: 50px;
+}
+
+.navbar-texto{
+    color: white;
+    font-size: 24px;
+    text-shadow: 1px 1px 1px  rgb(0 0 0 / 50%);
+    /*padding-top: 11px;*/
+   
+    text-align: center;
+}
+
+.contenedor-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-texto{
+    width: 180px;
+    height: 39px;
+    padding-top: 11px;
+    width: 50%;
+}
+
+.contenedor-texto:hover{
+    background-color: rgb(0 0 0 / 20%);
+    cursor: pointer;
+}

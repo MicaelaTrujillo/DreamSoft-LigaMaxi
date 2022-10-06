@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+
+html, body{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Roboto;
+}
+
+
+.timer-container {
+  background-image: url(../assets/background-two.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  width: 100%;
+  height: 20em;
+  font-family: Roboto;
+  text-shadow: 1px 1px 1px  rgb(0 0 0 / 50%);
+}
+
+.timer {
+  /*background-color: rgba(0,0,0,0.5);
+  display: flex; */
+  flex: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 7em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  width: 100%;
+  height: 15px;
+}
+
+.timer div:first-child{
+  text-align: center;
+  height: auto;
+}
+
+
+
+h2{
+  font-weight: 600;
+  
+  font-size: 2.5rem;
+}
+
+.timer div:first-child p{
+  color: #f8f8f8;
+  height: auto;
+}
+
+.timer div:last-child{
+  /*border: 1px solid #fff;*/
+  background-color: rgba(0,0,0,0.25);
+  
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-top: 0.5em;
+  padding: 2em;
+  text-align: center;
+  margin-left: 25%;
+  margin-right: 25%;
+  min-height: auto;
+}
+
+section p:first-child, .timer div:last-child span{
+  font-size: 4em;
+  font-weight: 500;
+}
+
+section p:last-child{
+  font-size: 1.5em;
+  font-weight: 450;
+}
+
+
+@media screen and (max-width:480px) {
+  .timer div:last-child{
+    margin-left: 2em;
+    margin-right: 2em;
+    padding: 3em 1em;
+  }
+  
+}
