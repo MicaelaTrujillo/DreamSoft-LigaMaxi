@@ -1,8 +1,9 @@
 
-import {FormInputs, FormComboBox, FormQR, FormComprob, FormBoton} from '../Elementos/ElementosForms'
+import {FormInputs, FormComboBox, FormQR, Boton, FormArchivo} from '../Elementos/ElementosForms'
 import Form from "react-bootstrap/Form";
 import "../styles sheet/FormPreinscripcion.css";
 import { useState } from 'react';
+
 
 function FormPreinsc() {
     const [nombre, cambiarNombre] = useState({campo: "", valido: null});
@@ -11,6 +12,10 @@ function FormPreinsc() {
         nombreEquipo: /^[a-zA-ZÀ-ÿ0-9\s]{1,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
     }
 
+    const manejarClic = () => {
+        console.log("clic");
+      }
+      
     return (
     <>
     <div className="row cont-main-form mt-5 mb-5 mx-0">
@@ -27,15 +32,18 @@ function FormPreinsc() {
                     arreglo = {["30 años", "35 años", "40 años"]}
                 />
                 <FormQR/>
-                <FormComprob/>
-                <div className="d-flex justify-content-evenly">
-                    <FormBoton
-                        value="Cancelar"
-                    />
-                    <FormBoton
-                        value="Enviar" 
-                    />
-                </div>
+                <FormArchivo
+                    archivo="Subir comprobante:"
+                />
+                <div className='botones pb-4'>
+                    <Boton 
+                        texto='Cancelar'
+                        manejarClic={manejarClic}/>
+
+                    <Boton
+                        texto='Enviar'
+                        manejarClic={manejarClic}/>
+            </div>
         </Form>
     </div>
     </>

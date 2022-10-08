@@ -1,7 +1,16 @@
 import '../styles sheet/formRegistro.css';
 import '../styles sheet/Boton.css';
-import {Boton,Inputext,FormInputs} from './Inputext';
+import {Boton,FormInputs,FormArchivo, FormContraseña} from '../Elementos/ElementosForms';
+import { useState } from 'react';
+
+
 function FormRegistro() {
+
+  const [nombre, cambiarNombre] = useState({campo: "", valido: null});
+   
+  const expresiones = {
+      nombreJugador: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
+  }
 
 const manejarClic = () => {
   console.log("clic");
@@ -12,45 +21,41 @@ const manejarClic = () => {
       <div className='container'>
         <div className='formulario'> 
           <h1>REGISTRO DE DELEGADO</h1>
-            <div class="mb-3">
-              <label for="nombreyapellido" class="form-label">Nombres(s) y Apellidos(s):</label>
 
-              <Inputext
-                texto="Juan Perez"/>
-            </div>
+            <FormInputs
+                    estado={nombre}
+                    cambiarEstado={cambiarNombre} 
+                    expresionRegular = {expresiones.nombreJugador}   
+                    label="Nombres(s) y Apellidos(s):"
+                    placeholder="Juan Perez"
+                />
+
+            
+            <FormInputs
+                    estado={'nombre'}
+                    cambiarEstado={'cambiarNombre'} 
+                    expresionRegular = {'expresiones.nombreEquipo'}   
+                    label="Correo:"
+                    placeholder="name@example.com"
+                />
 
             <FormInputs
                     estado={'nombre'}
                     cambiarEstado={'cambiarNombre'} 
                     expresionRegular = {'expresiones.nombreEquipo'}   
-                    label="Apellido:"
-                    placeholder="Ingrese su apellido"
+                    label="Telefono:"
+                    placeholder="+591 70707070"
                 />
 
-            <div class="mb-3">
-              <label for="correo" class="form-label">Correo:</label>
-              <Inputext
-                texto="name@example.com"/>
-            </div>
-            
 
-            <div class="mb-3">
-              <label for="telefono" class="form-label">Telefono:</label>  
-              <Inputext
-                texto="+591 70707070"/>
-            </div>
+            <FormContraseña
+                    label="Contraseña:"
+                    placeholder="123456"
+                />
 
-            <div class="mb-3">
-              <label for="password" class="form-label">Contraseña:</label>
-              <Inputext
-                texto="123456"/>
-            </div>
-
-            <div class="mb-3">
-              <label for="formFile" class="form-label">Foto:</label>
-              <input class="form-control" type="file" id="formFile"/>
-              
-            </div>
+            <FormArchivo
+              archivo="Foto:"
+            />
 
             <div className='botones'>
               <Boton 

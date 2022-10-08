@@ -18,7 +18,7 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
     }
 
     return(
-        <Form.Group className="mb-3 d-block" controlId="formBasicNombre">
+        <Form.Group className="mb-3 d-block">
             <Form.Label className="w-100 text-start">{label}</Form.Label>
             <Form.Control
                 className="form-control"
@@ -41,7 +41,7 @@ function FormComboBox({arreglo}){
         <Form.Label className="w-100 text-start">Categoría: </Form.Label>
         <Form.Select>
           {arreglo.map(dato => (
-            <option>{dato}</option>
+            <option key={dato.toString()}>{dato}</option>
           ) )}
         </Form.Select>
       </Form.Group>
@@ -60,23 +60,41 @@ function FormQR(){
 }
 
 
-function FormComprob(){
+function FormArchivo({archivo}){
     return(
         <Form.Group className="mb-4 d-block">
-            <Form.Label className="w-100 text-start">Subir comprobante: </Form.Label>
-            <Form.Control className="form-control" type="file" id="formFile"/>
+            <Form.Label className="w-100 text-start">{archivo}</Form.Label>
+            <Form.Control className="form-control" type="file" id="formFile"
+            />
         </Form.Group>
     )
 }
 
 
 
-function FormBoton({value}){
+function Boton({texto,manejarClic}){
     return(
-          <button className="w-25 form-buton-register">
-            {value}
-          </button>
+        <button
+            className='boton'
+            onClick={manejarClic}>
+            <p>{texto}</p>
+        </button>
+    );
+}
+
+function FormContraseña({label, placeholder}){
+
+    return(
+        <Form.Group className="mb-3 d-block" controlId="formBasicNombre">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="password"
+                placeholder={placeholder}
+            />
+            <p>Alerta de error</p>
+        </Form.Group>
     )
 }
 
-export {FormInputs, FormComboBox, FormQR, FormComprob, FormBoton}
+export {FormInputs, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña}
