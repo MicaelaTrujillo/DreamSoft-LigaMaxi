@@ -46,7 +46,7 @@ const Clock = () => {
 
   return (
     <div className='container-fluid'>
-      <div class = "row">
+      <div className = "row">
             <section className ="timer-container">
           <section className ="timer">
             <div className = "tittle">
