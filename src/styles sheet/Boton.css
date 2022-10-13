@@ -8,8 +8,9 @@ button{
 }
 p{ 
     color: white;
-    display: table-cell;
+    /*display: table-cell;*/
     vertical-align: center;
+    margin: 0 !important;
     
 }
 
