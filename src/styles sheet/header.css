@@ -30,7 +30,6 @@ body {
     color: white;
     font-size: 36px;
     font-weight: lighter;
-    padding-left: 60px;
     margin: 30px;
 }
 
@@ -39,5 +38,11 @@ body {
     font-weight: lighter;
     font-size: 20px;
     text-align: right;
-    padding-right: 60px;
+}
+
+.botonIs{
+    background: none;
+    width: auto;
+    margin: auto;
+    border: none;
 }

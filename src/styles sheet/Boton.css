@@ -1,4 +1,4 @@
-button{
+.boton{
     background: #FF7B00;
     font-family:Roboto;
     padding-left: 5%;
@@ -13,6 +13,6 @@ p{
     
 }
 
-button :hover{
+.boton :hover{
     background: #934700;
 }

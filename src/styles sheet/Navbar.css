@@ -14,8 +14,9 @@
     text-align: center;
 }
 
-.a{
-    width: 100%;
+Link {
+    color: white;
+    text-decoration: none;
 }
 
 .contenedor-navbar{
