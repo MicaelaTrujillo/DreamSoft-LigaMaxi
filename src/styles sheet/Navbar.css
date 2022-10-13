@@ -14,8 +14,9 @@
     text-align: center;
 }
 
-.a{
-    width: 100%;
+Link {
+    color: white;
+    text-decoration: none;
 }
 
 .contenedor-navbar{
@@ -38,4 +39,13 @@
 .contenedor-texto:hover{
     background-color: rgb(0 0 0 / 20%);
     cursor: pointer;
+}
+
+Link{
+    color: white;
+    font-size: 24px;
+    text-shadow: 1px 1px 1px  rgb(0 0 0 / 50%);
+    /*padding-top: 11px;*/
+   
+    text-align: center;
 }

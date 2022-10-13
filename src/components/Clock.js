@@ -11,7 +11,7 @@ const Clock = () => {
   let interval = useRef();
 
   const startTimer = () => {
-    const countdownDate = new Date('Oct 10,2022 00:00:00').getTime();
+    const countdownDate = new Date('Jan 5,2023 00:00:00').getTime();
 
     interval = setInterval(() => {
       const now = new Date().getTime();
@@ -45,41 +45,46 @@ const Clock = () => {
   });
 
   return (
-    <section className ="timer-container">
-      <section className ="timer">
-        <div className = "tittle">
-          
-          <h2>Inicio del campeonato:</h2>
-         
-        </div>
-        <div>
-            <section>
-                <p>{timerDays}</p>
-                <p>Día(s)</p>
-            </section>
-            <span>:</span>
-
-            <section>
-                <p>{timerHours}</p>
-                <p>Hora(s)</p>
-            </section>
-            <span>:</span>
-
-            <section>
-                <p>{timerMinutes}</p>
-                <p>Minuto(s)</p>
-            </section>
-            <span>:</span>
-
-            <section>
-                <p>{timerSeconds}</p>
-                <p>Segundo(s)</p>
-            </section>
+    <div className='container-fluid'>
+      <div className = "row">
+            <section className ="timer-container">
+          <section className ="timer">
+            <div className = "tittle">
+              
+              <h2>Inicio del campeonato:</h2>
             
-        </div>
-      </section>
+            </div>
+            <div>
+                <section>
+                    <p>{timerDays}</p>
+                    <p>Día(s)</p>
+                </section>
+                <span>:</span>
 
-    </section>
+                <section>
+                    <p>{timerHours}</p>
+                    <p>Hora(s)</p>
+                </section>
+                <span>:</span>
+
+                <section>
+                    <p>{timerMinutes}</p>
+                    <p>Minuto(s)</p>
+                </section>
+                <span>:</span>
+
+                <section>
+                    <p>{timerSeconds}</p>
+                    <p>Segundo(s)</p>
+                </section>
+                
+            </div>
+          </section>
+
+        </section>
+      </div>
+    </div>
+    
   );
 }
 
