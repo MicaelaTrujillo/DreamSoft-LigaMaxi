@@ -2,6 +2,10 @@ import QR from '../assets/qr.jpeg'
 import "../styles sheet/FormPreinscripcion.css";
 import Form from "react-bootstrap/Form";
 
+import { db } from "../Firebase/ConexionBD";
+import { doc, setDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
@@ -10,12 +14,13 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
     const validarNombre = () => {
         if(expresionRegular){
             if(expresionRegular.test(estado.campo)){
-                console.log("correcto")
+                cambiarEstado({...estado, valido: 'true'})
             }else{
-                console.log("incorrecto")
+                cambiarEstado({...estado, valido: 'false'})
             }
         }
     }
+    
 
     return(
         <Form.Group className="mb-3 d-block">
@@ -28,6 +33,7 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
                 onChange={onChange}
                 onKeyUp={validarNombre}
                 onBlur={validarNombre}
+                valido={estado.valido}
             />
             <p>Alerta de error</p>
         </Form.Group>
@@ -35,11 +41,18 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
 }
 
 
-function FormComboBox({arreglo}){
+function FormComboBox({label,arreglo, estado, cambiarEstado}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+
     return(
         <Form.Group className="mb-3 d-block">
-        <Form.Label className="w-100 text-start">Categoría: </Form.Label>
-        <Form.Select>
+        <Form.Label className="w-100 text-start">{label}</Form.Label>
+        <Form.Select
+            value={estado.campo}
+            onChange={onChange}
+        >
           {arreglo.map(dato => (
             <option key={dato.toString()}>{dato}</option>
           ) )}
@@ -60,11 +73,20 @@ function FormQR(){
 }
 
 
-function FormArchivo({archivo}){
+function FormArchivo({archivo, estado, cambiarEstado}){
+ 
+    const onChange = (e) => {
+        cambiarEstado(e.target.files[0]);
+        
+    }
+    
+
     return(
         <Form.Group className="mb-4 d-block">
             <Form.Label className="w-100 text-start">{archivo}</Form.Label>
             <Form.Control className="form-control" type="file" id="formFile"
+                
+                onChange={onChange}
             />
         </Form.Group>
     )
