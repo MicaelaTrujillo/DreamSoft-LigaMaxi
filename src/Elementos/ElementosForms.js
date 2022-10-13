@@ -2,17 +2,23 @@ import QR from '../assets/qr.jpeg'
 import "../styles sheet/FormPreinscripcion.css";
 import Form from "react-bootstrap/Form";
 
-function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular}){
+import styled from 'styled-components';
+let res='w-100  text-start';
+function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
     }
-
+    
     const validarNombre = () => {
-        if(expresionRegular){
+        if(expresionRegular){   
             if(expresionRegular.test(estado.campo)){
                 console.log("correcto")
+                res='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
             }else{
                 console.log("incorrecto")
+                res='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
             }
         }
     }
@@ -29,7 +35,7 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
                 onKeyUp={validarNombre}
                 onBlur={validarNombre}
             />
-            <p>Alerta de error</p>
+                <Form.Label className={res}>{alerta}</Form.Label>                  
         </Form.Group>
     )
 }
@@ -82,6 +88,12 @@ function Boton({texto,manejarClic}){
     );
 }
 
+function AleFinal(){
+    return(
+        <p>'Ingrese todos los datos correctamente por favor'</p>
+    );
+}
+
 function FormContraseña({label, placeholder}){
 
     return(
@@ -97,4 +109,4 @@ function FormContraseña({label, placeholder}){
     )
 }
 
-export {FormInputs, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña}
+export {FormInputs, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}

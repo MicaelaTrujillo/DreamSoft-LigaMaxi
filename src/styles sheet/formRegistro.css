@@ -18,3 +18,13 @@
     display: flex;
     justify-content: space-around  ;
   }
+
+.centrar{
+  display: block;
+  justify-content: center;
+  color: black;
+}
+
+.AleFinal{
+  color: black;
+}
