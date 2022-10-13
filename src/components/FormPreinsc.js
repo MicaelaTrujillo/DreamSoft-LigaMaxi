@@ -116,7 +116,7 @@ function FormPreinsc() {
     return (
     <>
     <div className="row cont-main-form mt-5 mb-5 mx-0">
-        <div className='formulario'> 
+        
             <Form className="form text-center container col-8 ">
                 <h3 className="mb-5 mt-3">FORMULARIO DE PRE-INSCRIPCION</h3>
                     <FormInputs
@@ -150,7 +150,6 @@ function FormPreinsc() {
                             />
                 </div>
             </Form>
-        </div>
     </div>
     </>
   );

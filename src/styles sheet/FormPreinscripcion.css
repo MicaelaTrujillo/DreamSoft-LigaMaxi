@@ -1,13 +1,3 @@
-.formulario{
-    background-color: #FAF9F7;
-    margin: 10%;
-    padding-top: 3%;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-bottom: 3%;
-    font-weight: bold;
-  }
-
 .cont-main-form{
     width: 100%;
     min-height: 93vh;
@@ -25,6 +15,13 @@
 }
 .btn-primary{
     background-color: rebeccapurple;
+}
+
+.form{
+    background-color: #FAF9F7;
+    margin: 0;
+    /*padding-left: 100px;
+    padding-right: 100px;*/
 }
 
 .alertaBien1{
@@ -64,7 +61,7 @@
 }
 .xdx{
     font-weight:lighter;
-    display: none;
+    display: no;
 }
  @media (max-width: 450px){
     .qr-imagen{
