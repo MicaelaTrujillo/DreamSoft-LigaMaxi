@@ -7,16 +7,23 @@ import { doc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular}){
+
+let res='w-100  text-start';
+function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
     }
-
+    
     const validarNombre = () => {
-        if(expresionRegular){
+        if(expresionRegular){   
             if(expresionRegular.test(estado.campo)){
-                cambiarEstado({...estado, valido: 'true'})
+                console.log("correcto")
+                res='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
             }else{
-                cambiarEstado({...estado, valido: 'false'})
+                console.log("incorrecto")
+                res='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
             }
         }
     }
@@ -35,7 +42,7 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
                 onBlur={validarNombre}
                 valido={estado.valido}
             />
-            <p>Alerta de error</p>
+                <Form.Label className={res}>{alerta}</Form.Label>                  
         </Form.Group>
     )
 }
@@ -104,6 +111,12 @@ function Boton({texto,manejarClic}){
     );
 }
 
+function AleFinal(){
+    return(
+        <p>'Ingrese todos los datos correctamente por favor'</p>
+    );
+}
+
 function FormContraseña({label, placeholder}){
 
     return(
@@ -119,4 +132,4 @@ function FormContraseña({label, placeholder}){
     )
 }
 
-export {FormInputs, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña}
+export {FormInputs, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}
