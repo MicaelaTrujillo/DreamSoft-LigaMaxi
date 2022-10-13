@@ -9,7 +9,7 @@ function Invpublica() {
             </div>
             
             <img 
-                className='imagen-invi'
+                class="img-thumbnail mx-auto d-block" className='imagen-invi'
                 src ={require('../assets/invitacion-publica1.png')}
             />
             
