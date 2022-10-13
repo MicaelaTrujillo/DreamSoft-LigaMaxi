@@ -6,9 +6,8 @@ import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular}){
 
-let res='w-100  text-start';
+let res='w-100 xdx text-start';
 function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
@@ -117,8 +116,24 @@ function AleFinal(){
     );
 }
 
-function FormContraseña({label, placeholder}){
+function FormContraseña({label, placeholder, estado,cambiarEstado,expresionRegular,alerta,id}){
 
+        const onChange = (e) => {
+            cambiarEstado({...estado, campo: e.target.value});
+        }
+        const validarNombre = () => {
+            if(expresionRegular){   
+                if(expresionRegular.test(estado.campo)){
+                    console.log("correcto")
+                    res='w-100  text-start alertaBien'+id
+                    cambiarEstado({...estado,valido:'true'})
+                }else{
+                    console.log("incorrecto")
+                    res='w-100 text-start alertaMal'+id
+                    cambiarEstado({...estado,valido:'false'})
+                }
+            }
+        }
     return(
         <Form.Group className="mb-3 d-block" controlId="formBasicNombre">
             <Form.Label className="w-100 text-start">{label}</Form.Label>
@@ -126,8 +141,12 @@ function FormContraseña({label, placeholder}){
                 className="form-control"
                 type="password"
                 placeholder={placeholder}
+                value={estado.campo}
+                onChange={onChange}
+                onKeyUp={validarNombre}
+                onBlur={validarNombre}
             />
-            <p>Alerta de error</p>
+            <Form.Label className={res}>{alerta}</Form.Label>  
         </Form.Group>
     )
 }

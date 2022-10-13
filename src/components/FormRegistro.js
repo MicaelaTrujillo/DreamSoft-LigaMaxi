@@ -3,6 +3,9 @@ import '../styles sheet/Boton.css';
 import {Boton,FormInputs,FormArchivo, FormContraseña,AleFinal} from '../Elementos/ElementosForms';
 import { useState } from 'react';
 
+import { db } from "../Firebase/ConexionBD";
+import { doc, setDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 function FormRegistro() {
 
@@ -16,16 +19,13 @@ function FormRegistro() {
 
   const expresiones = {
       nombreJugador: /^[a-zA-ZÀ-ÿ\s]{2,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
-      password: /^.{4,12}$/, // 4 a 12 digitos.
+      password: /^.{6,10}$/, // 4 a 12 digitos.
       correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
       telefono: /^\d{7,8}$/, // 7 a 14 numeros.
       ci: /^\d{7,8}$/ // 7 a 14 numeros.
   }
 
-const manejarClic = () => {
-  console.log("clic");
-  onSubmit();
-}
+
 const manejarClic2 = () => {
 
   console.log("clicCancelar");
@@ -35,8 +35,8 @@ const manejarClic2 = () => {
   cambiarTelefono({campo:'',valido:null});
   cambiarPassword({campo:'',valido:null});
 }
-const onSubmit = (e) =>{
-  // e.preventDefault();
+const validar = (e) =>{
+  //e.preventDefault();
   if(nombre.valido === 'true' &&
     ci.valido === 'true' &&
     correo.valido === 'true' &&
@@ -50,14 +50,44 @@ const onSubmit = (e) =>{
     cambiarCorreo({campo:'',valido:null});
     cambiarTelefono({campo:'',valido:null});
     cambiarPassword({campo:'',valido:null});
+   
   }else{
     cambiarFormValido(false);
   }
 }
+
+    async function onSubmit(e){
+      e.preventDefault();
+      if(nombre.valido === 'true' &&
+    ci.valido === 'true' &&
+    correo.valido === 'true' &&
+    telefono.valido === 'true' 
+    
+  ){
+    cambiarFormValido(true);
+    
+    // Add a new document in collection "cities"
+    await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", nombre.campo), {
+    NombreDelegado: nombre.campo,
+    CI: ci.campo,
+    Telefono: telefono.campo
+    });
+    cambiarNombre({campo:'',valido:null});
+    cambiarCi({campo:'',valido:null});
+    cambiarCorreo({campo:'',valido:null});
+    cambiarTelefono({campo:'',valido:null});
+    cambiarPassword({campo:'',valido:null});
+   
+  }else{
+    cambiarFormValido(false);
+  }
+   
+    }
+
   return (
     <div className="App">
       <div className='container'>
-        <div className='formulario' action="" onSubmit={onSubmit}> 
+        <div className='formulario'> 
           <h1>REGISTRO DE DELEGADO</h1>
 
             <FormInputs
@@ -86,7 +116,7 @@ const onSubmit = (e) =>{
                     expresionRegular = {expresiones.correo}   
                     label="Correo:"
                     placeholder="name@example.com"
-                    alerta="formato valido name@example.com"
+                    alerta="Formato valido name@example.com"
                     id="3"
                 />
 
@@ -104,6 +134,11 @@ const onSubmit = (e) =>{
             <FormContraseña
                     label="Contraseña:"
                     placeholder="123456"
+                    estado={password}
+                    cambiarEstado={cambiarPassword}
+                    expresionRegular={expresiones.password}
+                    alerta="Debe tener entre 6 y 10 caracteres"
+                    id="5"
                 />
 
             <FormArchivo
@@ -118,9 +153,9 @@ const onSubmit = (e) =>{
                 
                 manejarClic={manejarClic2}/>
 
-              <Boton type='submit'action="" onSubmit={onSubmit}
+              <Boton type='submit'
                 texto='Registrar'
-                manejarClic={manejarClic}/>
+                manejarClic={onSubmit}/>
             </div>
         </div>
       </div>

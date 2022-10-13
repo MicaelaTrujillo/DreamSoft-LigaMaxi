@@ -31,7 +31,7 @@ function FormPreinsc() {
     async function onSubmit(e){
         e.preventDefault();
         // Add a new document in collection "cities"
-        await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", "prueba05"), {
+        await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
         NombreEquipo: nombre.campo,
         Categoria: categoria.campo,
         });
