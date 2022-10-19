@@ -1,13 +1,11 @@
 import React from 'react';
 import FormRegistro from '../components/FormRegistro'
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
+import HomePage from '../components/homePage';
 
 function FormuRegistro() {
     return (
         <div>
-             <Header/>
-             <Navbar/>
+             <HomePage/>
              <FormRegistro/>
 
         </div>

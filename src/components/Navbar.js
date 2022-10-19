@@ -1,7 +1,7 @@
 import '../styles sheet/Navbar.css'
 import {Link} from 'react-router-dom'
 
-function Navbar (){
+function Navbar ( {children}){
     return(
         <nav className="nav-background">
             <div className='contenedor-navbar'>
@@ -22,6 +22,7 @@ function Navbar (){
                     <Link to="/FormularioPreInscripcion">Pre inscripción</Link>
                 
                 </div>
+                {children}
             </div>
         </nav>
     );

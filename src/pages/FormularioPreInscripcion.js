@@ -1,13 +1,11 @@
 import React from 'react';
 import FormPreinsc from '../components/FormPreinsc'
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
+import HomePage from '../components/homePage';
 
 function FormPreinscripcion() {
     return (
         <div>
-             <Header/>
-             <Navbar/>
+             <HomePage/>
              <FormPreinsc/>
 
         </div>
