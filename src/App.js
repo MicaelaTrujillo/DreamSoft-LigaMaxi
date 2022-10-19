@@ -14,12 +14,8 @@ function App() {
   return (
     <UserProvider>
        <Routes>
-          {/*si hay usuario */}
-          <Route path="/" element={<Home id='Cerrar sesion'/>}></Route>
-          <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>}></Route>
-          <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
-          {/*no hay usuario */}
           <Route path="/" element={<Home/>}></Route>
+          <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>}></Route>
           <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
         </Routes>
     </UserProvider>

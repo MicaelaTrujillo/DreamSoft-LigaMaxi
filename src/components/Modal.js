@@ -23,7 +23,7 @@ export default function ModalCmp({show, handleClose, setShow}) {
   
   useEffect(() => {
     if(user){
-     navegate("/")
+     //navegate("/")
     }
  }, [user]);
  

@@ -4,6 +4,8 @@ import Modal from './Modal.js';
 import { auth } from '../Firebase/ConexionBD';
 import { UserContext } from '../context/userProvider';
 import { async } from '@firebase/util';
+import {db} from '../Firebase/ConexionBD';
+import { collection} from "firebase/firestore";
 
 function Header(){
     const [show, setShow] = useState(false);
@@ -24,6 +26,16 @@ function Header(){
         }
     }
     console.log("usuariooo", user);
+    if(user){
+        /*const userRef = db.collection("Campeonato1");
+        userRef.get().then((results) => {
+            const data = results.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }))
+        console.log("que sale",data);
+        });*/
+    }
 
     return (
         <>
@@ -37,7 +49,7 @@ function Header(){
                     {user? cerrar() : handleShow()}
                     }>{user? "Cerrar Sesión" : "Iniciar Sesión"}
                 </button>
-              
+                <p> </p>
             </div>
         </div>
         </header>
