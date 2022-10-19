@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {Boton,FormInputs, FormContraseña} from '../Elementos/ElementosForms';
-import {signInWithEmailAndPassword } from "firebase/auth";
+import {signInWithEmailAndPassword, verifyBeforeUpdateEmail} from "firebase/auth";
 import { auth } from '../Firebase/ConexionBD';
-function ModalCmp({show, handleClose}) {
-    
+import { UserContext } from '../context/userProvider';
+import { useNavigate } from "react-router-dom"
+
+export default function ModalCmp({show, handleClose, setShow}) {
+  const {loginUser, user} = useContext(UserContext);
+  const navegate = useNavigate();
   const [password, cambiarPassword] = useState({campo: "", valido: null});
   const [correo, cambiarCorreo] = useState({campo: "", valido: null});
   const [formValido, cambiarFormValido] = useState({campo: "", valido: null});
@@ -16,16 +20,37 @@ function ModalCmp({show, handleClose}) {
       telefono: /^\d{7,8}$/, // 7 a 14 numeros.
       ci: /^\d{7,8}$/ // 7 a 14 numeros.
   }
-    
+  
+  useEffect(() => {
+    if(user){
+     navegate("/")
+    }
+ }, [user]);
+ 
   async function iniciarSesion(e){
     e.preventDefault();
     if( correo.valido === 'true' && password.valido === 'true'){
         cambiarFormValido(true);
-        console.log("se inicia sesion", correo.campo, password.campo);
-        signInWithEmailAndPassword(auth,correo.campo, password.campo);
-      }else{
-        console.log("no se inicia sesion");
+        cambiarCorreo({campo:'',valido:null});
+           
+        try{
+          await loginUser(correo.campo,password.campo);
+          setShow(false);
+          correo.campo="";
+          password.campo="";
+
+          navegate("/")
+      }catch(error){
+          if(error.code === "auth/wrong-password"){
+              alert("Contraseña incorrecta")
+          }else{
+              alert("Esta cuenta no esta registrada")
+          }
+          //console.log(error.code);
+          
+
       }
+    }
   }
 
   return (
@@ -64,4 +89,3 @@ function ModalCmp({show, handleClose}) {
   );
 }
 
-export default ModalCmp;

@@ -9,6 +9,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { async } from '@firebase/util';
 import { UserContext } from '../context/userProvider';
+import {app} from '../Firebase/ConexionBD';
 
 
 function FormRegistro() { 
@@ -69,30 +70,25 @@ const validar = (e) =>{
           telefono.valido === 'true' 
       ){
         cambiarFormValido(true);
-    
         
-        await createUserWithEmailAndPassword(auth, correo.campo, password.campo).then((userCredential) => {
-          // Signed in
-          const userID = userCredential.user.uid;
-          console.log("usuario", userCredential);
-          setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", userID), {
+        try{
+          await registerUser(correo.campo, password.campo);
+          const user = getAuth(app).currentUser.uid;
+          console.log("estooo",user);
+          setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", user), {
             NombreDelegado: nombre.campo,
             CI: ci.campo,
-            Telefono: telefono.campo
-            });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
-      
-    
-   
-    cambiarNombre({campo:'',valido:null});
-    cambiarCi({campo:'',valido:null});
-    cambiarCorreo({campo:'',valido:null});
-    cambiarTelefono({campo:'',valido:null});
-    cambiarPassword({campo:'',valido:null});
+            Telefono: telefono.campo,
+            Rol: 'Delegado'
+          });
+        }catch (error){
+          console.log(error);
+        }
+        cambiarNombre({campo:'',valido:null});
+        cambiarCi({campo:'',valido:null});
+        cambiarCorreo({campo:'',valido:null});
+        cambiarTelefono({campo:'',valido:null});
+        cambiarPassword({campo:'',valido:null});
    
   }else{
     cambiarFormValido(false);

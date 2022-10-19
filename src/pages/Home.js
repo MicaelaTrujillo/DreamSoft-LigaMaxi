@@ -7,10 +7,10 @@ import Clock from '../components/Clock';
 import Invpublica from '../components/Invpublica';
 import HomePage from '../components/homePage'
 
-function Home(props) {
+function Home() {
     return (
         <div>
-            <HomePage id= {props.id}/>
+            <HomePage />
             <Invpublica/>
             <Clock/>
 
