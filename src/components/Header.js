@@ -6,12 +6,15 @@ import { UserContext } from '../context/userProvider';
 import { async } from '@firebase/util';
 import {db} from '../Firebase/ConexionBD';
 import { collection} from "firebase/firestore";
+import { GetNameUser } from '../utyls/getNameRol';
 
 function Header(){
     const [show, setShow] = useState(false);
     const [cerrarSesion, setSesion]= useState(false);
     const {user,signOutUser} = useContext(UserContext);
+    const [userLogin, setUserLogin] = useState(null);
 
+    const userName = GetNameUser(user);
     const handleClose = () => {
         setShow(false);
     }
@@ -49,7 +52,7 @@ function Header(){
                     {user? cerrar() : handleShow()}
                     }>{user? "Cerrar Sesión" : "Iniciar Sesión"}
                 </button>
-                <p> </p>
+                <p>{userName? userName : ""}</p>
             </div>
         </div>
         </header>

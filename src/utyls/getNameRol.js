@@ -3,9 +3,9 @@ import {db} from '../Firebase/ConexionBD';
 import { doc, getDoc, getFirestore, query } from "firebase/firestore";
 import { useState } from 'react';
 //import {useCollectionData} from "react-firebase-hooks/firestore"
-export const GetRolUser = (user) =>{
+export const GetNameUser = (user) =>{
 
-    const [delegado, setDelegado]= useState(null);
+    const [delegadoName, setDelegado]= useState(null);
 
     async function getDel(){
        
@@ -14,7 +14,7 @@ export const GetRolUser = (user) =>{
 
         if (docSnap.exists()) {
             console.log("Document data:", docSnap.data());
-            await setDelegado(docSnap.data().Rol);
+            await setDelegado(docSnap.data().NombreDelegado);
         } else {
         //doc.data() will be undefined in this case
             console.log("No such document!");
@@ -30,16 +30,15 @@ export const GetRolUser = (user) =>{
         if(email){
             let aux = email.split('@');
             if(aux.includes('admin.com')){
-                res= 'admin'
+                res= 'Admin'
             }else{
                 getDel();
             }
             
         }
-        if(delegado){
-            res=delegado;
+        if(delegadoName){
+            res=delegadoName;
         }
-        console.log("us actual", delegado)
         return res;
         
     

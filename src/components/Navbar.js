@@ -35,6 +35,11 @@ function Navbar (){
     return(
         <nav className="nav-background">
             <div className='contenedor-navbar'>
+                <div className='contenedor-texto navbar-texto'>
+                <nav>
+                    <Link to="/">Inicio</Link>
+                </nav>
+                </div>
                 
         {user? 
             <div className='contenedor-texto navbar-texto'>
@@ -43,8 +48,7 @@ function Navbar (){
                     <Link to={path}>{name}</Link>
                 ))
             }
-        
-        </div>  
+             </div>  
             
          : 
         
