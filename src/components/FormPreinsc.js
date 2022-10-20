@@ -5,16 +5,16 @@ import "../styles sheet/FormPreinscripcion.css";
 import { useState } from 'react';
 import css from "../styles sheet/FormPreinscripcion.css"
 
+
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc,getDocs } from "firebase/firestore";
+import { doc, setDoc,getDocs,  collection, getDoc} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection} from "firebase/firestore";
 
 
 function FormPreinsc() {
     const [nombre, cambiarNombre] = useState({campo: "", valido: null});
     const [categoria, cambiarCategoria] = useState({campo: "", valido: null});
-    const [comprobante, cambiarComprobante] = useState();
+    const [comprobante, cambiarComprobante] = useState({campo: "", valido: null});
    
     const expresiones = {
         nombreEquipo: /^[a-zA-ZÀ-ÿ0-9\s]{3,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
@@ -30,8 +30,9 @@ function FormPreinsc() {
       
     async function onSubmit(e){
         e.preventDefault();
-        setTimeout(repetido,5000);
-        console.log("rep",controlar)
+        //setTimeout(repetido,5000);
+        console.log(nombre.campo);
+        repetido();
         /*if(controlar === true){
             // Add a new document in collection "cities"
             await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
@@ -61,22 +62,31 @@ function FormPreinsc() {
         //comas
         titulo = titulo.replace (/,,+/g,",");
         
-        for (let j=0; j < titulos.length; j++) {
-            console.log(titulo,titulos[j])
+        for (var j=0; j < titulos.length; j++) {
+            console.log(titulo,titulos[j], j, titulos.length)
+            console.log("Cat",categoria.campo)
              if (titulo.toLowerCase() == titulos[j].toLowerCase()) {
                  
                  controlar = false;
-                 console.log("test", controlar)
-                 alert("El equipo ya está registrado en la base de datos.")
                  j = titulos.length + 1;
-             }else{
-                await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
-                    NombreEquipo: nombre.campo,
-                    Categoria: categoria.campo,
-                    });
+                 alert("El equipo ya está registrado en la base de datos.")
              }
+             
+             
      
          }
+         console.log(controlar)
+         if(controlar){
+            uploadFile(comprobante.campo);
+              await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
+                 NombreEquipo: nombre.campo,
+                 Categoria: categoria.campo,
+                 //UrlImagen: urlImagen
+                 });
+                 cambiarNombre({campo:'',valido:null});
+                 cambiarCategoria({campo:'',valido:null});
+                 alert("Registro exitoso");
+          }
     }
     var controlar = true;
     var titulos = []; 
@@ -86,33 +96,98 @@ function FormPreinsc() {
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           titulos.push(doc.data().NombreEquipo)
-          console.log(titulos)
-          testTitulo();
+          console.log(titulos);
         });
+        testTitulo();
     }
 
+    let urlImagen="hola"
     function uploadFile(file){
-        const storageRef = ref(getStorage, 'Comprobantes/some-child')
-        console.log("llega")
+       
+        const storage = getStorage();
+        const storageRef = ref(storage,"Comprobantes/" + file.name);
+        
             uploadBytes(storageRef, file).then(snapshot => {
-            console.log(snapshot,"hola")
+            //console.log(snapshot,"hola")
             })
+
+            const starsRef = ref(storage,"Comprobantes/" + file.name);
+            getDownloadURL(starsRef)
+            .then((url) => {
+                console.log(url)
+                urlImagen=url;
+            })
+            .catch((error) => {
+                // A full list of error codes is available at
+                // https://firebase.google.com/docs/storage/web/handle-errors
+                switch (error.code) {
+                case 'storage/object-not-found':
+                    // File doesn't exist
+                    break;
+                case 'storage/unauthorized':
+                    // User doesn't have permission to access the object
+                    break;
+                case 'storage/canceled':
+                    // User canceled the upload
+                    break;
+
+                // ...
+
+                case 'storage/unknown':
+                    // Unknown error occurred, inspect the server response
+                    break;
+                }
+            });
     }
-    
-    function subirArchivo() {
+
+
+    /*function subirArchivo() {
         var comprob= "";
         var nombreComp="";
-        const onChange = (e) => {
+       
             //cambiarEstado({...estado, campo: e.target.files[0]});
-            comprob= e.target.files[0];
-            nombreComp = e.target.value;
-            nombreComp = nombreComp.slice(12);
-            console.log(comprob)
+            comprob= comprobante.campo;
+            //console.log(comprob)
+            nombreComp = comprobante.valor;
+            //nombreComp = nombreComp.slice(12);
+            //console.log(comprob)
             uploadFile(comprob);
        
+     }*/
+/*
+     var qrGenerado = "";
+     async function generarQR(){
+        var fechaIniConvocatoria= ""
+        var limitePreInsc= ""
+        var limiteInscrip= ""
+        const fecha = +new Date();
+        console.log("actual",fecha);
+
+        const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+            fechaIniConvocatoria= docSnap.data().FechaIniConvocatoria;
+            limitePreInsc= docSnap.data().LimitePreInsc;
+            limiteInscrip= docSnap.data().LimitePreInscrip;
+            console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+        
+        //Generamos qr
+        if(fecha >= fechaIniConvocatoria && fecha <= limitePreInsc){
+            qrGenerado = "/assets/qr.jpeg";
+        }else{
+            if(fecha > limitePreInsc && fecha <= limiteInscrip){
+                qrGenerado = "/assets/qrWebsis.png";
+            }else{
+                //AQUI SE CERRARIA FORMULARIO
+            }
         }
      }
-
+     generarQR();*/
     return (
     <>
     <div className="row cont-main-form mt-5 mb-5 mx-0">
@@ -134,7 +209,9 @@ function FormPreinsc() {
                         estado={categoria}
                         cambiarEstado={cambiarCategoria} 
                     />
-                    <FormQR/>
+                    <FormQR
+                      //  QR={qrGenerado}
+                    />
                     <FormArchivo
                         archivo="Subir comprobante:"
                         estado={comprobante}

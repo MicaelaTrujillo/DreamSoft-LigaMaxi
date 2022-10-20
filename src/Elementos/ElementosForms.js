@@ -1,11 +1,13 @@
-import QR from '../assets/qr.jpeg'
 import "../styles sheet/FormPreinscripcion.css";
 import Form from "react-bootstrap/Form";
 
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+import QR from '../assets/qr.jpeg'
+import QRwebsis from '../assets/qrWebsis.png'
+import { useState } from "react";
 
 let res='w-100 xdx text-start';
 function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
@@ -16,17 +18,18 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
     const validarNombre = () => {
         if(expresionRegular){   
             if(expresionRegular.test(estado.campo)){
-                console.log("correcto")
+                //console.log("correcto")
                 res='w-100  text-start alertaBien'+id
                 cambiarEstado({...estado,valido:'true'})
             }else{
-                console.log("incorrecto")
+                //console.log("incorrecto")
                 res='w-100 text-start alertaMal'+id
                 cambiarEstado({...estado,valido:'false'})
             }
         }
     }
     
+
 
     return(
         <Form.Group className="mb-3 d-block">
@@ -70,10 +73,44 @@ function FormComboBox({label,arreglo, estado, cambiarEstado}){
 
 
 function FormQR(){
+    var qrGenerado=""
+async function generarQR(){
+    var fechaIniConvocatoria= ""
+    var limitePreInsc= ""
+    var limiteInscrip= ""
+    const fecha = +new Date();
+    //console.log("actual",fecha);
+
+    const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+        fechaIniConvocatoria= docSnap.data().FechaIniConvocatoria;
+        limitePreInsc= docSnap.data().LimitePreInsc;
+        limiteInscrip= docSnap.data().LimitePreInscrip;
+       // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    
+    //Generamos qr
+    if(fecha >= fechaIniConvocatoria && fecha <= limitePreInsc){
+        qrGenerado = QR;
+    }else{
+        if(fecha > limitePreInsc && fecha <= limiteInscrip){
+            qrGenerado = QRwebsis;
+        }else{
+            //AQUI SE CERRARIA FORMULARIO
+        }
+    }
+ }
+
+generarQR()
     return(
         <Form.Group className="mb-4 text-center">
             <Form.Label className="w-100 d-block text-center">Nombre del equipo: </Form.Label>
-            <img className="qr-imagen w-sm-50 w-md-25" src={QR}/>
+                <img className="qr-imagen w-sm-50 w-md-25" src={QR}/>
         </Form.Group>
     )
 }
@@ -82,8 +119,13 @@ function FormQR(){
 function FormArchivo({archivo, estado, cambiarEstado}){
  
     const onChange = (e) => {
-        cambiarEstado(e.target.files[0]);
+        cambiarEstado({...estado, campo: e.target.files[0]});
+        /*const storage = getStorage();
+        const storageRef = ref(storage,"Comprobantes/" + e.target.files[0].name);
         
+            uploadBytes(storageRef, e.target.files[0]).then(snapshot => {
+            //console.log(snapshot,"hola")
+            })*/
     }
     
 
