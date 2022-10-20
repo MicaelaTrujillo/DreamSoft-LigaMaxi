@@ -9,47 +9,6 @@ import QR from '../assets/qr.jpeg'
 import QRwebsis from '../assets/qrWebsis.png'
 import { useState } from "react";
 
-let res='w-100 xdx text-start';
-function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
-    const onChange = (e) => {
-        cambiarEstado({...estado, campo: e.target.value});
-    }
-    
-    const validarNombre = () => {
-        if(expresionRegular){   
-            if(expresionRegular.test(estado.campo)){
-                //console.log("correcto")
-                res='w-100  text-start alertaBien'+id
-                cambiarEstado({...estado,valido:'true'})
-            }else{
-                //console.log("incorrecto")
-                res='w-100 text-start alertaMal'+id
-                cambiarEstado({...estado,valido:'false'})
-            }
-        }
-    }
-    
-
-
-    return(
-        <Form.Group className="mb-3 d-block">
-            <Form.Label className="w-100 text-start">{label}</Form.Label>
-            <Form.Control
-                className="form-control"
-                type="text"
-                placeholder={placeholder}
-                value={estado.campo}
-                onChange={onChange}
-                onKeyUp={validarNombre}
-                onBlur={validarNombre}
-                valido={estado.valido}
-            />
-                <Form.Label className={res}>{alerta}</Form.Label>                  
-        </Form.Group>
-    )
-}
-
-
 function FormComboBox({label,arreglo, estado, cambiarEstado}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
@@ -340,4 +299,4 @@ function FormInputs4({label, placeholder, estado, cambiarEstado, expresionRegula
     )
 }
 
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}ox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}

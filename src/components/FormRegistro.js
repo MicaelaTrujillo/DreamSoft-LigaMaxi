@@ -17,6 +17,8 @@ function FormRegistro() {
 
  const [formValido, cambiarFormValido] = useState({campo: "", valido: null});
 
+ const [comprobante, cambiarComprobante] = useState({campo: "", valido: null});
+
   const expresiones = {
       nombreJugador: /^[a-zA-ZÀ-ÿ\s]{2,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
       password: /^.{6,10}$/, // 4 a 12 digitos.
@@ -58,6 +60,7 @@ const validar = (e) =>{
 
     async function onSubmit(e){
       e.preventDefault();
+      
       if(nombre.valido === 'true' &&
     ci.valido === 'true' &&
     correo.valido === 'true' &&
@@ -67,6 +70,7 @@ const validar = (e) =>{
     cambiarFormValido(true);
     
     // Add a new document in collection "cities"
+    uploadFile(comprobante.campo);
     await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", nombre.campo), {
     NombreDelegado: nombre.campo,
     CI: ci.campo,
@@ -78,13 +82,53 @@ const validar = (e) =>{
     cambiarTelefono({campo:'',valido:null});
     cambiarPassword({campo:'',valido:null});
     //alerta
-    <div>
-      window.alert("Bienvenido a nuestro sitio web");
-    </div>
+    alert("Registro exitoso");
+    
   }else{
     cambiarFormValido(false);
   }
    
+    }
+
+
+
+    let urlImagen="hola"
+    function uploadFile(file){
+       
+        const storage = getStorage();
+        const storageRef = ref(storage,"Delegados/" + file.name);
+        
+            uploadBytes(storageRef, file).then(snapshot => {
+            //console.log(snapshot,"hola")
+            })
+
+            const starsRef = ref(storage,"Delegados/" + file.name);
+            getDownloadURL(starsRef)
+            .then((url) => {
+                console.log(url)
+                urlImagen=url;
+            })
+            .catch((error) => {
+                // A full list of error codes is available at
+                // https://firebase.google.com/docs/storage/web/handle-errors
+                switch (error.code) {
+                case 'storage/object-not-found':
+                    // File doesn't exist
+                    break;
+                case 'storage/unauthorized':
+                    // User doesn't have permission to access the object
+                    break;
+                case 'storage/canceled':
+                    // User canceled the upload
+                    break;
+
+                // ...
+
+                case 'storage/unknown':
+                    // Unknown error occurred, inspect the server response
+                    break;
+                }
+            });
     }
 
   return (
@@ -146,6 +190,8 @@ const validar = (e) =>{
 
             <FormArchivo
               archivo="Foto:"
+              estado={comprobante}
+              cambiarEstado={cambiarComprobante}
             />
             <div className='centrar'>
               <AleFinal/>

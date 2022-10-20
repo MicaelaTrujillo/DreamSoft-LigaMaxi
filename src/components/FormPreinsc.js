@@ -205,7 +205,7 @@ function FormPreinsc() {
                     />
                     <FormComboBox
                         label="Categoría: "
-                        arreglo = {["30 años", "35 años", "40 años"]}
+                        arreglo = {["Seleccione categoría","30 años", "35 años", "40 años"]}
                         estado={categoria}
                         cambiarEstado={cambiarCategoria} 
                     />
