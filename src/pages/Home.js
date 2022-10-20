@@ -10,9 +10,9 @@ import HomePage from '../components/homePage'
 function Home() {
     return (
         <div>
-             <HomePage/>
-             <Invpublica/>
-             <Clock/>
+            <HomePage />
+            <Invpublica/>
+            <Clock/>
 
         </div>
         

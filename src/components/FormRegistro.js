@@ -1,14 +1,22 @@
 import '../styles sheet/formRegistro.css';
 import '../styles sheet/Boton.css';
+
 import {Boton,FormInputs,FormInputs2,FormInputs3,FormInputs4,FormArchivo, FormContraseña,AleFinal,Alert} from '../Elementos/ElementosForms';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+
 
 import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { async } from '@firebase/util';
+import { UserContext } from '../context/userProvider';
+import {app} from '../Firebase/ConexionBD';
 
-function FormRegistro() {
 
+function FormRegistro() { 
+  const {registerUser} = useContext(UserContext);
+  const auth = getAuth();
   const [nombre, cambiarNombre] = useState({campo: "", valido: null});
   const [ci, cambiarCi] = useState({campo: "", valido: null});
   const [correo, cambiarCorreo] = useState({campo: "", valido: null});
@@ -60,30 +68,35 @@ const validar = (e) =>{
 
     async function onSubmit(e){
       e.preventDefault();
-      
-      if(nombre.valido === 'true' &&
-    ci.valido === 'true' &&
-    correo.valido === 'true' &&
-    telefono.valido === 'true' 
-    
-  ){
-    cambiarFormValido(true);
-    
-    // Add a new document in collection "cities"
-    uploadFile(comprobante.campo);
-    await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", nombre.campo), {
-    NombreDelegado: nombre.campo,
-    CI: ci.campo,
-    Telefono: telefono.campo
-    });
-    cambiarNombre({campo:'',valido:null});
-    cambiarCi({campo:'',valido:null});
-    cambiarCorreo({campo:'',valido:null});
-    cambiarTelefono({campo:'',valido:null});
-    cambiarPassword({campo:'',valido:null});
-    //alerta
-    alert("Registro exitoso");
-    
+      if( nombre.valido === 'true' &&
+          ci.valido === 'true' &&
+          correo.valido === 'true' &&
+          telefono.valido === 'true' 
+      ){
+        cambiarFormValido(true);
+        
+        try{
+          await registerUser(correo.campo, password.campo);
+          const user = getAuth(app).currentUser.uid;
+          console.log("estooo",user);
+          uploadFile(comprobante.campo);
+          setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", user), {
+            NombreDelegado: nombre.campo,
+            CI: ci.campo,
+            Telefono: telefono.campo,
+            Rol: 'Delegado'
+          });
+        }catch (error){
+          console.log(error);
+        }
+        cambiarNombre({campo:'',valido:null});
+        cambiarCi({campo:'',valido:null});
+        cambiarCorreo({campo:'',valido:null});
+        cambiarTelefono({campo:'',valido:null});
+        cambiarPassword({campo:'',valido:null});
+   
+         //alerta
+        alert("Registro exitoso");
   }else{
     cambiarFormValido(false);
   }

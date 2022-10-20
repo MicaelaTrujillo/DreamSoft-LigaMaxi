@@ -46,3 +46,8 @@ body {
     margin: auto;
     border: none;
 }
+
+.columna{
+    text-align: right;
+    margin-right: 30px;
+}
