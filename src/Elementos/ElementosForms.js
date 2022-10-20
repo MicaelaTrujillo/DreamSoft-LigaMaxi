@@ -158,6 +158,7 @@ function AleFinal(){
     );
 }
 
+let resCont='w-100 xdx text-start alertaBien';
 function FormContraseña({label, placeholder, estado,cambiarEstado,expresionRegular,alerta,id}){
 
         const onChange = (e) => {
@@ -167,11 +168,11 @@ function FormContraseña({label, placeholder, estado,cambiarEstado,expresionRegu
             if(expresionRegular){   
                 if(expresionRegular.test(estado.campo)){
                     console.log("correcto")
-                    res='w-100  text-start alertaBien'+id
+                    resCont='w-100  text-start alertaBien'+id
                     cambiarEstado({...estado,valido:'true'})
                 }else{
                     console.log("incorrecto")
-                    res='w-100 text-start alertaMal'+id
+                    resCont='w-100 text-start alertaMal'+id
                     cambiarEstado({...estado,valido:'false'})
                 }
             }
@@ -188,9 +189,155 @@ function FormContraseña({label, placeholder, estado,cambiarEstado,expresionRegu
                 onKeyUp={validarNombre}
                 onBlur={validarNombre}
             />
-            <Form.Label className={res}>{alerta}</Form.Label>  
+            <Form.Label className={resCont}>{alerta}</Form.Label>  
         </Form.Group>
     )
 }
 
-export {FormInputs, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}
+let res='w-100 xdx text-start alertaBien';
+function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+    const validarNombre = () => {
+        res='w-100 xdx text-start ' 
+        if(expresionRegular){   
+            if(expresionRegular.test(estado.campo)){
+                console.log("correcto")
+                res='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
+            }else{
+                console.log("incorrecto")
+                res='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
+            }
+        }
+    }
+    return(
+        <Form.Group className="mb-3 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="text"
+                placeholder={placeholder}
+                value={estado.campo}
+                onChange={onChange}
+                onKeyUp={validarNombre}
+                onBlur={validarNombre}
+                valido={estado.valido}
+            />
+                <Form.Label className={res}>{alerta}</Form.Label>                  
+        </Form.Group>
+    )
+}
+let res2='w-100 xdx text-start alertaBien';
+function FormInputs2({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+    const validarNombre = () => {
+        res2='w-100 xdx text-start ' 
+        if(expresionRegular){   
+            if(expresionRegular.test(estado.campo)){
+                console.log("correcto")
+                res2='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
+            }else{
+                console.log("incorrecto")
+                res2='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
+            }
+        }
+    }
+    return(
+        <Form.Group className="mb-3 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="text"
+                placeholder={placeholder}
+                value={estado.campo}
+                onChange={onChange}
+                onKeyUp={validarNombre}
+                onBlur={validarNombre}
+                valido={estado.valido}
+            />
+                <Form.Label className={res2}>{alerta}</Form.Label>                  
+        </Form.Group>
+    )
+}
+
+let res3='w-100 xdx text-start alertaBien';
+function FormInputs3({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+    const validarNombre = () => {
+        res3='w-100 xdx text-start ' 
+        if(expresionRegular){   
+            if(expresionRegular.test(estado.campo)){
+                console.log("correcto")
+                res3='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
+            }else{
+                console.log("incorrecto")
+                res3='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
+            }
+        }
+    }
+    return(
+        <Form.Group className="mb-3 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="text"
+                placeholder={placeholder}
+                value={estado.campo}
+                onChange={onChange}
+                onKeyUp={validarNombre}
+                onBlur={validarNombre}
+                valido={estado.valido}
+            />
+                <Form.Label className={res3}>{alerta}</Form.Label>                  
+        </Form.Group>
+    )
+}
+let res4='w-100 xdx text-start alertaBien';
+function FormInputs4({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+    const validarNombre = () => {
+        res4='w-100 xdx text-start ' 
+        if(expresionRegular){   
+            if(expresionRegular.test(estado.campo)){
+                console.log("correcto")
+                res4='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
+            }else{
+                console.log("incorrecto")
+                res4='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
+            }
+        }
+    }
+    return(
+        <Form.Group className="mb-3 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="text"
+                placeholder={placeholder}
+                value={estado.campo}
+                onChange={onChange}
+                onKeyUp={validarNombre}
+                onBlur={validarNombre}
+                valido={estado.valido}
+            />
+                <Form.Label className={res4}>{alerta}</Form.Label>                  
+        </Form.Group>
+    )
+}
+
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}ox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}

@@ -1,6 +1,6 @@
 import '../styles sheet/formRegistro.css';
 import '../styles sheet/Boton.css';
-import {Boton,FormInputs,FormArchivo, FormContraseña,AleFinal} from '../Elementos/ElementosForms';
+import {Boton,FormInputs,FormInputs2,FormInputs3,FormInputs4,FormArchivo, FormContraseña,AleFinal,Alert} from '../Elementos/ElementosForms';
 import { useState } from 'react';
 
 import { db } from "../Firebase/ConexionBD";
@@ -77,7 +77,10 @@ const validar = (e) =>{
     cambiarCorreo({campo:'',valido:null});
     cambiarTelefono({campo:'',valido:null});
     cambiarPassword({campo:'',valido:null});
-   
+    //alerta
+    <div>
+      window.alert("Bienvenido a nuestro sitio web");
+    </div>
   }else{
     cambiarFormValido(false);
   }
@@ -100,7 +103,7 @@ const validar = (e) =>{
                     id="1"
                 />
 
-            <FormInputs
+            <FormInputs2
                     estado={ci}
                     cambiarEstado={cambiarCi} 
                     expresionRegular = {expresiones.ci}   
@@ -110,7 +113,7 @@ const validar = (e) =>{
                     id="2"
                 />
             
-            <FormInputs
+            <FormInputs3
                     estado={correo}
                     cambiarEstado={cambiarCorreo} 
                     expresionRegular = {expresiones.correo}   
@@ -120,7 +123,7 @@ const validar = (e) =>{
                     id="3"
                 />
 
-            <FormInputs
+            <FormInputs4
                     estado={telefono}
                     cambiarEstado={cambiarTelefono} 
                     expresionRegular = {expresiones.telefono}   
