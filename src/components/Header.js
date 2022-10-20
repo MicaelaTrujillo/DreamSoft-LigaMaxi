@@ -52,7 +52,7 @@ function Header(){
                     {user? cerrar() : handleShow()}
                     }>{user? "Cerrar Sesión" : "Iniciar Sesión"}
                 </button>
-                <p>{userName? userName : ""}</p>
+                <p> {user?  <>{userName? userName : ""} </>: ""} </p>
             </div>
         </div>
         </header>

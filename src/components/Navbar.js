@@ -7,13 +7,9 @@ import { GetRolUser } from '../utyls/getRolUser';
 const routes={
     user:[
         {
-            name: 'Pre Inscripción',
-            path: '/FormularioPreInscripcion'
+            name: 'Registro',
+            path: '/FormularioRegistro'
         },
-        {
-            name: 'Equipos',
-            path: '/FormularioPreInscripcion'
-        }
     ],
     admin:[
         {
