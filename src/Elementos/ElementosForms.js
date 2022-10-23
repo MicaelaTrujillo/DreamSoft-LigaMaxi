@@ -77,7 +77,7 @@ console.log(imagen,"nanananna")
     return(
         <Form.Group className="mb-4 text-center">
             <Form.Label className="w-100 d-block text-center">Realice su pago aqui: </Form.Label>
-                <img className="qr-imagen w-sm-50 w-md-25" src={imagen}/>
+                <img className="qr-imagen w-sm-50 w-md-25" src={imagen} width="267" height="265"/>
         </Form.Group>
     )
 }

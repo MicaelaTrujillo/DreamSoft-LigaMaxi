@@ -2,7 +2,7 @@
 import {FormInputs, FormComboBox, FormQR, Boton, FormArchivo} from '../Elementos/ElementosForms'
 import Form from "react-bootstrap/Form";
 import "../styles sheet/FormPreinscripcion.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import css from "../styles sheet/FormPreinscripcion.css"
 import ReactDOM from 'react-dom/client';
 
@@ -11,7 +11,7 @@ import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/fir
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import * as firebase from '../Firebase/ConexionBD'
 import { render } from '@testing-library/react';
-
+/*
 var qrGenerado2=""
 async function generarQR(){
    
@@ -55,13 +55,56 @@ async function generarQR(){
  }
  generarQR() 
 
-
+*/
 
 function FormPreinsc() {
     const [nombre, cambiarNombre] = useState({campo: "", valido: null});
     const [categoria, cambiarCategoria] = useState({campo: "", valido: null});
     const [comprobante, cambiarComprobante] = useState({campo: "", valido: null});
    
+
+    const [stringImage, setstringImage] = useState('');
+  useEffect(() => {
+    async function generarQR() {
+      const fecha = new Date();
+      console.log("actual", fecha);
+
+      const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        console.log("si entra al exist", docSnap.data());
+        var fechaIniConvocatoria = docSnap.data().FechaIniConvocatoria.toDate();
+        var limitePreInsc = docSnap.data().LimitePreInsc.toDate();
+        var limiteInscrip = docSnap.data().LimiteInscrip.toDate();
+        var imagen1 = docSnap.data().qr1;
+        var imagen2 = docSnap.data().qr2;
+        // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+      console.log("fechas", fechaIniConvocatoria, limitePreInsc, limiteInscrip);
+      //Generamos qr
+      var qrGenerado = "";
+      if (fecha >= fechaIniConvocatoria && fecha <= limitePreInsc) {
+        console.log("imagen1");
+        qrGenerado = imagen1;
+      } else {
+        if (fecha > limitePreInsc && fecha <= limiteInscrip) {
+          console.log("imagen2");
+          qrGenerado = imagen2;
+        } else {
+          //AQUI SE CERRARIA FORMULARIO
+        }
+      }
+      setstringImage(qrGenerado)
+      console.log(stringImage, "este es el 2");
+    }
+    generarQR();
+  }, []);
+
+
     const expresiones = {
         nombreEquipo: /^[a-zA-ZÀ-ÿ0-9\s]{3,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
     }
@@ -307,7 +350,7 @@ function FormPreinsc() {
                         cambiarEstado={cambiarCategoria} 
                     />
                     <FormQR 
-                        imagen = {qrGenerado2}
+                        imagen = {stringImage}
                     />
                     <FormArchivo
                         archivo="Subir comprobante:"
