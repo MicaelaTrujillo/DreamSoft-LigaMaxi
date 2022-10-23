@@ -6,7 +6,7 @@ import { useContext, useState } from 'react';
 
 
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { async } from '@firebase/util';
@@ -79,7 +79,7 @@ const validar = (e) =>{
           await registerUser(correo.campo, password.campo);
           const user = getAuth(app).currentUser.uid;
           console.log("estooo",user);
-          uploadFile(comprobante.campo);
+          uploadFile(comprobante.campo,user);
           setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", user), {
             NombreDelegado: nombre.campo,
             CI: ci.campo,
@@ -106,20 +106,21 @@ const validar = (e) =>{
 
 
     let urlImagen="hola"
-    function uploadFile(file){
+    function uploadFile(file,user){
        
         const storage = getStorage();
         const storageRef = ref(storage,"Delegados/" + file.name);
         
             uploadBytes(storageRef, file).then(snapshot => {
             //console.log(snapshot,"hola")
-            })
-
-            const starsRef = ref(storage,"Delegados/" + file.name);
-            getDownloadURL(starsRef)
-            .then((url) => {
-                console.log(url)
-                urlImagen=url;
+            setTimeout(
+              getDownloadURL(storageRef)
+              .then((url) => {
+                  console.log(url)
+                  updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", user), {
+                      UrlImagen: url
+                      });
+              }),5000)
             })
             .catch((error) => {
                 // A full list of error codes is available at
@@ -205,6 +206,7 @@ const validar = (e) =>{
               archivo="Foto:"
               estado={comprobante}
               cambiarEstado={cambiarComprobante}
+              acepta = "image/*"
             />
             <div className='centrar'>
               <AleFinal/>

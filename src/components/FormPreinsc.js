@@ -4,11 +4,57 @@ import Form from "react-bootstrap/Form";
 import "../styles sheet/FormPreinscripcion.css";
 import { useState } from 'react';
 import css from "../styles sheet/FormPreinscripcion.css"
-
+import ReactDOM from 'react-dom/client';
 
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc,getDocs,  collection, getDoc} from "firebase/firestore";
+import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import * as firebase from '../Firebase/ConexionBD'
+import { render } from '@testing-library/react';
+
+var qrGenerado2=""
+async function generarQR(){
+   
+   // var fechaIniConvocatoria= ""
+    //var limitePreInsc= ""
+    //var limiteInscrip= ""
+    const fecha = new Date();
+    console.log("actual",fecha);
+
+    const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("si entra al exist", docSnap.data())
+        var fechaIniConvocatoria= docSnap.data().FechaIniConvocatoria.toDate();
+        var limitePreInsc= docSnap.data().LimitePreInsc.toDate();
+        var limiteInscrip= docSnap.data().LimiteInscrip.toDate();
+       var imagen1=docSnap.data().qr1
+       var imagen2=docSnap.data().qr2
+       // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    console.log("fechas",fechaIniConvocatoria, limitePreInsc, limiteInscrip)
+    //Generamos qr
+    var qrGenerado=""
+    if(fecha >= fechaIniConvocatoria && fecha <= limitePreInsc){
+        console.log("imagen1")
+        qrGenerado = imagen1;
+    }else{
+        if(fecha > limitePreInsc && fecha <= limiteInscrip){
+            console.log("imagen2")
+            qrGenerado = imagen2;
+        }else{
+            //AQUI SE CERRARIA FORMULARIO
+        }
+    }
+    qrGenerado2 = qrGenerado
+    console.log(qrGenerado2, "este es el 2")
+ }
+ generarQR() 
+
 
 
 function FormPreinsc() {
@@ -77,15 +123,18 @@ function FormPreinsc() {
          }
          console.log(controlar)
          if(controlar){
+            console.log("entro")
             uploadFile(comprobante.campo);
-              await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
+            //subirImagen(comprobante.campo);
+             await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
                  NombreEquipo: nombre.campo,
-                 Categoria: categoria.campo,
-                 //UrlImagen: urlImagen
-                 });
-                 cambiarNombre({campo:'',valido:null});
-                 cambiarCategoria({campo:'',valido:null});
-                 alert("Registro exitoso");
+                 Categoria: categoria.campo
+                 })
+                 //cambiarNombre({campo:'',valido:null});
+                 //cambiarCategoria({campo:'',valido:null});
+
+                 alert("Registro exitoso")
+              
           }
     }
     var controlar = true;
@@ -101,22 +150,23 @@ function FormPreinsc() {
         testTitulo();
     }
 
-    let urlImagen="hola"
-    function uploadFile(file){
-       
+    
+    async function uploadFile(file){
         const storage = getStorage();
         const storageRef = ref(storage,"Comprobantes/" + file.name);
         
-            uploadBytes(storageRef, file).then(snapshot => {
+        uploadBytes(storageRef, file).then(snapshot => {
             //console.log(snapshot,"hola")
-            })
-
-            const starsRef = ref(storage,"Comprobantes/" + file.name);
-            getDownloadURL(starsRef)
+          
+         setTimeout(
+            getDownloadURL(storageRef)
             .then((url) => {
                 console.log(url)
-                urlImagen=url;
-            })
+                updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
+                    UrlImagen: url
+                    });
+            }),5000)
+        })
             .catch((error) => {
                 // A full list of error codes is available at
                 // https://firebase.google.com/docs/storage/web/handle-errors
@@ -141,7 +191,42 @@ function FormPreinsc() {
     }
 
 
-    /*function subirArchivo() {
+
+    /*function subirImagen(file) {
+        const storage = getStorage();
+        const storageRef = ref(storage,"Comprobantes/" + file.name);
+        
+           var uploadTask = uploadFile(file)
+    
+       // Listen for state changes, errors, and completion of the upload.
+
+       uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        (error) => {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+                case 'storage/unauthorized':
+                    // User doesn't have permission to access the object
+                    break;
+                case 'storage/canceled':
+                    // User canceled the upload
+                    break;
+                case 'storage/unknown':
+                    // Unknown error occurred, inspect error.serverResponse
+                    break;
+            }
+        },
+        () => {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                console.log('File available at', downloadURL);
+            });
+        });
+        
+    }*/
+
+   /* function subirArchivo() {
         var comprob= "";
         var nombreComp="";
        
@@ -154,40 +239,52 @@ function FormPreinsc() {
             uploadFile(comprob);
        
      }*/
-/*
-     var qrGenerado = "";
-     async function generarQR(){
-        var fechaIniConvocatoria= ""
-        var limitePreInsc= ""
-        var limiteInscrip= ""
-        const fecha = +new Date();
-        console.log("actual",fecha);
 
-        const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
-        const docSnap = await getDoc(docRef);
+     /*
+     var qrGenerado2=""
+     async function generarQR(){
         
-        if (docSnap.exists()) {
-            fechaIniConvocatoria= docSnap.data().FechaIniConvocatoria;
-            limitePreInsc= docSnap.data().LimitePreInsc;
-            limiteInscrip= docSnap.data().LimitePreInscrip;
-            console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
+        // var fechaIniConvocatoria= ""
+         //var limitePreInsc= ""
+         //var limiteInscrip= ""
+         const fecha = new Date();
+         console.log("actual",fecha);
+     
+         const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
+         const docSnap = await getDoc(docRef);
         
-        //Generamos qr
-        if(fecha >= fechaIniConvocatoria && fecha <= limitePreInsc){
-            qrGenerado = "/assets/qr.jpeg";
-        }else{
-            if(fecha > limitePreInsc && fecha <= limiteInscrip){
-                qrGenerado = "/assets/qrWebsis.png";
-            }else{
-                //AQUI SE CERRARIA FORMULARIO
-            }
-        }
-     }
-     generarQR();*/
+         if (docSnap.exists()) {
+             console.log("si entra al exist", docSnap.data())
+             var fechaIniConvocatoria= docSnap.data().FechaIniConvocatoria.toDate();
+             var limitePreInsc= docSnap.data().LimitePreInsc.toDate();
+             var limiteInscrip= docSnap.data().LimiteInscrip.toDate();
+            var imagen1=docSnap.data().qr1
+            var imagen2=docSnap.data().qr2
+            // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
+         } else {
+           // doc.data() will be undefined in this case
+           console.log("No such document!");
+         }
+         console.log("fechas",fechaIniConvocatoria, limitePreInsc, limiteInscrip)
+         //Generamos qr
+         var qrGenerado=""
+         if(fecha >= fechaIniConvocatoria && fecha <= limitePreInsc){
+             console.log("imagen1")
+             qrGenerado = imagen1;
+         }else{
+             if(fecha > limitePreInsc && fecha <= limiteInscrip){
+                 console.log("imagen2")
+                 qrGenerado = imagen2;
+             }else{
+                 //AQUI SE CERRARIA FORMULARIO
+             }
+         }
+         qrGenerado2 = qrGenerado
+         console.log(qrGenerado2, "este es el 2")
+         return qrGenerado2
+      }
+        var gener = generarQR()
+      */
     return (
     <>
     <div className="row cont-main-form mt-5 mb-5 mx-0">
@@ -205,17 +302,18 @@ function FormPreinsc() {
                     />
                     <FormComboBox
                         label="Categoría: "
-                        arreglo = {["Seleccione categoría","30 años", "35 años", "40 años"]}
+                        arreglo = {["*Seleccione categoría","30 años", "35 años", "40 años"]}
                         estado={categoria}
                         cambiarEstado={cambiarCategoria} 
                     />
-                    <FormQR
-                      //  QR={qrGenerado}
+                    <FormQR 
+                        imagen = {qrGenerado2}
                     />
                     <FormArchivo
                         archivo="Subir comprobante:"
                         estado={comprobante}
                         cambiarEstado={cambiarComprobante}
+                        acepta=".pdf, image/*"
                     />
                     <div className='botones pb-4'>
                         <Boton 
@@ -230,6 +328,7 @@ function FormPreinsc() {
     </div>
     </>
   );
+  
 }
 
 export default FormPreinsc;

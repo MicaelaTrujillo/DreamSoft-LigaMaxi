@@ -1,5 +1,7 @@
 import "../styles sheet/FormPreinscripcion.css";
 import Form from "react-bootstrap/Form";
+import ReactDOM from 'react-dom/client';
+
 
 import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -31,51 +33,57 @@ function FormComboBox({label,arreglo, estado, cambiarEstado}){
 
 
 
-function FormQR(){
-    var qrGenerado=""
+function FormQR({imagen}){
+  /*var qrGenerado2=""
 async function generarQR(){
-    var fechaIniConvocatoria= ""
-    var limitePreInsc= ""
-    var limiteInscrip= ""
-    const fecha = +new Date();
-    //console.log("actual",fecha);
+   // var fechaIniConvocatoria= ""
+    //var limitePreInsc= ""
+    //var limiteInscrip= ""
+    const fecha = new Date();
+    console.log("actual",fecha);
 
     const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
     const docSnap = await getDoc(docRef);
-    
+   
     if (docSnap.exists()) {
-        fechaIniConvocatoria= docSnap.data().FechaIniConvocatoria;
-        limitePreInsc= docSnap.data().LimitePreInsc;
-        limiteInscrip= docSnap.data().LimitePreInscrip;
+        console.log("si entra al exist", docSnap.data())
+        var fechaIniConvocatoria= docSnap.data().FechaIniConvocatoria.toDate();
+        var limitePreInsc= docSnap.data().LimitePreInsc.toDate();
+        var limiteInscrip= docSnap.data().LimiteInscrip.toDate();
        // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
     }
-    
+    console.log("fechas",fechaIniConvocatoria, limitePreInsc, limiteInscrip)
     //Generamos qr
+    var qrGenerado=""
     if(fecha >= fechaIniConvocatoria && fecha <= limitePreInsc){
-        qrGenerado = QR;
+        console.log("imagen1")
+        qrGenerado = imagen1;
     }else{
         if(fecha > limitePreInsc && fecha <= limiteInscrip){
-            qrGenerado = QRwebsis;
+            console.log("imagen2")
+            qrGenerado = imagen2;
         }else{
             //AQUI SE CERRARIA FORMULARIO
         }
     }
+    qrGenerado2 = qrGenerado
+    console.log(qrGenerado2, "este es el 2")
  }
-
-generarQR()
+ generarQR()*/
+console.log(imagen,"nanananna")
     return(
         <Form.Group className="mb-4 text-center">
-            <Form.Label className="w-100 d-block text-center">Nombre del equipo: </Form.Label>
-                <img className="qr-imagen w-sm-50 w-md-25" src={QR}/>
+            <Form.Label className="w-100 d-block text-center">Realice su pago aqui: </Form.Label>
+                <img className="qr-imagen w-sm-50 w-md-25" src={imagen}/>
         </Form.Group>
     )
 }
 
 
-function FormArchivo({archivo, estado, cambiarEstado}){
+function FormArchivo({archivo, estado, cambiarEstado, acepta}){
  
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.files[0]});
@@ -92,7 +100,7 @@ function FormArchivo({archivo, estado, cambiarEstado}){
         <Form.Group className="mb-4 d-block">
             <Form.Label className="w-100 text-start">{archivo}</Form.Label>
             <Form.Control className="form-control" type="file" id="formFile"
-                
+                accept={acepta}
                 onChange={onChange}
             />
         </Form.Group>
