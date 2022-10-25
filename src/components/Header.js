@@ -45,7 +45,7 @@ function Header(){
         <header className="Main-header header-background">
         <div className='contenedor-header'>
             <h2 className='header-text fila'>
-                liga maxi basquet
+                LIGA MAXI BASQUET
             </h2>
             <div className='fila columna'>
                 <button className='botonIs login' type='submit' onClick= {() => 
