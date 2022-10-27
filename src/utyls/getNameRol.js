@@ -31,14 +31,17 @@ export const GetNameUser = (user) =>{
             let aux = email.split('@');
             if(aux.includes('admin.com')){
                 res= 'Admin'
+                console.log("creo que no esta entrando aqui")
             }else{
                 getDel();
+                res=delegadoName;
             }
             
         }
-        if(delegadoName){
+        /*if(delegadoName){
             res=delegadoName;
-        }
+        }*/
+        console.log("us actual", delegadoName)
         return res;
         
     

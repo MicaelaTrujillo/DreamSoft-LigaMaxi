@@ -10,6 +10,7 @@ import { app } from "./Firebase/ConexionBD";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Redirect } from "react-router-dom"
 import UserProvider from "./context/userProvider";
+import Solicitudes from "./pages/Solicitudes";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
           <Route path="/FormularioCampeonato" element={<FormularioCampeonato/>}></Route>
           <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
+          <Route path="/Solicitudes" element={<Solicitudes/>}></Route>
         </Routes>
     </UserProvider>
   );
