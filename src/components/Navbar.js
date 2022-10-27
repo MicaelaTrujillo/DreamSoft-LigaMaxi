@@ -13,8 +13,12 @@ const routes={
     ],
     admin:[
         {
-            name: 'Notificaciones',
-            path: '/Notificaciones'
+            name: 'Solicitudes',
+            path: '/Solicitudes'
+        },
+        {
+            name: 'Campeonato',
+            path: '/FormularioCampeonato'
         }
     ],
     Delegado:[
@@ -22,6 +26,10 @@ const routes={
             name: 'Pre Inscripción',
             path: '/FormularioPreInscripcion'
         },
+        {
+            name: 'Inscripción',
+            path: '/FormularioInscripcion'
+        }
     ],
 }
 function Navbar (){
@@ -32,19 +40,21 @@ function Navbar (){
         <nav className="nav-background">
             <div className='contenedor-navbar'>
                 <div className='contenedor-texto navbar-texto'>
-                <nav>
-                    <Link to="/">Inicio</Link>
-                </nav>
+                    <nav>
+                        <Link to="/">Inicio</Link>
+                    </nav>
                 </div>
                 
-        {user? 
-            <div className='contenedor-texto navbar-texto'>
-            {
+                {user? 
+            
                 routes[userRol]?.map(({name, path}) => (
-                    <Link to={path}>{name}</Link>
+                    <div className='contenedor-texto navbar-texto'>
+                        <nav>  
+                            <Link to={path}>{name}</Link>
+                        </nav>
+                    </div>
                 ))
-            }
-             </div>  
+            
             
          : 
         
