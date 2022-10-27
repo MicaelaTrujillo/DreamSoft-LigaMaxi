@@ -31,14 +31,16 @@ export const GetRolUser = (user) =>{
             let aux = email.split('@');
             if(aux.includes('admin.com')){
                 res= 'admin'
+                console.log("creo que no esta entrando aqui")
             }else{
                 getDel();
+                res=delegado;
             }
             
         }
-        if(delegado){
+        /*if(delegado){
             res=delegado;
-        }
+        }*/
         console.log("us actual", delegado)
         return res;
         

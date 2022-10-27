@@ -7,6 +7,7 @@ import { app } from "./Firebase/ConexionBD";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Redirect } from "react-router-dom"
 import UserProvider from "./context/userProvider";
+import Solicitudes from "./pages/Solicitudes";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>}></Route>
           <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
+          <Route path="/Solicitudes" element={<Solicitudes/>}></Route>
         </Routes>
     </UserProvider>
   );

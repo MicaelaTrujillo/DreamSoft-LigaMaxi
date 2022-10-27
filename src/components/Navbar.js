@@ -13,8 +13,8 @@ const routes={
     ],
     admin:[
         {
-            name: 'Notificaciones',
-            path: '/Notificaciones'
+            name: 'Solicitudes',
+            path: '/Solicitudes'
         }
     ],
     Delegado:[

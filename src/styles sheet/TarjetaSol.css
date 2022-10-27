@@ -1,0 +1,12 @@
+.contenedor-tarjeta{
+    width: 800px;
+    height: 100px;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}

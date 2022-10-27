@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'Bebas';
+    src: url(../fonts/BebasNeue-Regular.woff) format('woff');
+}
+
+body {
+    font-family: 'Bebas', Open sans-serif, Arial, Helvetica, sans-serif;
+    
+}
+.main{
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+  
+}
+
+.contenedor-sol{
+    background-color: #eea81b;
+    width: 1050px;
+    height: auto;
+    text-align: center;
+    padding: 40px;
+    font-weight: 400;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+
+h2{
+    max-width: 940px;
+    font-size: 40px;
+    font-family: 'Bebas';
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 40px;
+    white-space: pre;
+}
