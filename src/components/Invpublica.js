@@ -100,8 +100,8 @@ const [imageInvPub, setstringImage] = useState('');
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("si entra al exist", docSnap.data());
-        var invitacionPublica = docSnap.data().invitacion;
+        //console.log("si entra al exist", docSnap.data());
+        var invitacionPublica = docSnap.data().Invitacion;
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");

@@ -50,10 +50,12 @@ h2{
   font-weight: 600;
   
   font-size: 2.5rem;
+  font-family: 'Roboto' !important;
+  margin: auto;
 }
 
 .timer div:first-child p{
-  color: #f8f8f8;
+  color: #fff;
   height: auto;
 }
 
@@ -93,7 +95,7 @@ section p:last-child{
 
 
 
-@media screen and (max-width:470px) {
+@media screen and (max-width:560px) {
   .timer div:last-child{
     margin-left: 1.5em;
     margin-right: 1.5em;
@@ -116,34 +118,61 @@ section p:last-child{
   }
 
   .timer-container {
-    height: 17em;
+    height: 16em;
   }
 }
 
-@media screen and (max-width:360px) {
+@media screen and (max-width:450px) {
   .timer div:last-child{
-    margin-left: 0.1em;
-    margin-right: 0.1em;
-    padding: 0.5em;
+    margin-left: 1em !important;
+    margin-right: 1em !important; 
+    padding: 0.8em !important;
   }
 
   .timer section p:first-child, .timer div:last-child span{
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-size: 1.05rem !important;
+    font-weight: 400 !important;
   }
   
   .timer section p:last-child{
-    font-size: 0.75rem;
-    font-weight: 350;
+    font-size: 0.68rem !important;
+    font-weight: 350 !important;
   }
   h2{
-    font-weight: 500;
+    font-weight: 500 !important;
     
-    font-size: 1.5rem;
+    font-size: 1.15rem !important;
   }
 
   .timer-container {
-    height: 13.5em;
+    height: 11em !important;
+  }
+}
+
+@media screen and (max-width:520px) {
+  .timer div:last-child{
+    margin-left: 1.5em !important;
+    margin-right: 1.5em !important; 
+    padding: 1em !important;
+  }
+
+  .timer section p:first-child, .timer div:last-child span{
+    font-size: 1.3rem !important;
+    font-weight: 400 !important;
+  }
+  
+  .timer section p:last-child{
+    font-size: 1rem !important;
+    font-weight: 350 !important;
+  }
+  h2{
+    font-weight: 500 !important;
+    
+    font-size: 1.2rem !important;
+  }
+
+  .timer-container {
+    height: 11em !important;
   }
 }
 
