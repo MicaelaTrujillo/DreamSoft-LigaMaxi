@@ -1,26 +1,34 @@
-import {Routes, Route } from "react-router-dom";
+import {Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import FormularioPreInscripcion from "./pages/FormularioPreInscripcion";
 import FormularioRegistro from "./pages/FormularioRegistro";
 import './App.css';
-import { app } from "./Firebase/ConexionBD";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { Redirect } from "react-router-dom"
-import UserProvider from "./context/userProvider";
+
 import Solicitudes from "./pages/Solicitudes";
+import PrivateRoute from "./components/privateRutes";
+
+import { UserContext } from '../src/context/userProvider';
+import { useContext } from 'react';
+import { GetRolUser } from "../src/utyls/getRolUser";
 
 function App() {
-
-  
+  const {user} = useContext(UserContext);
+  const userRol = GetRolUser(user);
+  console.log("en app este es el usuario", user);
   return (
-    <UserProvider>
        <Routes>
           <Route path="/" element={<Home/>}></Route>
-          <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>}></Route>
           <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
-          <Route path="/Solicitudes" element={<Solicitudes/>}></Route>
+
+          <Route element={<PrivateRoute isAllowed={!!user}/>}>
+             <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
+          </Route>
+
+          <Route element={<PrivateRoute isAllowed={!!user && userRol=="admin"}/>}>
+            <Route exact path='/Solicitudes' element={<Solicitudes/>}/>
+          </Route>
+          
         </Routes>
-    </UserProvider>
   );
 }
 

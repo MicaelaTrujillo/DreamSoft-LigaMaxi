@@ -10,3 +10,7 @@
     border-color: black;
     border-width: 1px;
 }
+
+.nom-tarjeta{
+    text-align: left;
+}

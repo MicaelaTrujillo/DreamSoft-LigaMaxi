@@ -1,6 +1,7 @@
-import { Route } from "react-router-dom";
-const PrivateRoute = (props)=>{
-    return <Route {...props}/>
-}
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
+const PrivateRoute = ({isAllowed}) => {
+    return isAllowed ? <Outlet /> : <Navigate to="/" />;
+}
 export default PrivateRoute;

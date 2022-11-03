@@ -15,11 +15,21 @@ const routes={
         {
             name: 'Solicitudes',
             path: '/Solicitudes'
+        },
+        {
+            name: 'Inscripciones',
+            path: '/Solicitudes'
         }
     ],
     Delegado:[
         {
             name: 'Pre Inscripción',
+            path: '/FormularioPreInscripcion'
+        },
+    ],
+    apuntador:[
+        {
+            name: 'Mesa',
             path: '/FormularioPreInscripcion'
         },
     ],
@@ -38,13 +48,17 @@ function Navbar (){
                 </div>
                 
         {user? 
-            <div className='contenedor-texto navbar-texto'>
-            {
+            
+            
                 routes[userRol]?.map(({name, path}) => (
-                    <Link to={path}>{name}</Link>
+                    <div className='contenedor-texto navbar-texto'>
+                    <nav>
+                        <Link to={path}>{name}</Link>    
+                    </nav>
+                    </div> 
                 ))
-            }
-             </div>  
+            
+             
             
          : 
         
