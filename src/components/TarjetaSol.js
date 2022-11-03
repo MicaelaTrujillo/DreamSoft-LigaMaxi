@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/esm/Button";
 import "../styles sheet/TarjetaSol.css";
 
+
 function TarjetaSol(){
     return (
             <div className="contenedor-tarjeta">
