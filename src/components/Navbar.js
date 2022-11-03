@@ -13,7 +13,7 @@ const routes={
     ],
     admin:[
         {
-            name: 'Inscripciones',
+            name: 'Solicitudes',
             path: '/Solicitudes',
         },
         {

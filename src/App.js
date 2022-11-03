@@ -25,10 +25,12 @@ function App() {
 
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
+             <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
           </Route>
 
           <Route element={<PrivateRoute isAllowed={!!user && userRol=="admin"}/>}>
             <Route exact path='/Solicitudes' element={<Solicitudes/>}/>
+            <Route path="/FormularioCampeonato" element={<FormularioCampeonato/>}></Route>
           </Route>
           
 
