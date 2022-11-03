@@ -14,7 +14,7 @@ const routes={
     admin:[
         {
             name: 'Solicitudes',
-            path: '/Solicitudes'
+            path: '/Solicitudes',
         },
         {
             name: 'Campeonato',
@@ -31,6 +31,12 @@ const routes={
             path: '/FormularioInscripcion'
         }
     ],
+    apuntador:[
+        {
+            name: 'Mesa',
+            path: '/FormularioPreInscripcion'
+        },
+    ],
 }
 function Navbar (){
     const {user} = useContext(UserContext);
@@ -45,6 +51,7 @@ function Navbar (){
                     </nav>
                 </div>
                 
+
                 {user? 
             
                 routes[userRol]?.map(({name, path}) => (
@@ -54,7 +61,6 @@ function Navbar (){
                         </nav>
                     </div>
                 ))
-            
             
          : 
         

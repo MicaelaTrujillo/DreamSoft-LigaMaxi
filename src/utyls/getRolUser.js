@@ -4,8 +4,23 @@ import { doc, getDoc, getFirestore, query } from "firebase/firestore";
 import { useState } from 'react';
 //import {useCollectionData} from "react-firebase-hooks/firestore"
 export const GetRolUser = (user) =>{
-
     const [delegado, setDelegado]= useState(null);
+    let res = 'user'
+    const {email} = user || {}
+    console.log('el email',email)
+        if(email){
+            let aux = email.split('@');
+            if(aux.includes('admin.com')){
+                res= 'admin'
+                console.log("creo que no esta entrando aqui")
+            }else if(aux.includes('apuntador.com')){
+                res='apuntador'
+            }else {
+                getDel();
+                res=delegado;
+            }
+            
+        }
 
     async function getDel(){
        
@@ -22,42 +37,8 @@ export const GetRolUser = (user) =>{
         
         }
     }
-   
-    
-        let res = 'user'
-        const {email} = user || {}
-        console.log('el email',email)
-        if(email){
-            let aux = email.split('@');
-            if(aux.includes('admin.com')){
-                res= 'admin'
-                console.log("creo que no esta entrando aqui")
-            }else{
-                getDel();
-                res=delegado;
-            }
-            
-        }
-        /*if(delegado){
-            res=delegado;
-        }*/
+        
         console.log("us actual", delegado)
         return res;
-        
-    
-    /*let res = 'user'; 
-    const {email} = user || {}
-    if(email){
-        let aux= email.split('@');
-            if(aux.includes('admin.com')){
-                res= 'admin';
-            }else{
-                getDel();
-            }
-    }
-    if(delegado){
-        res=delegado
-    }
-   console.log("en getROL", user)
-   return res;*/
+
 }

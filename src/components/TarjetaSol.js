@@ -7,7 +7,7 @@ function TarjetaSol(){
     return (
             <div className="contenedor-tarjeta">
             <span className="nom-tarjeta">Nombre de equipo</span>
-            <Button>Habilitado</Button>
+            <Button>Ver Información</Button>
         </div>
         
     );

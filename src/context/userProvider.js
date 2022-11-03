@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
 import { createContext, useEffect, useState } from "react"
+import { Navigate } from "react-router-dom"
 import { auth } from "../Firebase/ConexionBD"
 
 export const UserContext = createContext()
@@ -21,7 +22,11 @@ const  UserProvider = ({children}) => {
 
     const  registerUser = (email, password)=>createUserWithEmailAndPassword(auth, email, password)
     const loginUser = (email,  password) => signInWithEmailAndPassword(auth,email,password)
-    const  signOutUser =()=> signOut(auth)
+    const  signOutUser =()=> {
+        signOut(auth)
+        return <Navigate to='/'/>
+    }
+    
 
     return(
         <UserContext.Provider value={{user, setUser, registerUser, loginUser, signOutUser}}>
