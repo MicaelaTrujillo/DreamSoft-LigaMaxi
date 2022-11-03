@@ -4,6 +4,12 @@ import Form from "react-bootstrap/Form";
 
 
 function FormInscripcion() {
+
+    function onSubmit(){
+        
+    }
+
+
     return (
         <div className="row cont-main-form mt-2 mb-2 mx-0">
             
@@ -20,7 +26,7 @@ function FormInscripcion() {
                              
                         />
                         <LabelForm
-                            label="Añadir jugador: "
+                            label="Añadir entrenador: "
                         />
                         <div className='botones pb-4'>
                             
@@ -36,7 +42,9 @@ function FormInscripcion() {
                         <div className='botones pb-4'>
                             
                             <Boton
-                                    texto='Añadir'      
+                                    texto='Añadir'    
+                                    manejarClic={""}
+                                    enlace = "/FormularioRegistroJugador"
                             />
                         </div>
 
