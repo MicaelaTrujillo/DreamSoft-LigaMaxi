@@ -2,6 +2,9 @@ import {Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import FormularioPreInscripcion from "./pages/FormularioPreInscripcion";
 import FormularioRegistro from "./pages/FormularioRegistro";
+import FormularioCampeonato from "./pages/FormularioCampeonato";
+import FormularioInscripcion from "./pages/FormularioInscripcion";
+
 import './App.css';
 
 import Solicitudes from "./pages/Solicitudes";
@@ -28,6 +31,7 @@ function App() {
             <Route exact path='/Solicitudes' element={<Solicitudes/>}/>
           </Route>
           
+
         </Routes>
   );
 }

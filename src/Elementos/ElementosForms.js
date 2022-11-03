@@ -307,4 +307,41 @@ function FormInputs4({label, placeholder, estado, cambiarEstado, expresionRegula
     )
 }
 
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal}
+
+
+function FormFecha({label}){
+
+    return(
+        <Form.Group className="mb-4 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control className="form-control" type="datetime-local"
+            />
+        </Form.Group>
+    )
+}
+
+
+function FormInputSinCambioEst({label, value}){
+    
+    return(
+        <Form.Group className="mb-3 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="text"
+                value={value}
+            />
+                <Form.Label></Form.Label>                  
+        </Form.Group>
+    )
+}
+
+
+function LabelForm({label}){
+    return(
+        <>
+        <Form.Label className="w-100">{label}</Form.Label>
+        </>
+    );
+}
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,LabelForm}
