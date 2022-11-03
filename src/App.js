@@ -4,6 +4,7 @@ import FormularioPreInscripcion from "./pages/FormularioPreInscripcion";
 import FormularioRegistro from "./pages/FormularioRegistro";
 import FormularioCampeonato from "./pages/FormularioCampeonato";
 import FormularioInscripcion from "./pages/FormularioInscripcion";
+import FormularioRegistroJugador from "./pages/FormularioRegistroJugador";
 
 import './App.css';
 import { app } from "./Firebase/ConexionBD";
@@ -23,6 +24,7 @@ function App() {
           <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
           <Route path="/FormularioCampeonato" element={<FormularioCampeonato/>}></Route>
           <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
+          <Route path="/FormularioRegistroJugador" element={<FormularioRegistroJugador/>}></Route>
           <Route path="/Solicitudes" element={<Solicitudes/>}></Route>
         </Routes>
     </UserProvider>

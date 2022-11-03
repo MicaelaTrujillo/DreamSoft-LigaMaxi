@@ -307,7 +307,79 @@ function FormInputs4({label, placeholder, estado, cambiarEstado, expresionRegula
     )
 }
 
+let res5='w-100 xdx text-start alertaBien';
+function FormInputs5({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+    const validarNombre = () => {
+        res5='w-100 xdx text-start ' 
+        if(expresionRegular){   
+            if(expresionRegular.test(estado.campo)){
+                console.log("correcto")
+                res5='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
+            }else{
+                console.log("incorrecto")
+                res5='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
+            }
+        }
+    }
+    return(
+        <Form.Group className="mb-3 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="text"
+                placeholder={placeholder}
+                value={estado.campo}
+                onChange={onChange}
+                onKeyUp={validarNombre}
+                onBlur={validarNombre}
+                valido={estado.valido}
+            />
+                <Form.Label className={res5}>{alerta}</Form.Label>                  
+        </Form.Group>
+    )
+}
 
+let res6='w-100 xdx text-start alertaBien';
+function FormInputs6({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+    const validarNombre = () => {
+        res6='w-100 xdx text-start ' 
+        if(expresionRegular){   
+            if(expresionRegular.test(estado.campo)){
+                console.log("correcto")
+                res6='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
+            }else{
+                console.log("incorrecto")
+                res6='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
+            }
+        }
+    }
+    return(
+        <Form.Group className="mb-3 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="text"
+                placeholder={placeholder}
+                value={estado.campo}
+                onChange={onChange}
+                onKeyUp={validarNombre}
+                onBlur={validarNombre}
+                valido={estado.valido}
+            />
+                <Form.Label className={res6}>{alerta}</Form.Label>                  
+        </Form.Group>
+    )
+}
 
 function FormFecha({label}){
 
@@ -344,4 +416,4 @@ function LabelForm({label}){
         </>
     );
 }
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,LabelForm}
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,LabelForm}
