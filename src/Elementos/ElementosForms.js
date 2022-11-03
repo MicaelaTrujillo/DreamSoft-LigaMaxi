@@ -1,7 +1,7 @@
 import "../styles sheet/FormPreinscripcion.css";
 import Form from "react-bootstrap/Form";
 import ReactDOM from 'react-dom/client';
-
+import {Link} from 'react-router-dom'
 
 import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -109,12 +109,13 @@ function FormArchivo({archivo, estado, cambiarEstado, acepta}){
 
 
 
-function Boton({texto,manejarClic}){
+function Boton({texto,manejarClic,enlace}){
     return(
         <button
             className='boton'
             onClick={manejarClic}>
-            <p>{texto}</p>
+            <Link to={enlace}>{texto}</Link>
+            
         </button>
     );
 }
