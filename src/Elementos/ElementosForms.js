@@ -162,7 +162,7 @@ function FormContraseña({label, placeholder, estado,cambiarEstado,expresionRegu
 }
 
 let res='w-100 xdx text-start alertaBien';
-function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id,value}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
     }
@@ -187,7 +187,7 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
                 className="form-control"
                 type="text"
                 placeholder={placeholder}
-                value={estado.campo}
+                value={value}
                 onChange={onChange}
                 onKeyUp={validarNombre}
                 onBlur={validarNombre}
@@ -309,12 +309,16 @@ function FormInputs4({label, placeholder, estado, cambiarEstado, expresionRegula
 
 
 
-function FormFecha({label}){
-
+function FormFecha({label,value,estado, cambiarEstado}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
     return(
         <Form.Group className="mb-4 d-block">
             <Form.Label className="w-100 text-start">{label}</Form.Label>
             <Form.Control className="form-control" type="datetime-local"
+                value = {value}
+                onChange={onChange}
             />
         </Form.Group>
     )
@@ -344,4 +348,15 @@ function LabelForm({label}){
         </>
     );
 }
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,LabelForm}
+
+
+function FormImagen({imagen}){
+    
+    return(
+        <Form.Group className="mb-4 text-center">
+            <Form.Label className="w-100 d-block text-center"></Form.Label>
+                <img className="qr-imagen w-sm-50 w-md-25" src={imagen} width="267" height="265"/>
+        </Form.Group>
+    )
+}
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,LabelForm, FormImagen}
