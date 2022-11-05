@@ -30,7 +30,7 @@ export const GetNameUser = (user) =>{
         if(email){
             let aux = email.split('@');
             if(aux.includes('admin.com')){
-                res= 'Administrador'
+                res= email
                 console.log("creo que no esta entrando aqui nameee")
             }else if (aux.includes('apuntador.com')){
                 res='Apuntador de Mesa'

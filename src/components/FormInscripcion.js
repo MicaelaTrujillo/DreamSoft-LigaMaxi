@@ -33,7 +33,6 @@ function FormInscripcion() {
                             <Boton 
                                 type='submint'
                                 texto='Añadir'      
-                                manejarClic={cargarInscripcion}
                             />
                         </div>
 
