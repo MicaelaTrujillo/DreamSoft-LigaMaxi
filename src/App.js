@@ -4,6 +4,7 @@ import FormularioPreInscripcion from "./pages/FormularioPreInscripcion";
 import FormularioRegistro from "./pages/FormularioRegistro";
 import FormularioCampeonato from "./pages/FormularioCampeonato";
 import FormularioInscripcion from "./pages/FormularioInscripcion";
+import FormularioRegistroJugador from "./pages/FormularioRegistroJugador";
 
 import './App.css';
 
@@ -23,9 +24,11 @@ function App() {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
 
+
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
              <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
+             <Route path="/FormularioRegistroJugador" element={<FormularioRegistroJugador/>}></Route>
           </Route>
 
           <Route element={<PrivateRoute isAllowed={!!user && userRol=="admin"}/>}>

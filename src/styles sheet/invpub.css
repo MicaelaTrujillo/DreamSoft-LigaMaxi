@@ -34,10 +34,11 @@ html,body{
     align-items: center;
     margin-top: 0.625rem;
     margin-bottom: 0.625rem;
+    font-family: 'Bebas';
     
 }
 .texto-inv h2{
-    font-family: 'Bebas', Open sans-serif, Arial, Helvetica, sans-serif;
+    font-family: 'Bebas' !important;
  
     
     text-align: center;
@@ -56,6 +57,14 @@ html,body{
     padding: 1.25rem;
     
 }
+
+@media screen and (max-width:430px) {
+    
+    .texto-inv h2{
+        font-size: 0.9rem !important;
+        padding: 0.7rem !important;
+    }
+    }
 
 @media screen and (max-width:500px) {
     
