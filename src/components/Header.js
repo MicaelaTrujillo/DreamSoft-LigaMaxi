@@ -8,6 +8,7 @@ import {db} from '../Firebase/ConexionBD';
 import { collection} from "firebase/firestore";
 import { GetNameUser } from '../utyls/getNameRol';
 import { Navigate, Route } from 'react-router-dom';
+import { GetRolUser } from '../utyls/getRolUser';
 
 
 function Header(){
@@ -17,7 +18,7 @@ function Header(){
     const [userLogin, setUserLogin] = useState(null);
 
     const userName = GetNameUser(user);
-    console.log("nombre header", userName);
+    const userRol = GetRolUser (user);
     const handleClose = () => {
         setShow(false);
     }
@@ -46,6 +47,7 @@ function Header(){
                     {user? cerrar() : handleShow()}
                     }>{user? "Cerrar Sesión" : "Iniciar Sesión"}
                 </button>
+                <p> {user?  <>{userRol? userRol : ""} </>: ""}</p>
                 <p> {user?  <>{userName? userName : ""} </>: ""} </p>
             </div>
         </div>

@@ -11,7 +11,7 @@ const routes={
             path: '/FormularioRegistro'
         },
     ],
-    admin:[
+    Administrador:[
         {
             name: 'Solicitudes',
             path: '/Solicitudes',

@@ -6,6 +6,7 @@ import { useState } from 'react';
 export const GetNameUser = (user) =>{
 
     const [delegadoName, setDelegado]= useState(null);
+    console.log("estado actual del delegado", delegadoName);
 
     async function getDel(){
        
@@ -30,7 +31,7 @@ export const GetNameUser = (user) =>{
         if(email){
             let aux = email.split('@');
             if(aux.includes('admin.com')){
-                res= 'Administrador'
+                res= email
                 console.log("creo que no esta entrando aqui nameee")
             }else if (aux.includes('apuntador.com')){
                 res='Apuntador de Mesa'

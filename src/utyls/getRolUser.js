@@ -11,7 +11,7 @@ export const GetRolUser = (user) =>{
         if(email){
             let aux = email.split('@');
             if(aux.includes('admin.com')){
-                res= 'admin'
+                res= 'Administrador'
                 console.log("creo que no esta entrando aqui")
             }else if(aux.includes('apuntador.com')){
                 res='apuntador'

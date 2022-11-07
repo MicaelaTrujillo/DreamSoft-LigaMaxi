@@ -5,10 +5,10 @@ import Form from "react-bootstrap/Form";
 
 function FormInscripcion() {
 
+
     function onSubmit(){
         
     }
-
 
     return (
         <div className="row cont-main-form mt-2 mb-2 mx-0">
@@ -30,8 +30,9 @@ function FormInscripcion() {
                         />
                         <div className='botones pb-4'>
                             
-                            <Boton
-                                    texto='Añadir'      
+                            <Boton 
+                                type='submint'
+                                texto='Añadir'      
                             />
                         </div>
 
