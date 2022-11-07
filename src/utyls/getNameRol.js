@@ -6,6 +6,7 @@ import { useState } from 'react';
 export const GetNameUser = (user) =>{
 
     const [delegadoName, setDelegado]= useState(null);
+    console.log("estado actual del delegado", delegadoName);
 
     async function getDel(){
        
