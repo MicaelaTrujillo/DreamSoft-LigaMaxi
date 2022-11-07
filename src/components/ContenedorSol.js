@@ -8,25 +8,7 @@ import { async } from "@firebase/util";
 
 
 function ContenedorSol(){
-    const eqNoHabilitados = [];
     const [equiposNH, setENH] = useState([]);
-    const eqHabilitados =[];
-
-       /*getDocs(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Solicitudes")).then(
-            (querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    // doc.data() is never undefined for query doc snapshots
-                    if(doc.data().Habilitado == false){
-                      eqNoHabilitados.push(
-                        {id: doc.id},
-                        {nombre: doc.data().NombreEquipo}
-                        )
-                    }else{
-                      eqHabilitados.push(doc.data())
-                    }
-                  });
-                  //setENH(eqHabilitados);
-        });*/
         
     useEffect (() => {
         getDocs(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Solicitudes")).then(
@@ -40,9 +22,6 @@ function ContenedorSol(){
         });
     }, []);
        
-        /*setENH(datos);*/
-        console.log("Matriz de equipos NO habilitados", eqNoHabilitados);
-        console.log("Matriz de equipos habilitados", eqHabilitados);
         console.log("aquiiiiiiii", equiposNH);
     
  
@@ -53,7 +32,7 @@ function ContenedorSol(){
                 <h2>EQUIPOS</h2>
                 <p className="sub-titulo">Solicitudes de inscripción:</p>
                 {equiposNH.map((user) => (
-                 <TarjetaSol key = {user.id} name={user.NombreEquipo}/>
+                 <TarjetaSol key = {user.id} name={user.NombreEquipo} categoria={user.Categoria} imagen={user.UrlImagen}/>
                  ))}
             </div>
         </div>

@@ -17,8 +17,8 @@ function TarjetaSol(props){
         
         <Button variant="primary" onClick={ () => setModalShow(true)}>Ver Información</Button>
         </div>
-         <Modal show={modalShow}
-        onHide={() => setModalShow(false)}/>
+
+        <Modal show={modalShow} onHide={() => setModalShow(false)} nombre={props.name} categoria={props.categoria} imagen={props.imagen}/>
         </>
         
     
