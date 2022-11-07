@@ -1,11 +1,11 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import {FormInputSinCambioEst, Boton, LabelForm, FormArchivo, FormImagen} from '../Elementos/ElementosForms'
-import { async } from '@firebase/util';
+import {FormInputSinCambioEst, Boton, FormImagen} from '../Elementos/ElementosForms'
+
 
 function ModalSol(props){
     async function habilitarIns(){
-        console.log("ahorita vemos que pedo");
+        console.log("aqui se deberia habilitar Inscripcion en el nav del delgado");
     }
 
     return (

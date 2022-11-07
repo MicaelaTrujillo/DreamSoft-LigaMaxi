@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../styles sheet/ContenedorSol.css"
 import TarjetaSol from "./TarjetaSol";
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/firestore";
-import { Button } from "bootstrap";
-import { async } from "@firebase/util";
+import {getDocs,  collection} from "firebase/firestore";
+
 
 
 function ContenedorSol(){
