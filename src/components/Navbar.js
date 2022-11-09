@@ -11,7 +11,7 @@ const routes={
             path: '/FormularioRegistro'
         },
     ],
-    admin:[
+    Administrador:[
         {
             name: 'Solicitudes',
             path: '/Solicitudes',
@@ -28,7 +28,7 @@ const routes={
         },
         {
             name: 'Inscripción',
-            path: '/FormularioInscripcion'
+            path: '/Inscripciones'
         }
     ],
     apuntador:[

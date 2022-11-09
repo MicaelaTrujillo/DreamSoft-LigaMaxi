@@ -41,3 +41,8 @@ h2{
     margin: 40px;
     white-space: pre;
 }
+
+.sub-titulo{
+    align-self: auto;
+    color: black;
+}

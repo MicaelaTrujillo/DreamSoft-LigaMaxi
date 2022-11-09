@@ -1,6 +1,6 @@
 
 import {db} from '../Firebase/ConexionBD';
-import { doc, getDoc, getFirestore, query } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useState } from 'react';
 //import {useCollectionData} from "react-firebase-hooks/firestore"
 export const GetNameUser = (user) =>{
@@ -13,7 +13,7 @@ export const GetNameUser = (user) =>{
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
+            //console.log("Document data:", docSnap.data());
             await setDelegado(docSnap.data().NombreDelegado);
         } else {
         //doc.data() will be undefined in this case
@@ -26,12 +26,11 @@ export const GetNameUser = (user) =>{
     
         let res = 'user'
         const {email} = user || {}
-        console.log('el email',email)
+        //console.log('el email',email)
         if(email){
             let aux = email.split('@');
             if(aux.includes('admin.com')){
-                res= 'Administrador'
-                console.log("creo que no esta entrando aqui nameee")
+                res= email
             }else if (aux.includes('apuntador.com')){
                 res='Apuntador de Mesa'
             }else{
