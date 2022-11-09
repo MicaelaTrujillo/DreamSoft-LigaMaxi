@@ -356,7 +356,7 @@ function FormPreinsc() {
                         archivo="Subir comprobante:"
                         estado={comprobante}
                         cambiarEstado={cambiarComprobante}
-                        acepta=".pdf, image/*"
+                        acepta="image/*"
                     />
                     <div className='botones pb-4'>
                         <Boton 
