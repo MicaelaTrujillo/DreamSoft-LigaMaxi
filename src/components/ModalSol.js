@@ -1,13 +1,18 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import {FormInputSinCambioEst, Boton, FormImagen} from '../Elementos/ElementosForms'
+import { db } from "../Firebase/ConexionBD";
+import { doc, updateDoc} from "firebase/firestore";
+
 
 
 function ModalSol(props){
     async function habilitarIns(){
-        console.log("aqui se deberia habilitar Inscripcion en el nav del delgado");
+        await updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", props.nombre), {
+          Habilitado: true
+          })
+          //window.location.reload(true);
     }
-
     return (
         <Modal
         show={props.show} onHide={props.onHide} animation={false}
@@ -40,7 +45,12 @@ function ModalSol(props){
             <Boton 
                 texto='Habilitar'
                 type='submit'
-                manejarClic= {habilitarIns}/>
+                manejarClic= {() => {
+                  habilitarIns();
+                  props.onHide();
+                  props.deshabilitarBtn();
+                }}
+              />
           </Modal.Footer>
         </Modal>
       );

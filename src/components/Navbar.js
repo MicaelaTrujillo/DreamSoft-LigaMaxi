@@ -28,7 +28,7 @@ const routes={
         },
         {
             name: 'Inscripción',
-            path: '/FormularioInscripcion'
+            path: '/Inscripciones'
         }
     ],
     apuntador:[
