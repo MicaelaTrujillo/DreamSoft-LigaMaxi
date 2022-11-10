@@ -109,12 +109,12 @@ function FormArchivo({archivo, estado, cambiarEstado, acepta}){
 
 
 
-function Boton({texto,manejarClic}){
+function Boton({texto,manejarClic,enlace}){
     return(
         <button
             className='boton'
             onClick={manejarClic}>
-            <p>{texto}</p>
+            <Link to={enlace}>{texto}</Link>
         </button>
     );
 }
@@ -483,5 +483,5 @@ function FormImagen({imagen}){
 }
 
 
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen, FormImagen}
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen}
 
