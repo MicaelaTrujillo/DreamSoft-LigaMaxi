@@ -71,7 +71,7 @@ import { async } from '@firebase/util';
  console.log(linkImag,"VVVV2222222");
  
 */
-
+var textInv="";
 const Invpublica = () =>{
 /*async function obtenerImag() {
       const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
@@ -102,6 +102,7 @@ const [imageInvPub, setstringImage] = useState('');
       if (docSnap.exists()) {
         //console.log("si entra al exist", docSnap.data());
         var invitacionPublica = docSnap.data().Invitacion;
+        var text= docSnap.data().TextoInvitacionP;
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -109,7 +110,10 @@ const [imageInvPub, setstringImage] = useState('');
      // console.log("Urls",invitacionPublica);
       var imageInvi = "";
       imageInvi=invitacionPublica;
+      
+      textInv=text;
       setstringImage(imageInvi)
+      //settext(textInv)
       //console.log("Si daaaaaa", imageInvPub);
     }
     obtenerImag();
@@ -126,7 +130,11 @@ const [imageInvPub, setstringImage] = useState('');
                 
                 src ={imageInvPub}
             />
-            
+            <div className='contenedorText'>
+              <h2 className='text-style'>
+                {textInv}
+              </h2>
+            </div>
             
         </div>
     );

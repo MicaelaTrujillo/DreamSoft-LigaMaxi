@@ -5,6 +5,8 @@ import FormularioRegistro from "./pages/FormularioRegistro";
 import FormularioCampeonato from "./pages/FormularioCampeonato";
 import FormularioInscripcion from "./pages/FormularioInscripcion";
 import FormularioRegistroJugador from "./pages/FormularioRegistroJugador";
+import InformacionEquipo from "./pages/InformacionEquipo";
+import Equipos from "./pages/Equipos";
 
 import './App.css';
 
@@ -24,18 +26,21 @@ function App() {
        <Routes>
           <Route path="/" element={<Home/>}></Route>
           <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
-
+          
 
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
              <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
              <Route path="/FormularioRegistroJugador" element={<FormularioRegistroJugador/>}></Route>
+             <Route path="/InformacionEquipo" element={<InformacionEquipo/>}></Route>
+             <Route path="/Equipos" element={<Equipos/>}></Route>
              <Route path="/Inscripciones" element={<VistaInscripcion/>}></Route>
              <Route path="/Inscripciones/FormularioInscripcion/:equipo/:categoria" element={<FormularioInscripcion/>}></Route>
           </Route>
 
           <Route element={<PrivateRoute isAllowed={!!user && userRol==="Administrador"}/>}>
             <Route exact path='/Solicitudes' element={<Solicitudes/>}/>
+            
             <Route path="/FormularioCampeonato" element={<FormularioCampeonato/>}></Route>
           </Route>
           

@@ -39,9 +39,10 @@ function ContenedorSol(props){
         }, []);
 
     return(
-        <div className="main">
-            <div className="contenedor-sol">
-                <h2>{props.titulo}</h2>
+        <div className="container">
+            <div className="main">
+            <div className="contenedor-sol row cont-main mt-5 mb-5 mx-0">
+                <h2 className="tituloE">{props.titulo}</h2>
                 <p className="sub-titulo">{props.subtitulo}</p>
                 {userRol==='Administrador'? 
                     equiposAdm.map((equipo) => (
@@ -55,8 +56,8 @@ function ContenedorSol(props){
                     
                 }
             </div>
-
         </div>
+        
     );
 }
 

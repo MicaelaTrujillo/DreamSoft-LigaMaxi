@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+  }  
+
+.contenedor-prei label{
+    font-family: Roboto;
+}
+
+.botonEstilo{
+    align-items: center !important;
+    display: flex;
+    justify-content: center !important;
+}

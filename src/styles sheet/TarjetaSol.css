@@ -1,16 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+  }  
+
 .contenedor-tarjeta{
-    width: 800px;
+    width: 700px;
     height: 100px;
     margin: 15px;
-    display: flex;
+   font-family: Roboto;
     align-items: center;
     justify-content: center;
     background-color: #fff;
     border-style: solid;
     border-color: black;
     border-width: 1px;
+    display:grid;
+  grid-template-columns: repeat(4, 4fr);
+
 }
 
 .nom-tarjeta{
-    text-align: left;
+    text-align: left !important;
+    align-items: left;
+    font-weight: 600;
+    font-size: 1.35rem;
+    
+}
+
+.botonVerInfo{
+    background-color: #FF7B00 !important;
+    border-radius: 0% !important;
+    border-color: #35364A !important;
+    align-items: right !important;
+    cursor: pointer;
+    width: max-content;
+    justify-content: end !important;
+    align-content: end !important;
+    font-weight: 450!important;
+    font-size: 1.30rem !important;
+}
+.botonHabilitado{
+    background-color: #FFBF84 !important;
+    border-radius: 0% !important;
+    border-color: #35364A !important;
+    align-items: right !important;
+    cursor: pointer;
+    width:fit-content;
+    justify-content: end !important;
+    align-content: end !important;
+    font-weight: 450!important;
+    font-size: 1.30rem !important;
+    
+}
+
+@media screen and (max-width:650px) {
+    .nom-tarjeta{
+        font-weight: 580;
+        font-size: 1.05rem;
+        
+    }
+    
+    .botonVerInfo{
+        font-weight: 400!important;
+        font-size: 1rem !important;
+    }
+    
 }

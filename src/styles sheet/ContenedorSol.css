@@ -3,10 +3,10 @@
     src: url(../fonts/BebasNeue-Regular.woff) format('woff');
 }
 
-body {
-    font-family: 'Bebas', Open sans-serif, Arial, Helvetica, sans-serif;
-    
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+
+
 .main{
     min-height: 100vh;
     display: flex;
@@ -32,17 +32,38 @@ body {
 
 }
 
-h2{
+.tituloE{
     max-width: 940px;
     font-size: 40px;
-    font-family: 'Bebas';
+    font-family: 'Bebas' !important;
     font-weight: 700;
     line-height: 1.1;
     margin: 40px;
     white-space: pre;
+    margin: 0 ;
+    margin-bottom: 0.625rem;
 }
 
 .sub-titulo{
     align-self: auto;
     color: black;
+    font-weight: 600;
+    font-family: Roboto;
+    margin: 0.625rem !important;
+    font-size: 1.5rem;
+    text-align: start;
+}
+.p{
+    color: black;
+}
+
+@media screen and (max-width:650px) {
+    .tituloE{
+        font-size: 30px !important;
+        font-weight: 600;
+    }
+    .sub-titulo{
+        font-size: 1.05rem;
+    }
+    
 }
