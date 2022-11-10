@@ -5,7 +5,7 @@ import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/firestore";
 import { Button } from "bootstrap";
 import { async } from "@firebase/util";
-import styled from "styled-components";
+
 import {FormInputs, Boton, FormArchivo, FormInputSinCambioEst, LabelForm} from '../Elementos/ElementosForms';
 import "../styles sheet/infoEquipo.css";
 import {Link} from 'react-router-dom'
