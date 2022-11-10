@@ -1,7 +1,7 @@
 import "../styles sheet/FormPreinscripcion.css";
 import Form from "react-bootstrap/Form";
 import ReactDOM from 'react-dom/client';
-
+import {Link} from 'react-router-dom'
 
 import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -109,12 +109,13 @@ function FormArchivo({archivo, estado, cambiarEstado, acepta}){
 
 
 
-function Boton({texto,manejarClic}){
+function Boton({texto,manejarClic,enlace}){
     return(
         <button
             className='boton'
             onClick={manejarClic}>
-            <p>{texto}</p>
+            <Link to={enlace}>{texto}</Link>
+            
         </button>
     );
 }
@@ -162,7 +163,7 @@ function FormContraseña({label, placeholder, estado,cambiarEstado,expresionRegu
 }
 
 let res='w-100 xdx text-start alertaBien';
-function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id,value}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
     }
@@ -187,7 +188,7 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
                 className="form-control"
                 type="text"
                 placeholder={placeholder}
-                value={estado.campo}
+                value={value}
                 onChange={onChange}
                 onKeyUp={validarNombre}
                 onBlur={validarNombre}
@@ -271,6 +272,7 @@ function FormInputs3({label, placeholder, estado, cambiarEstado, expresionRegula
     )
 }
 let res4='w-100 xdx text-start alertaBien';
+//altura
 function FormInputs4({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
@@ -308,6 +310,7 @@ function FormInputs4({label, placeholder, estado, cambiarEstado, expresionRegula
 }
 
 let res5='w-100 xdx text-start alertaBien';
+//imput del peso
 function FormInputs5({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
@@ -315,10 +318,12 @@ function FormInputs5({label, placeholder, estado, cambiarEstado, expresionRegula
     const validarNombre = () => {
         res5='w-100 xdx text-start ' 
         if(expresionRegular){   
-            if(expresionRegular.test(estado.campo)){
-                console.log("correcto")
-                res5='w-100  text-start alertaBien'+id
-                cambiarEstado({...estado,valido:'true'})
+            if(estado.campo<=150){
+                if(expresionRegular.test(estado.campo)){
+                    console.log("correcto")
+                    res5='w-100  text-start alertaBien'+id
+                    cambiarEstado({...estado,valido:'true'})
+                } 
             }else{
                 console.log("incorrecto")
                 res5='w-100 text-start alertaMal'+id
@@ -381,20 +386,73 @@ function FormInputs6({label, placeholder, estado, cambiarEstado, expresionRegula
     )
 }
 
-function FormFecha({label}){
-
+function FormFecha({label,value,estado, cambiarEstado}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
     return(
         <Form.Group className="mb-4 d-block">
             <Form.Label className="w-100 text-start">{label}</Form.Label>
             <Form.Control className="form-control" type="datetime-local"
+                value = {value}
+                onChange={onChange}
             />
         </Form.Group>
     )
 }
 
+function FormFecha2({label,value,estado, cambiarEstado}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
 
-function FormInputSinCambioEst({label, value}){
+    const fCampo = new Date(estado.campo);
     
+    console.log("FCampo: ",fCampo);
+
+
+    const fechaActual = Date.now();
+    
+    const hoy= new Date (fechaActual);
+
+    //console.log("hoy: "+hoy)
+    const fechaCat=categoria.slice(0,-5);
+    console.log("fechaCat: "+ fechaCat);
+
+    let catEnMili= 1000*60*60*24*365*fechaCat;
+    var fechaRest = fechaActual-catEnMili;
+    
+
+    let cincoAEnMili= 1000*60*60*24*365*5;
+
+    var fechaCampoMili    = fCampo-0;
+
+    var f1= new Date(fechaRest);
+    var fn= new Date(fechaRest-cincoAEnMili);
+    var f2= new Date(fechaCampoMili);
+
+    const fMax= f1.toISOString();
+    const fMax2= "1"+fMax.slice(1,-8);
+
+    const fMin= fn.toISOString();
+    const fMin2= "1"+fMin.slice(1,-8);
+    
+    console.log("MAXIMO" ,fMax2);
+    console.log("minimo" ,fMin2)
+
+
+    return(
+        <Form.Group className="mb-4 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control className="form-control" type="datetime-local" max={fMax2} min={fMin2}
+                onChange={onChange}
+            />
+        </Form.Group>
+    )
+}
+var categoria= "";
+function FormInputSinCambioEst({label, value}){
+    categoria = value;
     return(
         <Form.Group className="mb-3 d-block">
             <Form.Label className="w-100 text-start">{label}</Form.Label>
@@ -416,4 +474,14 @@ function LabelForm({label}){
         </>
     );
 }
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,LabelForm}
+function FormImagen({imagen}){
+    
+    return(
+        <Form.Group className="mb-4 text-center">
+            <Form.Label className="w-100 d-block text-center"></Form.Label>
+                <img className="qr-imagen w-sm-50 w-md-25" src={imagen} width="267" height="265"/>
+        </Form.Group>
+    )
+}
+
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen}
