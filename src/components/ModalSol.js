@@ -1,11 +1,21 @@
 import Modal from 'react-bootstrap/Modal';
-import {Boton,FormInputs, FormContraseña} from '../Elementos/ElementosForms';
 import Button from 'react-bootstrap/Button';
+import {FormInputSinCambioEst, Boton, FormImagen} from '../Elementos/ElementosForms'
+import { db } from "../Firebase/ConexionBD";
+import { doc, updateDoc} from "firebase/firestore";
+
+
 
 function ModalSol(props){
+    async function habilitarIns(){
+        await updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", props.nombre), {
+          Habilitado: true
+          })
+          //window.location.reload(true);
+    }
     return (
         <Modal
-          {...props}
+        show={props.show} onHide={props.onHide} animation={false}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -16,14 +26,31 @@ function ModalSol(props){
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-              consectetur ac, vestibulum at eros.
-            </div>
+                <FormInputSinCambioEst
+                    label="Nombre del equipo: "
+                    value = {props.nombre}
+                />
+                <FormInputSinCambioEst
+                    label="Categoría: "
+                    value = {props.categoria}
+                />
+                <div>Comprobante: </div>
+                <FormImagen
+                    archivo="Comprobante: "
+                    imagen = {props.imagen}
+                />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={props.onHide}>Close</Button>
+            <Boton 
+                texto='Habilitar'
+                type='submit'
+                manejarClic= {() => {
+                  habilitarIns();
+                  props.onHide();
+                  props.deshabilitarBtn();
+                }}
+              />
           </Modal.Footer>
         </Modal>
       );

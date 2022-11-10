@@ -2,65 +2,63 @@ import React, { useEffect, useState } from "react";
 import "../styles sheet/ContenedorSol.css"
 import TarjetaSol from "./TarjetaSol";
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/firestore";
-import { Button } from "bootstrap";
-import { async } from "@firebase/util";
+import {getDocs,  collection,  where, query} from "firebase/firestore";
+import { UserContext } from '../context/userProvider';
+import { useContext } from 'react';
+import { GetRolUser } from "../utyls/getRolUser";
 
-function ContenedorSol(){
-    const eqNoHabilitados = [];
-    const [equiposNH, setENH] = useState([]);
-    const eqHabilitados =[];
+function ContenedorSol(props){
+    const [equiposAdm, setAdm] = useState([]);
+    const [equiposDel, setDel] = useState([]);
+    const {user} = useContext(UserContext);
+    const userRol = GetRolUser(user);
+ 
+        useEffect (() => {
+            getDocs(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Solicitudes")).then(
+                (querySnapshot) => {
+                    const datos = querySnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    }));
+                    //console.log("datoos",datos);  
+                    setAdm(datos);
+            });
+        }, []);
+    
 
-       /*getDocs(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Solicitudes")).then(
-            (querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    // doc.data() is never undefined for query doc snapshots
-                    if(doc.data().Habilitado == false){
-                      eqNoHabilitados.push(
-                        {id: doc.id},
-                        {nombre: doc.data().NombreEquipo}
-                        )
-                    }else{
-                      eqHabilitados.push(doc.data())
-                    }
-                  });
-                  //setENH(eqHabilitados);
-        });*/
+        useEffect (() => {
+        const q = query(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Solicitudes"), where("Solicitante", "==", user.uid));
         
-    useEffect (() => {
-        getDocs(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Solicitudes")).then(
-            (querySnapshot) => {
-                const datos = querySnapshot.docs.map((doc) => ({
+            getDocs(q).then((querySnapshot) =>{
+                const datosDel = querySnapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
-                }));
-                console.log("datoos",datos);  
-                setENH(datos);
-        });
-    }, []);
-       
-        /*setENH(datos);*/
-        console.log("Matriz de equipos NO habilitados", eqNoHabilitados);
-        console.log("Matriz de equipos habilitados", eqHabilitados);
-        console.log("aquiiiiiiii", equiposNH);
-    
- 
+                }));  
+                setDel(datosDel);
+            });
+        }, []);
 
     return(
-    <div className="container">
-        <div className="main">
-            <div className="contenedor-sol">
-                <h2>EQUIPOS</h2>
-
-                <p className="sub-titulo">Solicitudes de inscripción:</p>
-                {equiposNH.map((user) => (
-                 <TarjetaSol key = {user.id} name={user.NombreEquipo}/>
-                 ))}
-
+        <div className="container">
+            <div className="main">
+            <div className="contenedor-sol row cont-main mt-5 mb-5 mx-0">
+                <h2 className="tituloE">{props.titulo}</h2>
+                <p className="sub-titulo">{props.subtitulo}</p>
+                {userRol==='Administrador'? 
+                    equiposAdm.map((equipo) => (
+                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} imagen={equipo.UrlImagen} habilitado={equipo.Habilitado}/>
+                    ))
+                    
+                  : 
+                    equiposDel.map((equipo) => (
+                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} imagen={equipo.UrlImagen} habilitado={equipo.Habilitado}/>
+                    ))
+                    
+                }
             </div>
+
         </div>
-    </div>
-    
+        </div>
         
     );
 }

@@ -1,0 +1,13 @@
+.botonInfo{
+    background-color: #FFBF84 !important;
+    border-radius: 0% !important;
+    border-color: #35364A !important;
+    align-items: right !important;
+    cursor: pointer;
+    width:fit-content;
+    justify-content: end !important;
+    align-content: end !important;
+    font-weight: 450!important;
+    font-size: 1.30rem !important;
+    
+}

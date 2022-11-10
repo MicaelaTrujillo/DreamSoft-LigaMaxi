@@ -19,6 +19,10 @@ const routes={
         {
             name: 'Campeonato',
             path: '/FormularioCampeonato'
+        },
+        {
+            name: 'Equipos',
+            path: '/Equipos'
         }
     ],
     Delegado:[
@@ -28,7 +32,7 @@ const routes={
         },
         {
             name: 'Inscripción',
-            path: '/FormularioInscripcion'
+            path: '/Inscripciones'
         }
     ],
     apuntador:[
