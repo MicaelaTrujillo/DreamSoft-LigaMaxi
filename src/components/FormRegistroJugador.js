@@ -1,7 +1,7 @@
 import '../styles sheet/formRegistro.css';
 import '../styles sheet/Boton.css';
 
-import {Boton,FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6,FormArchivo, FormContraseña,AleFinal,Alert,FormFecha} from '../Elementos/ElementosForms';
+import {Boton,FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6,FormArchivo, FormContraseña,AleFinal,Alert,FormFecha,FormFecha2} from '../Elementos/ElementosForms';
 import { useContext, useState } from 'react';
 
 
@@ -24,6 +24,7 @@ function FormRegistroJugador() {
   const [correo, cambiarCorreo] = useState({campo: "", valido: null});
   const [telefono, cambiarTelefono] = useState({campo: "", valido: null});
   const [password, cambiarPassword] = useState({campo: "", valido: null});
+  const [fecha, cambiarFecha] = useState({campo: "", valido: null});
 
  const [formValido, cambiarFormValido] = useState({campo: "", valido: null});
 
@@ -35,7 +36,7 @@ function FormRegistroJugador() {
       correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
       telefono: /^\d{7,8}$/, // 7 a 14 numeros.
       ci: /^\d{7,8}$/, // 7 a 14 numeros.
-      altura: /^\d{3,3}$/,
+      altura: /^[0-9]+,[0-9]+$/,
       peso: /^\d{2,3}$/
   }
 
@@ -48,6 +49,7 @@ const manejarClic2 = () => {
   cambiarCorreo({campo:'',valido:null});
   cambiarTelefono({campo:'',valido:null});
   cambiarPassword({campo:'',valido:null});
+  cambiarFecha({campo:'',valido:null});
 }
 const validar = (e) =>{
   //e.preventDefault();
@@ -64,6 +66,7 @@ const validar = (e) =>{
     cambiarCorreo({campo:'',valido:null});
     cambiarTelefono({campo:'',valido:null});
     cambiarPassword({campo:'',valido:null});
+    cambiarFecha({campo:'',valido:null});
    
   }else{
     cambiarFormValido(false);
@@ -98,7 +101,7 @@ const validar = (e) =>{
         cambiarCorreo({campo:'',valido:null});
         cambiarTelefono({campo:'',valido:null});
         cambiarPassword({campo:'',valido:null});
-   
+        cambiarFecha({campo:'',valido:null});
          //alerta
         alert("Registro exitoso");
   }else{
@@ -181,7 +184,7 @@ const validar = (e) =>{
                     expresionRegular = {expresiones.peso}   
                     label="Peso (kg):"
                     placeholder="55"
-                    alerta="El peso se debe ingresar en kilogramos, sin decimales, como ser 50"
+                    alerta="El peso se debe ingresar en kilogramos, sin decimales"
                     id="1"
                 />
 
@@ -205,8 +208,10 @@ const validar = (e) =>{
                     id="2"
                 />
             
-                <FormFecha
+            <FormFecha2
                   label="Fecha de Nacimiento:"
+                  estado={fecha}
+                  cambiarEstado={cambiarFecha} 
                 />
 
             
