@@ -3,14 +3,11 @@ import {FormInputs, FormComboBox, FormQR, Boton, FormArchivo} from '../Elementos
 import Form from "react-bootstrap/Form";
 import "../styles sheet/FormPreinscripcion.css";
 import { useState, useEffect } from 'react';
-import css from "../styles sheet/FormPreinscripcion.css"
-import ReactDOM from 'react-dom/client';
-
 import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import * as firebase from '../Firebase/ConexionBD'
-import { render } from '@testing-library/react';
+import { UserContext } from '../context/userProvider';
+import { useContext } from 'react';
 /*
 var qrGenerado2=""
 async function generarQR(){
@@ -58,6 +55,8 @@ async function generarQR(){
 */
 
 function FormPreinsc() {
+    const {user} = useContext(UserContext);
+
     const [nombre, cambiarNombre] = useState({campo: "", valido: null});
     const [categoria, cambiarCategoria] = useState({campo: "", valido: null});
     const [comprobante, cambiarComprobante] = useState({campo: "", valido: null});
@@ -171,7 +170,9 @@ function FormPreinsc() {
             //subirImagen(comprobante.campo);
              await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
                  NombreEquipo: nombre.campo,
-                 Categoria: categoria.campo
+                 Categoria: categoria.campo,
+                 Habilitado: false,
+                 Solicitante: user.uid
                  })
                  //cambiarNombre({campo:'',valido:null});
                  //cambiarCategoria({campo:'',valido:null});
@@ -356,7 +357,7 @@ function FormPreinsc() {
                         archivo="Subir comprobante:"
                         estado={comprobante}
                         cambiarEstado={cambiarComprobante}
-                        acepta=".pdf, image/*"
+                        acepta="image/*"
                     />
                     <div className='botones pb-4'>
                         <Boton 

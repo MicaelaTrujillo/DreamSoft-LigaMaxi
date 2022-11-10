@@ -11,10 +11,10 @@ const routes={
             path: '/FormularioRegistro'
         },
     ],
-    admin:[
+    Administrador:[
         {
             name: 'Solicitudes',
-            path: '/Solicitudes'
+            path: '/Solicitudes',
         },
         {
             name: 'Campeonato',
@@ -28,8 +28,14 @@ const routes={
         },
         {
             name: 'Inscripción',
-            path: '/FormularioInscripcion'
+            path: '/Inscripciones'
         }
+    ],
+    apuntador:[
+        {
+            name: 'Mesa',
+            path: '/FormularioPreInscripcion'
+        },
     ],
 }
 function Navbar (){
@@ -45,6 +51,7 @@ function Navbar (){
                     </nav>
                 </div>
                 
+
                 {user? 
             
                 routes[userRol]?.map(({name, path}) => (
@@ -54,7 +61,6 @@ function Navbar (){
                         </nav>
                     </div>
                 ))
-            
             
          : 
         

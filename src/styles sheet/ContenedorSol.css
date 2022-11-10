@@ -19,7 +19,7 @@ body {
 }
 
 .contenedor-sol{
-    background-color: #eea81b;
+    background-color: #FAF9F7;
     width: 1050px;
     height: auto;
     text-align: center;
@@ -40,4 +40,9 @@ h2{
     line-height: 1.1;
     margin: 40px;
     white-space: pre;
+}
+
+.sub-titulo{
+    align-self: auto;
+    color: black;
 }

@@ -3,11 +3,7 @@ import {FormInputSinCambioEst, Boton, LabelForm} from '../Elementos/ElementosFor
 import Form from "react-bootstrap/Form";
 
 
-function FormInscripcion() {
-
-    function onSubmit(){
-        
-    }
+function FormInscripcion({nombre, categoria}) {
 
 
     return (
@@ -17,12 +13,11 @@ function FormInscripcion() {
                     <h3 className="mb-5 mt-3">FORMULARIO DE INSCRIPCIÓN</h3>
                         <FormInputSinCambioEst
                             label="Nombre del equipo: "
-                            value = "Jaguares"
-                             
+                            value = {nombre}
                         />
                         <FormInputSinCambioEst
                             label="Categoría: "
-                            value = "35 años"
+                            value = {categoria}
                              
                         />
                         <LabelForm
@@ -30,8 +25,9 @@ function FormInscripcion() {
                         />
                         <div className='botones pb-4'>
                             
-                            <Boton
-                                    texto='Añadir'      
+                            <Boton 
+                                type='submint'
+                                texto='Añadir'      
                             />
                         </div>
 

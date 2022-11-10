@@ -6,7 +6,7 @@ function Solicitudes(){
     return(
        <div>
              <HomePage/>
-             <ContenedorSol/>
+             <ContenedorSol titulo='EQUIPOS' subtitulo='Solicitudes de inscripción:'/>
        </div>
     );
     

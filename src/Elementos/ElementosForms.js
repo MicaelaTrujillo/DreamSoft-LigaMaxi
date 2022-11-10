@@ -162,7 +162,7 @@ function FormContraseña({label, placeholder, estado,cambiarEstado,expresionRegu
 }
 
 let res='w-100 xdx text-start alertaBien';
-function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id,value}){
+function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
     }
@@ -187,7 +187,7 @@ function FormInputs({label, placeholder, estado, cambiarEstado, expresionRegular
                 className="form-control"
                 type="text"
                 placeholder={placeholder}
-                value={value}
+                value={estado.campo}
                 onChange={onChange}
                 onKeyUp={validarNombre}
                 onBlur={validarNombre}
@@ -473,8 +473,7 @@ function LabelForm({label}){
         </>
     );
 }
-function FormImagen({imagen}){
-    
+function FormImagen({imagen}){ 
     return(
         <Form.Group className="mb-4 text-center">
             <Form.Label className="w-100 d-block text-center"></Form.Label>
@@ -483,4 +482,6 @@ function FormImagen({imagen}){
     )
 }
 
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen}
+
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen, FormImagen}
+

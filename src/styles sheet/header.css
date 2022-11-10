@@ -31,6 +31,7 @@ body {
     font-size: 36px;
     font-weight: lighter;
     margin: 30px;
+    font-family: 'Bebas' !important;
 }
 
 .login{
@@ -38,6 +39,7 @@ body {
     font-weight: lighter;
     font-size: 20px;
     text-align: right;
+    font-family: 'Bebas';
 }
 
 .botonIs{

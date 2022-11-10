@@ -7,6 +7,9 @@ import { async } from '@firebase/util';
 import {db} from '../Firebase/ConexionBD';
 import { collection} from "firebase/firestore";
 import { GetNameUser } from '../utyls/getNameRol';
+import { Navigate, Route } from 'react-router-dom';
+import { GetRolUser } from '../utyls/getRolUser';
+
 
 function Header(){
     const [show, setShow] = useState(false);
@@ -15,6 +18,7 @@ function Header(){
     const [userLogin, setUserLogin] = useState(null);
 
     const userName = GetNameUser(user);
+    const userRol = GetRolUser (user);
     const handleClose = () => {
         setShow(false);
     }
@@ -23,21 +27,12 @@ function Header(){
     const cerrar = async () => {
         setShow(false);
         try {
+            console.log("entra aqui");
+            <Route path="/" element={<Navigate to="/FormularioRegistro" />} />
             await signOutUser();
         } catch (error) {
             console.log(error.code);
         }
-    }
-    console.log("usuariooo", user);
-    if(user){
-        /*const userRef = db.collection("Campeonato1");
-        userRef.get().then((results) => {
-            const data = results.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }))
-        console.log("que sale",data);
-        });*/
     }
 
     return (
@@ -52,6 +47,7 @@ function Header(){
                     {user? cerrar() : handleShow()}
                     }>{user? "Cerrar Sesión" : "Iniciar Sesión"}
                 </button>
+                <p> {user?  <>{userRol? userRol : ""} </>: ""}</p>
                 <p> {user?  <>{userName? userName : ""} </>: ""} </p>
             </div>
         </div>
