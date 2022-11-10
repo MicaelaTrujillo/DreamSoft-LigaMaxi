@@ -57,6 +57,7 @@ function ContenedorSol(props){
                 }
             </div>
         </div>
+        </div>
         
     );
 }
