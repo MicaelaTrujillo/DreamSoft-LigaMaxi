@@ -3,7 +3,7 @@ import '../styles sheet/Boton.css';
 
 import {Boton,FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6,FormArchivo, FormContraseña,AleFinal,Alert,FormFecha,FormFecha2} from '../Elementos/ElementosForms';
 import { useContext, useState } from 'react';
-
+import {mandarNomEq} from './FormInscripcion'
 
 import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
@@ -12,18 +12,18 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { async } from '@firebase/util';
 import { UserContext } from '../context/userProvider';
 import {app} from '../Firebase/ConexionBD';
-
+import {useEffect } from 'react';
+import {useParams} from 'react-router-dom';
 
 function FormRegistroJugador() { 
-  const {registerUser} = useContext(UserContext);
-  const auth = getAuth();
+  const equipo = useParams();
+  const enlaceForm = '/Inscripciones/FormularioInscripcion/'+ equipo.equipo + "/" + equipo.categoria
+  console.log("se paso el nombre",equipo.equipo,equipo.categoria)
   const [nombre, cambiarNombre] = useState({campo: "", valido: null});
   const [peso, cambiarPeso] = useState({campo: "", valido: null});
   const [altura, cambiarAltura] = useState({campo: "", valido: null});
   const [ci, cambiarCi] = useState({campo: "", valido: null});
   const [correo, cambiarCorreo] = useState({campo: "", valido: null});
-  const [telefono, cambiarTelefono] = useState({campo: "", valido: null});
-  const [password, cambiarPassword] = useState({campo: "", valido: null});
   const [fecha, cambiarFecha] = useState({campo: "", valido: null});
 
  const [formValido, cambiarFormValido] = useState({campo: "", valido: null});
@@ -34,7 +34,6 @@ function FormRegistroJugador() {
       nombreJugador: /^[a-zA-ZÀ-ÿ\s]{2,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
       password: /^.{6,10}$/, // 4 a 12 digitos.
       correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-      telefono: /^\d{7,8}$/, // 7 a 14 numeros.
       ci: /^\d{7,8}$/, // 7 a 14 numeros.
       altura: /^[0-9]+,[0-9]+$/,
       peso: /^\d{2,3}$/
@@ -47,16 +46,13 @@ const manejarClic2 = () => {
   cambiarNombre({campo:'',valido:null});
   cambiarCi({campo:'',valido:null});
   cambiarCorreo({campo:'',valido:null});
-  cambiarTelefono({campo:'',valido:null});
-  cambiarPassword({campo:'',valido:null});
   cambiarFecha({campo:'',valido:null});
 }
 const validar = (e) =>{
   //e.preventDefault();
   if(nombre.valido === 'true' &&
     ci.valido === 'true' &&
-    correo.valido === 'true' &&
-    telefono.valido === 'true' 
+    correo.valido === 'true'
     
   ){
     cambiarFormValido(true);
@@ -64,8 +60,6 @@ const validar = (e) =>{
     cambiarNombre({campo:'',valido:null});
     cambiarCi({campo:'',valido:null});
     cambiarCorreo({campo:'',valido:null});
-    cambiarTelefono({campo:'',valido:null});
-    cambiarPassword({campo:'',valido:null});
     cambiarFecha({campo:'',valido:null});
    
   }else{
@@ -75,48 +69,27 @@ const validar = (e) =>{
 
     async function onSubmit(e){
       e.preventDefault();
-      if( nombre.valido === 'true' &&
-          ci.valido === 'true' &&
-          correo.valido === 'true' &&
-          telefono.valido === 'true' 
-      ){
-        cambiarFormValido(true);
-        
-        try{
-          await registerUser(correo.campo, password.campo);
-          const user = getAuth(app).currentUser.uid;
-          console.log("estooo",user);
-          uploadFile(comprobante.campo,user);
-          setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", user), {
-            NombreDelegado: nombre.campo,
-            CI: ci.campo,
-            Telefono: telefono.campo,
-            Rol: 'Delegado'
-          });
-        }catch (error){
-          console.log(error);
-        }
-        cambiarNombre({campo:'',valido:null});
-        cambiarCi({campo:'',valido:null});
-        cambiarCorreo({campo:'',valido:null});
-        cambiarTelefono({campo:'',valido:null});
-        cambiarPassword({campo:'',valido:null});
-        cambiarFecha({campo:'',valido:null});
-         //alerta
-        alert("Registro exitoso");
-  }else{
-    cambiarFormValido(false);
-  }
+      const fechaNac = new Date(fecha.campo)
+      console.log("se esta registrando jugador")
+      uploadFile(comprobante.campo);
+      await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", equipo.equipo, "Jugadores", nombre.campo), {
+        nombreJugador: nombre.campo,
+        Altura: altura.campo,
+        Peso: peso.campo,
+        Correo: correo.campo,
+        CI: ci.campo,
+        FNac: fechaNac
+        })
+
+        alert("Jugador añadido exitosamente.")
    
     }
 
 
-
-    let urlImagen="hola"
-    function uploadFile(file,user){
+    function uploadFile(file){
        
         const storage = getStorage();
-        const storageRef = ref(storage,"Delegados/" + file.name);
+        const storageRef = ref(storage,"Jugadores/" + file.name);
         
             uploadBytes(storageRef, file).then(snapshot => {
             //console.log(snapshot,"hola")
@@ -124,8 +97,8 @@ const validar = (e) =>{
               getDownloadURL(storageRef)
               .then((url) => {
                   console.log(url)
-                  updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Delegados", user), {
-                      UrlImagen: url
+                  updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", equipo.equipo, "Jugadores", nombre.campo), {
+                      Foto: url
                       });
               }),5000)
             })
@@ -151,6 +124,8 @@ const validar = (e) =>{
                 }
             });
     }
+
+  
 
   return (
     <div className="App">
@@ -228,12 +203,13 @@ const validar = (e) =>{
             <div className='botones'>
               <Boton 
                 texto='Cancelar'
-                
-                manejarClic={manejarClic2}/>
+                manejarClic={manejarClic2}
+                enlace = {enlaceForm}/>
 
               <Boton type='submit'
                 texto='Registrar'
-                manejarClic={onSubmit}/>
+                manejarClic={onSubmit}
+                enlace={enlaceForm}/>
             </div>
         </div>
       </div>

@@ -20,6 +20,21 @@
   grid-template-columns: repeat(4, 4fr);
 
 }
+.contenedor-tarjetaJugador{
+    width: 850px;
+    height: 50px;
+    margin: 50px;
+   font-family: Roboto;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    display:grid;
+  grid-template-columns: repeat(4, 4fr);
+
+}
 
 .nom-tarjeta{
     text-align: left !important;
