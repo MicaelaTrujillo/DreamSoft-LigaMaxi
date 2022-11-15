@@ -7,6 +7,7 @@ import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/fir
 
 
 function FormInscripcion({nombre, categoria}) {
+       
    // var contador = 0
     const [contador, cambiarcontador] = useState("")
     const [nombreEnt, cambiarNombreEnt] = useState({campo: "", valido: null});
@@ -140,7 +141,7 @@ var enlaceForm=""
                             <Boton 
                                 texto='Cancelar'
                                 manejarClic=""
-                                enlace = "/"
+                                enlace = {enlaceFom2}
                                 />
                                 
     

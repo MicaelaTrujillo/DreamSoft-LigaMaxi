@@ -71,8 +71,8 @@ const validar = (e) =>{
       e.preventDefault();
       const fechaNac = new Date(fecha.campo)
       console.log("se esta registrando jugador")
-      uploadFile(comprobante.campo);
-      await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", equipo.equipo, "Jugadores", nombre.campo), {
+      //uploadFile(comprobante.campo);
+      await updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", equipo.equipo, "Jugadores", nombre.campo), {
         nombreJugador: nombre.campo,
         Altura: altura.campo,
         Peso: peso.campo,
@@ -85,20 +85,21 @@ const validar = (e) =>{
    
     }
 
-
+    
     function uploadFile(file){
        
         const storage = getStorage();
         const storageRef = ref(storage,"Jugadores/" + file.name);
-        
+        if (file.name != undefined && nombre.campo != ''){
             uploadBytes(storageRef, file).then(snapshot => {
             //console.log(snapshot,"hola")
             setTimeout(
               getDownloadURL(storageRef)
               .then((url) => {
                   console.log(url)
-                  updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", equipo.equipo, "Jugadores", nombre.campo), {
-                      Foto: url
+                  setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", equipo.equipo, "Jugadores", nombre.campo), {
+                    nombreJugador: nombre.campo  ,
+                    Foto: url
                       });
               }),5000)
             })
@@ -123,9 +124,10 @@ const validar = (e) =>{
                     break;
                 }
             });
+          }
     }
 
-  
+  uploadFile(comprobante.campo);
 
   return (
     <div className="App">
