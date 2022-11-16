@@ -36,7 +36,7 @@ function TarjetaSol(props){
         data([])
         }, []);
 
-    
+        
     return (
         <>
         <div className="contenedor-tarjeta">

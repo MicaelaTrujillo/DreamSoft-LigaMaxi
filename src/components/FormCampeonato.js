@@ -129,36 +129,40 @@ function FormCampeonato() {
         fechaIniConvocatoria2 = new Date(fecIniConvoc.campo)
         limitePreInsc2 = new Date(limPreInsc.campo)
         limiteInscrip2 = new Date(limInsc.campo)
-        if(fechaIniConvocatoria2 > fechaActual || fechaIniConvocatoria2 < fechaActual){
-            if(limitePreInsc2 > fechaIniConvocatoria2){
-                if(limiteInscrip2 > limitePreInsc2){
-                    if(fechaInicio2 > limiteInscrip2){
-                        if(fechaFin2 > fechaInicio2){
-                            updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf"), {
-                                NombreCampeonato: nombre.campo,
-                                Version: version.campo,
-                                FechaInicio: fechaInicio2,
-                                FechaFin: fechaFin2,
-                                FechaIniConvocatoria: fechaIniConvocatoria2,
-                                LimitePreInsc: limitePreInsc2,
-                                LimiteInscrip: limiteInscrip2
-                                });
-                                alert("Cambios guardados exitosamente.")
+        var fechaFinalLimite = fechaInicio2
+        fechaFinalLimite = new Date(fechaFinalLimite.setDate(fechaFinalLimite.getDate() + 10))
+        console.log(fechaFinalLimite)
+            if(fechaIniConvocatoria2 > fechaActual || fechaIniConvocatoria2 < limitePreInsc2){
+                if(limitePreInsc2 > fechaIniConvocatoria2){
+                    if(limiteInscrip2 > limitePreInsc2){
+                        if(fechaInicio2 > limiteInscrip2){
+                            if(fechaFin2 > fechaInicio2 && fechaFin2 <= fechaFinalLimite){
+                                updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf"), {
+                                    NombreCampeonato: nombre.campo,
+                                    Version: version.campo,
+                                    FechaInicio: fechaInicio2,
+                                    FechaFin: fechaFin2,
+                                    FechaIniConvocatoria: fechaIniConvocatoria2,
+                                    LimitePreInsc: limitePreInsc2,
+                                    LimiteInscrip: limiteInscrip2
+                                    });
+                                    alert("Cambios guardados exitosamente.")
+                            }else{
+                                alert("Fecha de fin fuera de rango (debe ser mayor a la fecha inicio con una diferencia de máximo 10 días.)")
+                            }
                         }else{
-                            alert("Fecha de fin fuera de rango (debe ser mayor a la fecha inicio.)")
+                            alert("Fecha de inicio fuera de rango (debe ser mayor a la fecha de límite de inscripción.)")
                         }
                     }else{
-                        alert("Fecha de inicio fuera de rango (debe ser mayor a la fecha de límite de inscripción.)")
+                        alert("Fecha de límite de inscripción fuera de rango (debe ser mayor a la fecha de límite de pre-inscripción.)")
                     }
                 }else{
-                    alert("Fecha de límite de inscripción fuera de rango (debe ser mayor a la fecha de límite de pre-inscripción.)")
+                    alert("Fecha de límite de pre-inscripción fuera de rango (debe ser mayor a la fecha de inicio de convocatoria.)")
                 }
             }else{
-                alert("Fecha de límite de pre-inscripción fuera de rango (debe ser mayor a la fecha de inicio de convocatoria.)")
+                alert("Fecha de inicio de convocatoria fuera de rango (debe ser mayor a la fecha actual.)")
             }
-        }else{
-            alert("Fecha de inicio de convocatoria fuera de rango (debe ser mayor a la fecha actual.)")
-        }
+            
     }
 
     async function uploadQR1(){
