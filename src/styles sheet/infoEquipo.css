@@ -11,3 +11,48 @@
     font-size: 1.30rem !important;
     
 }
+
+.main-inf{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+    height: 93vh !important;
+    display: flex;
+}
+
+.contenedor-Info{
+    margin: 0;
+    background-color: #FAF9F7;
+    width: 1050px;
+    height: auto;
+    text-align: center;
+    padding: 40px;
+    font-weight: 400;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.nombre{
+    font-size: 1.375rem;
+    text-align: start;
+}
+
+.container-text{
+    margin: 10px;
+    background-color: #FFFF;
+    border: 1rem;
+    text-align: start;
+    border: 1px solid #000;
+}
+
+.text{
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 5px;
+}
+
+
