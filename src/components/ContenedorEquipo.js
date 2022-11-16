@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles sheet/ContenedorSol.css"
-import TarjetaSol from "./TarjetaEquipo";
+import TarjetaEquipo from "./TarjetaEquipo";
 import { db } from "../Firebase/ConexionBD";
 import {getDocs,  collection,  where, query} from "firebase/firestore";
 import { UserContext } from '../context/userProvider';
@@ -33,7 +33,7 @@ function ContenedorEquipo(props){
                 <p className="sub-titulo">{props.subtitulo}</p>
                 {
                     equiposInscritos.map((equipo) => (
-                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} delegado={equipo.Delegado} entrenador={equipo.Entrenador}/>
+                    <TarjetaEquipo key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} delegado={equipo.Delegado} entrenador={equipo.Entrenador}/>
                     ))
                     
                 }

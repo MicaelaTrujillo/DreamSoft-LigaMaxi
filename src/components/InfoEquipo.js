@@ -14,33 +14,34 @@ import {Link} from 'react-router-dom'
 function InfoEquipo(){
     return (
         
-        <div className="row cont-main mt-5 mb-5 mx-0" >
-                
-            <Form className="form text-center container col-8 ">
-                <h3 className="mb-5 mt-3">INFORMACIÓN DEL EQUIPO</h3>
-                
-                    <FormInputSinCambioEst
-                        label="Nombre del equipo: "
-                        value = "Jaguares"
-                        
-                    />
-                    <FormInputSinCambioEst
-                        label="Categoría: "
-                        value = "35 años"
-                        
-                    />
-                    <LabelForm className="mb-1 mt-1"
-                        label="Delegado: "
-                    />  
-                    
-                    <LabelForm
-                        label="Entrenador: "
-                    />  
-                    <LabelForm
-                        label="Jugadores: "
-                    />  
-            </Form>
+        <div className="container">
+        <div className="main-inf">
+            <div className="contenedor-Info row cont-main mt-5 mb-5 mx-0">
             
+                <h2 className="tituloE">Información del Equipo</h2>
+
+                <h2 className="nombre ">Nombre de Equipo: </h2>
+                <div className="container-text">
+                    <h2 className="text"> Los tigres</h2> 
+                </div>
+                
+                <h2 className="nombre">Categoría: </h2>
+                <div className="container-text">
+                    <h2 className="text"> 35 años</h2> 
+                </div>
+                
+                <h2 className="nombre">Entrenador:</h2>
+                <div className="container-text">
+                    <h2 className="text"> Juan Perez</h2> 
+                </div>
+                
+                <h2 className="nombre">Jugadores:</h2>
+                
+            </div>
+        </div>
+        
+
+    
         </div>
     );
     
