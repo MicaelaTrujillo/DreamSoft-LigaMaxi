@@ -12,8 +12,6 @@ function VistaInscripcion (){
     const [limite, setlimite] = useState('');
     useEffect(() => {
     async function obtenerFecha() {
-        
-        console.log("actual", fecha);
   
         const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
         const docSnap = await getDoc(docRef);
@@ -29,8 +27,12 @@ function VistaInscripcion (){
         }
        
       }
+      
       obtenerFecha();
     }, []);
+
+    console.log("fecha actual", fecha);
+    console.log("fecha de la base", limite);
     return (
         <div>
             <HomePage/>
