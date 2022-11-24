@@ -36,7 +36,7 @@ function TarjetaSol(props){
         data([])
         }, []);
 
-    
+        
     return (
         <>
         <div className="contenedor-tarjeta">
@@ -50,9 +50,13 @@ function TarjetaSol(props){
               <Button className="botonVerInfo"  onClick={ () => setModalShow(true)}>Ver Información</Button>
         :
             props.habilitado?
-            <Link to={`/Inscripciones/FormularioInscripcion/${props.name}/${props.categoria}`}><Button >Inscribir</Button></Link>
+                props.inscrito?
+                <Button className="botonVerInfo" variant="primary" disabled>Inscrito</Button>
+                :
+                <Link to={`/Inscripciones/FormularioInscripcion/${props.name}/${props.categoria}`}><Button className="botonVerInfo">Inscribir</Button></Link>
+
             :
-            <Button variant="primary" disabled>Inhabilitado</Button>
+            <Button className="botonHabilitado"  disabled>Inhabilitado</Button>
         }
         </div>
 

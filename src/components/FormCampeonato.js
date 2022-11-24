@@ -55,19 +55,19 @@ function FormCampeonato() {
         if (docSnap.exists()) {
           console.log("si entra al exist", docSnap.data());
           fechaInicio = docSnap.data().FechaInicio.toDate();
-          fechaInicio = (fechaInicio.getFullYear() + "-" + (fechaInicio.getMonth()+1 > 9? fechaInicio.getMonth()+1: "0" + fechaInicio.getMonth()+1) + "-" + (fechaInicio.getDate() > 9? fechaInicio.getDate(): "0" + fechaInicio.getDate())  +" 00:00").toString()
+          fechaInicio = (fechaInicio.getFullYear() + "-" + (fechaInicio.getMonth()+1 > 9? fechaInicio.getMonth()+1: "0" + (fechaInicio.getMonth()+1)) + "-" + (fechaInicio.getDate() > 9? fechaInicio.getDate(): "0" + fechaInicio.getDate())  +" 00:00").toString()
           //fechaInicio2 = docSnap.data().FechaInicio.toDate();
           fechaFin = docSnap.data().FechaFin.toDate();
-          fechaFin = (fechaFin.getFullYear() + "-" + (fechaFin.getMonth()+1 > 9? fechaFin.getMonth()+1: "0" + fechaFin.getMonth()+1) + "-" + (fechaFin.getDate() > 9? fechaFin.getDate(): "0" + fechaFin.getDate()) +" 00:00").toString()
+          fechaFin = (fechaFin.getFullYear() + "-" + (fechaFin.getMonth()+1 > 9? fechaFin.getMonth()+1: "0" + (fechaFin.getMonth()+1)) + "-" + (fechaFin.getDate() > 9? fechaFin.getDate(): "0" + fechaFin.getDate()) +" 00:00").toString()
           //fechaFin2 = docSnap.data().FechaFin.toDate();
           fechaIniConvocatoria = docSnap.data().FechaIniConvocatoria.toDate();
           fechaIniConvocatoria = (fechaIniConvocatoria.getFullYear() + "-" + (fechaIniConvocatoria.getMonth()+1 > 9? fechaIniConvocatoria.getMonth()+1: "0" + fechaIniConvocatoria.getMonth()+1) + "-" + (fechaIniConvocatoria.getDate() > 9? fechaIniConvocatoria.getDate(): "0" + fechaIniConvocatoria.getDate()) +" 00:00").toString()
           //fechaIniConvocatoria2 = docSnap.data().FechaIniConvocatoria.toDate();
           limitePreInsc = docSnap.data().LimitePreInsc.toDate();
-          limitePreInsc=(limitePreInsc.getFullYear() + "-" + (limitePreInsc.getMonth()+1 > 9? limitePreInsc.getMonth()+1: "0" + limitePreInsc.getMonth()+1) + "-" + (limitePreInsc.getDate() > 9? limitePreInsc.getDate(): "0" + limitePreInsc.getDate()) +" 00:00").toString()
+          limitePreInsc=(limitePreInsc.getFullYear() + "-" + (limitePreInsc.getMonth()+1 > 9? limitePreInsc.getMonth()+1: "0" + (limitePreInsc.getMonth()+1)) + "-" + (limitePreInsc.getDate() > 9? limitePreInsc.getDate(): "0" + limitePreInsc.getDate()) +" 00:00").toString()
           //limitePreInsc2 = docSnap.data().LimitePreInsc.toDate();
           limiteInscrip = docSnap.data().LimiteInscrip.toDate();
-          limiteInscrip = (limiteInscrip.getFullYear() + "-" + (limiteInscrip.getMonth()+1 > 9? limiteInscrip.getMonth()+1: "0" + limiteInscrip.getMonth()+1) + "-" + (limiteInscrip.getDate() > 9? limiteInscrip.getDate(): "0" + limiteInscrip.getDate()) +" 00:00").toString()
+          limiteInscrip = (limiteInscrip.getFullYear() + "-" + (limiteInscrip.getMonth()+1 > 9? limiteInscrip.getMonth()+1: "0" + (limiteInscrip.getMonth()+1)) + "-" + (limiteInscrip.getDate() > 9? limiteInscrip.getDate(): "0" + limiteInscrip.getDate()) +" 00:00").toString()
          //limiteInscrip2 = docSnap.data().LimiteInscrip.toDate();
           nombreCampeonato = docSnap.data().NombreCampeonato;
           versionCamp = docSnap.data().Version;
@@ -129,36 +129,40 @@ function FormCampeonato() {
         fechaIniConvocatoria2 = new Date(fecIniConvoc.campo)
         limitePreInsc2 = new Date(limPreInsc.campo)
         limiteInscrip2 = new Date(limInsc.campo)
-        if(fechaIniConvocatoria2 > fechaActual || fechaIniConvocatoria2 < fechaActual){
-            if(limitePreInsc2 > fechaIniConvocatoria2){
-                if(limiteInscrip2 > limitePreInsc2){
-                    if(fechaInicio2 > limiteInscrip2){
-                        if(fechaFin2 > fechaInicio2){
-                            updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf"), {
-                                NombreCampeonato: nombre.campo,
-                                Version: version.campo,
-                                FechaInicio: fechaInicio2,
-                                FechaFin: fechaFin2,
-                                FechaIniConvocatoria: fechaIniConvocatoria2,
-                                LimitePreInsc: limitePreInsc2,
-                                LimiteInscrip: limiteInscrip2
-                                });
-                                alert("Cambios guardados exitosamente.")
+        var fechaFinalLimite = fechaInicio2
+        fechaFinalLimite = new Date(fechaFinalLimite.setDate(fechaFinalLimite.getDate() + 10))
+        console.log(fechaFinalLimite)
+            if(fechaIniConvocatoria2 > fechaActual || fechaIniConvocatoria2 < limitePreInsc2){
+                if(limitePreInsc2 > fechaIniConvocatoria2){
+                    if(limiteInscrip2 > limitePreInsc2){
+                        if(fechaInicio2 > limiteInscrip2){
+                            if(fechaFin2 > fechaInicio2 && fechaFin2 <= fechaFinalLimite){
+                                updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf"), {
+                                    NombreCampeonato: nombre.campo,
+                                    Version: version.campo,
+                                    FechaInicio: fechaInicio2,
+                                    FechaFin: fechaFin2,
+                                    FechaIniConvocatoria: fechaIniConvocatoria2,
+                                    LimitePreInsc: limitePreInsc2,
+                                    LimiteInscrip: limiteInscrip2
+                                    });
+                                    alert("Cambios guardados exitosamente.")
+                            }else{
+                                alert("Fecha de fin fuera de rango (debe ser mayor a la fecha inicio con una diferencia de máximo 10 días.)")
+                            }
                         }else{
-                            alert("Fecha de fin fuera de rango (debe ser mayor a la fecha inicio.)")
+                            alert("Fecha de inicio fuera de rango (debe ser mayor a la fecha de límite de inscripción.)")
                         }
                     }else{
-                        alert("Fecha de inicio fuera de rango (debe ser mayor a la fecha de límite de inscripción.)")
+                        alert("Fecha de límite de inscripción fuera de rango (debe ser mayor a la fecha de límite de pre-inscripción.)")
                     }
                 }else{
-                    alert("Fecha de límite de inscripción fuera de rango (debe ser mayor a la fecha de límite de pre-inscripción.)")
+                    alert("Fecha de límite de pre-inscripción fuera de rango (debe ser mayor a la fecha de inicio de convocatoria.)")
                 }
             }else{
-                alert("Fecha de límite de pre-inscripción fuera de rango (debe ser mayor a la fecha de inicio de convocatoria.)")
+                alert("Fecha de inicio de convocatoria fuera de rango (debe ser mayor a la fecha actual.)")
             }
-        }else{
-            alert("Fecha de inicio de convocatoria fuera de rango (debe ser mayor a la fecha actual.)")
-        }
+            
     }
 
     async function uploadQR1(){

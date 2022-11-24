@@ -8,6 +8,9 @@ import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/fir
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { UserContext } from '../context/userProvider';
 import { useContext } from 'react';
+
+
+import ReactDOM from 'react-dom/client';
 /*
 var qrGenerado2=""
 async function generarQR(){
@@ -63,6 +66,12 @@ function FormPreinsc() {
    
 
     const [stringImage, setstringImage] = useState('');
+
+        var fecAct = ""
+        var fecIniCon = ""
+        var limPreIns = ""
+        var limIns = ""
+       
   useEffect(() => {
     async function generarQR() {
       const fecha = new Date();
@@ -78,6 +87,11 @@ function FormPreinsc() {
         var limiteInscrip = docSnap.data().LimiteInscrip.toDate();
         var imagen1 = docSnap.data().qr1;
         var imagen2 = docSnap.data().qr2;
+
+        fecAct = fecha
+        fecIniCon = docSnap.data().FechaIniConvocatoria.toDate();
+        limPreIns = docSnap.data().LimitePreInsc.toDate();
+        limIns = docSnap.data().LimiteInscrip.toDate();
         // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
       } else {
         // doc.data() will be undefined in this case
@@ -94,7 +108,11 @@ function FormPreinsc() {
           console.log("imagen2");
           qrGenerado = imagen2;
         } else {
-          //AQUI SE CERRARIA FORMULARIO
+            const root = ReactDOM.createRoot(
+                document.getElementById('contenedor')
+              );
+              const element = <h1 className="col-4 ">Está fuera de la fecha de inscripción de equipos para el campeonato.</h1>;
+              root.render(element);
         }
       }
       setstringImage(qrGenerado)
@@ -172,6 +190,7 @@ function FormPreinsc() {
                  NombreEquipo: nombre.campo,
                  Categoria: categoria.campo,
                  Habilitado: false,
+                 Inscrito: false,
                  Solicitante: user.uid
                  })
                  //cambiarNombre({campo:'',valido:null});
@@ -331,45 +350,46 @@ function FormPreinsc() {
       */
     return (
     <>
-    <div className="row cont-main-form mt-5 mb-5 mx-0">
-        
-            <Form className="form text-center container col-8 ">
-                <h3 className="mb-5 mt-3">FORMULARIO DE PRE-INSCRIPCION</h3>
-                    <FormInputs
-                        label="Nombre de equipo: "
-                        placeholder="Ingrese el nombre del equipo"
-                        estado={nombre}
-                        cambiarEstado={cambiarNombre} 
-                        expresionRegular = {expresiones.nombreEquipo}
-                        alerta="El nombre del equipo no debe contener caracteres especiales"
-                        id="1"
-                    />
-                    <FormComboBox
-                        label="Categoría: "
-                        arreglo = {["*Seleccione categoría","30 años", "35 años", "40 años"]}
-                        estado={categoria}
-                        cambiarEstado={cambiarCategoria} 
-                    />
-                    <FormQR 
-                        imagen = {stringImage}
-                    />
-                    <FormArchivo
-                        archivo="Subir comprobante:"
-                        estado={comprobante}
-                        cambiarEstado={cambiarComprobante}
-                        acepta="image/*"
-                    />
-                    <div className='botones pb-4'>
-                        <Boton 
-                            texto='Cancelar'/>
+        <div id="contenedor" className="row cont-main-form mt-5 mb-5 mx-0">
+            
+                <Form className="form text-center container col-8 ">
+                    <h3 className="mb-5 mt-3">FORMULARIO DE PRE-INSCRIPCION</h3>
+                        <FormInputs
+                            label="Nombre de equipo: "
+                            placeholder="Ingrese el nombre del equipo"
+                            estado={nombre}
+                            cambiarEstado={cambiarNombre} 
+                            expresionRegular = {expresiones.nombreEquipo}
+                            alerta="El nombre del equipo no debe contener caracteres especiales"
+                            id="1"
+                        />
+                        <FormComboBox
+                            label="Categoría: "
+                            arreglo = {["*Seleccione categoría","30 años", "35 años", "40 años"]}
+                            estado={categoria}
+                            cambiarEstado={cambiarCategoria} 
+                        />
+                        <FormQR 
+                            imagen = {stringImage}
+                        />
+                        <FormArchivo
+                            archivo="Subir comprobante:"
+                            estado={comprobante}
+                            cambiarEstado={cambiarComprobante}
+                            acepta="image/*"
+                        />
+                        <div className='botones pb-4'>
+                            <Boton 
+                                texto='Cancelar'/>
 
-                        <Boton 
-                            texto='Enviar'
-                            manejarClic={onSubmit}
-                            />
-                </div>
-            </Form>
-    </div>
+                            <Boton 
+                                texto='Enviar'
+                                manejarClic={onSubmit}
+                                />
+                    </div>
+                </Form>
+        </div>
+    
     </>
   );
   
