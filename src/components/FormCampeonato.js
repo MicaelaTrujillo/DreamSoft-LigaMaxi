@@ -132,7 +132,7 @@ function FormCampeonato() {
         var fechaFinalLimite = fechaInicio2
         fechaFinalLimite = new Date(fechaFinalLimite.setDate(fechaFinalLimite.getDate() + 10))
         console.log(fechaFinalLimite)
-            if(fechaIniConvocatoria2 > fechaActual || fechaIniConvocatoria2 < limitePreInsc2){
+            if(fechaIniConvocatoria2 > fechaActual && fechaIniConvocatoria2 < limitePreInsc2){
                 if(limitePreInsc2 > fechaIniConvocatoria2){
                     if(limiteInscrip2 > limitePreInsc2){
                         if(fechaInicio2 > limiteInscrip2){
