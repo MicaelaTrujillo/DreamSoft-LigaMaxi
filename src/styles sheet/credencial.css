@@ -1,0 +1,126 @@
+.main-inf2{
+    width: 85% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    margin-left: 30% !important;
+    margin-right: 30% !important;
+    padding-bottom: 0;
+}
+
+.contenedor-Info2{
+    margin: 0;
+    background-color: #FAF9F7;
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 45px;
+    font-weight: 400;
+    text-align: center !important;
+    
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 1rem !important;
+    margin-left: 30% !important;
+    margin-right: 30% !important;
+}
+
+.DatosCre{
+    background-color: #ffff;
+    padding: 30px;
+    width: 70% !important;
+    border: 1px solid #000;
+    margin-left: 8% !important;
+    margin-right: 8% !important;
+    
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.DetalleInf{
+    grid-column: 2/3;
+}
+
+.tituloC{
+    max-width: 940px;
+    font-size: 40px;
+    font-family: 'Bebas' !important;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 35px;
+    white-space: pre;
+    margin: 0 ;
+    margin-bottom: 0.625rem;
+    
+    text-align: center !important;
+}
+
+.fotoJug{
+    margin-top: 5px;
+    align-items: center;
+    margin: auto;
+    padding: auto;
+    display: block;
+    width: 230px !important;
+    height: auto !important;
+}
+
+.nombre{
+    font-size: 1.375rem;
+    text-align: start;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 3px;
+}
+
+.cont-Boton .botonCred{
+    background-color: #FF7B00 !important;
+    border-radius: 0% !important;
+    border-color: #35364A !important;
+    align-items: center !important;
+    justify-self: center !important;
+    cursor: pointer;
+    width: max-content;
+    justify-content: center !important;
+    align-content: center !important;
+    font-weight: 500!important;
+    font-size: 1.30rem !important;
+    margin-bottom: 15px;
+}
+
+
+
+.cont-Boton{
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    
+}
+
+@media screen and (max-width:1000px) {
+    .nombre{
+        font-size: 1rem !important;
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+        margin-top: 3px !important;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .nombre{
+        font-size: 0.9rem !important;
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+        margin-top: 2px !important;
+    }
+
+    .DatosCre{
+        background-color: #ffff;
+        padding: 30px;
+        width: 85% !important;
+    }
+}
