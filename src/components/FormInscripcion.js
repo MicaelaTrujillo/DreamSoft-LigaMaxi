@@ -54,6 +54,9 @@ var enlaceForm=""
                 Categoria: categoria,
                 Entrenador: nombreEnt.campo
             })
+            await updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre), {
+                Inscrito: true
+            })
                 alert("Se añadio el equipo a la base de datos.")
             }
     }
