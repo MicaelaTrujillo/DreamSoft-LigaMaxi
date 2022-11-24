@@ -82,7 +82,7 @@ function Credencial({nombreE, nombreJ} ){
     
   var nomEArr=removeSpacesFromString(nombreE);
   var nomJArr=removeSpacesFromString(nombreJ);
-    var urlJ=`https://gorgeous-kataifi-6c7cb5.netlify.app/InformacionJugador/${nomEArr}/${nomJArr}`;
+    var urlJ=`https://liga-maxi-dreamsoft.netlify.app/InformacionJugador/${nomEArr}/${nomJArr}`;
     const [url, setUrl] = useState('');
     useEffect(() => {
       QRCode.toDataURL(urlJ).then((data) => {
