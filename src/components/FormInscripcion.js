@@ -47,7 +47,7 @@ var enlaceForm=""
         e.preventDefault();
         console.log("onsubmit2")
         if(contador < 5){
-            alert("Debe registrar al menos 5 jugadores.")
+            alert("Debe registrar al menos a 5 jugadores.")
         }else{
             await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", nombre), {
                 NombreEquipo: nombre,
