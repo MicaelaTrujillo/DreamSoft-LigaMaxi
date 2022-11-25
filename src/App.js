@@ -28,17 +28,18 @@ function App() {
        <Routes>
           <Route path="/" element={<Home/>}></Route>
           <Route path="/FormularioRegistro" element={<FormularioRegistro/>}></Route>
-          
-
+          <Route path="/Equipos" element={<Equipos/>}></Route>
+          <Route path="/InformacionEquipo/:equipo" element={<InformacionEquipo/>}></Route>
+          <Route path="/InformacionJugador/:equipo/:jugador" element={<InformacionJugador/>}></Route>  
+                   
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
              <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
              <Route path="/FormularioRegistroJugador/:equipo/:categoria" element={<FormularioRegistroJugador/>}></Route>
-             <Route path="/InformacionEquipo/:equipo" element={<InformacionEquipo/>}></Route>
-             <Route path="/Equipos" element={<Equipos/>}></Route>
+             
              <Route path="/Inscripciones" element={<VistaInscripcion/>}></Route>
              <Route path="/Inscripciones/FormularioInscripcion/:equipo/:categoria" element={<FormularioInscripcion/>}></Route>
-             <Route path="/InformacionJugador/:equipo/:jugador" element={<InformacionJugador/>}></Route>
+             
              <Route path="/CredencialJugador/:equipo/:jugador" element={<CredencialJugador/>}></Route>
           </Route>
 

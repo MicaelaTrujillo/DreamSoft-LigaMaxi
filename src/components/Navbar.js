@@ -10,6 +10,7 @@ const routes={
             name: 'Registro',
             path: '/FormularioRegistro'
         },
+        
     ],
     Administrador:[
         {
@@ -20,10 +21,7 @@ const routes={
             name: 'Campeonato',
             path: '/FormularioCampeonato'
         },
-        {
-            name: 'Equipos',
-            path: '/Equipos'
-        }
+        
     ],
     Delegado:[
         {
@@ -33,7 +31,8 @@ const routes={
         {
             name: 'Inscripción',
             path: '/Inscripciones'
-        }
+        },
+        
     ],
     apuntador:[
         {
@@ -54,7 +53,12 @@ function Navbar (){
                         <Link to="/">Inicio</Link>
                     </nav>
                 </div>
-                
+                <div className='contenedor-texto navbar-texto'>   
+                <nav>
+                    <Link to="/Equipos">Equipos</Link>
+                </nav>          
+                    
+                </div>
 
                 {user? 
             
@@ -71,6 +75,8 @@ function Navbar (){
         <div className='contenedor-texto navbar-texto'>             
             <Link to="/FormularioRegistro">Registro</Link>
         </div>
+
+        
         }
         </div>
         </nav>
