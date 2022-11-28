@@ -48,7 +48,7 @@ function TarjetaEquipo(props){
             <Button
                 className='botonHabilitado'
                 onClick="">
-                <Link to="/InformacionEquipo" >Ver equipo</Link>
+                <Link to={`/InformacionEquipo/${props.name}`} >Ver equipo</Link>
             
             </Button>
         }

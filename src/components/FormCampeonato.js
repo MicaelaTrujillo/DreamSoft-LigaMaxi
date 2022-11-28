@@ -55,19 +55,19 @@ function FormCampeonato() {
         if (docSnap.exists()) {
           console.log("si entra al exist", docSnap.data());
           fechaInicio = docSnap.data().FechaInicio.toDate();
-          fechaInicio = (fechaInicio.getFullYear() + "-" + (fechaInicio.getMonth()+1 > 9? fechaInicio.getMonth()+1: "0" + fechaInicio.getMonth()+1) + "-" + (fechaInicio.getDate() > 9? fechaInicio.getDate(): "0" + fechaInicio.getDate())  +" 00:00").toString()
+          fechaInicio = (fechaInicio.getFullYear() + "-" + (fechaInicio.getMonth()+1 > 9? fechaInicio.getMonth()+1: "0" + (fechaInicio.getMonth()+1)) + "-" + (fechaInicio.getDate() > 9? fechaInicio.getDate(): "0" + fechaInicio.getDate())  +" 00:00").toString()
           //fechaInicio2 = docSnap.data().FechaInicio.toDate();
           fechaFin = docSnap.data().FechaFin.toDate();
-          fechaFin = (fechaFin.getFullYear() + "-" + (fechaFin.getMonth()+1 > 9? fechaFin.getMonth()+1: "0" + fechaFin.getMonth()+1) + "-" + (fechaFin.getDate() > 9? fechaFin.getDate(): "0" + fechaFin.getDate()) +" 00:00").toString()
+          fechaFin = (fechaFin.getFullYear() + "-" + (fechaFin.getMonth()+1 > 9? fechaFin.getMonth()+1: "0" + (fechaFin.getMonth()+1)) + "-" + (fechaFin.getDate() > 9? fechaFin.getDate(): "0" + fechaFin.getDate()) +" 00:00").toString()
           //fechaFin2 = docSnap.data().FechaFin.toDate();
           fechaIniConvocatoria = docSnap.data().FechaIniConvocatoria.toDate();
           fechaIniConvocatoria = (fechaIniConvocatoria.getFullYear() + "-" + (fechaIniConvocatoria.getMonth()+1 > 9? fechaIniConvocatoria.getMonth()+1: "0" + fechaIniConvocatoria.getMonth()+1) + "-" + (fechaIniConvocatoria.getDate() > 9? fechaIniConvocatoria.getDate(): "0" + fechaIniConvocatoria.getDate()) +" 00:00").toString()
           //fechaIniConvocatoria2 = docSnap.data().FechaIniConvocatoria.toDate();
           limitePreInsc = docSnap.data().LimitePreInsc.toDate();
-          limitePreInsc=(limitePreInsc.getFullYear() + "-" + (limitePreInsc.getMonth()+1 > 9? limitePreInsc.getMonth()+1: "0" + limitePreInsc.getMonth()+1) + "-" + (limitePreInsc.getDate() > 9? limitePreInsc.getDate(): "0" + limitePreInsc.getDate()) +" 00:00").toString()
+          limitePreInsc=(limitePreInsc.getFullYear() + "-" + (limitePreInsc.getMonth()+1 > 9? limitePreInsc.getMonth()+1: "0" + (limitePreInsc.getMonth()+1)) + "-" + (limitePreInsc.getDate() > 9? limitePreInsc.getDate(): "0" + limitePreInsc.getDate()) +" 00:00").toString()
           //limitePreInsc2 = docSnap.data().LimitePreInsc.toDate();
           limiteInscrip = docSnap.data().LimiteInscrip.toDate();
-          limiteInscrip = (limiteInscrip.getFullYear() + "-" + (limiteInscrip.getMonth()+1 > 9? limiteInscrip.getMonth()+1: "0" + limiteInscrip.getMonth()+1) + "-" + (limiteInscrip.getDate() > 9? limiteInscrip.getDate(): "0" + limiteInscrip.getDate()) +" 00:00").toString()
+          limiteInscrip = (limiteInscrip.getFullYear() + "-" + (limiteInscrip.getMonth()+1 > 9? limiteInscrip.getMonth()+1: "0" + (limiteInscrip.getMonth()+1)) + "-" + (limiteInscrip.getDate() > 9? limiteInscrip.getDate(): "0" + limiteInscrip.getDate()) +" 00:00").toString()
          //limiteInscrip2 = docSnap.data().LimiteInscrip.toDate();
           nombreCampeonato = docSnap.data().NombreCampeonato;
           versionCamp = docSnap.data().Version;

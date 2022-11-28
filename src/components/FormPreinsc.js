@@ -190,6 +190,7 @@ function FormPreinsc() {
                  NombreEquipo: nombre.campo,
                  Categoria: categoria.campo,
                  Habilitado: false,
+                 Inscrito: false,
                  Solicitante: user.uid
                  })
                  //cambiarNombre({campo:'',valido:null});
