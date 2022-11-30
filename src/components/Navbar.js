@@ -21,6 +21,10 @@ const routes={
             name: 'Campeonato',
             path: '/FormularioCampeonato'
         },
+        {
+            name: 'Registro Planilla',
+            path: '/FormularioPlanilla'
+        },
         
     ],
     Delegado:[

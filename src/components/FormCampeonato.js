@@ -129,14 +129,14 @@ function FormCampeonato() {
         fechaIniConvocatoria2 = new Date(fecIniConvoc.campo)
         limitePreInsc2 = new Date(limPreInsc.campo)
         limiteInscrip2 = new Date(limInsc.campo)
-        var fechaFinalLimite = fechaInicio2
-        fechaFinalLimite = new Date(fechaFinalLimite.setDate(fechaFinalLimite.getDate() + 10))
-        console.log(fechaFinalLimite)
+       // var fechaFinalLimite = fechaInicio2
+       // fechaFinalLimite = new Date(fechaFinalLimite.setDate(fechaFinalLimite.getDate() + 10))
+        console.log(fechaIniConvocatoria2, limitePreInsc2, limiteInscrip2,fechaInicio2,fechaFin2)
             if(fechaIniConvocatoria2 > fechaActual && fechaIniConvocatoria2 < limitePreInsc2){
                 if(limitePreInsc2 > fechaIniConvocatoria2){
                     if(limiteInscrip2 > limitePreInsc2){
                         if(fechaInicio2 > limiteInscrip2){
-                            if(fechaFin2 > fechaInicio2 && fechaFin2 <= fechaFinalLimite){
+                            if(fechaFin2 > fechaInicio2){
                                 updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf"), {
                                     NombreCampeonato: nombre.campo,
                                     Version: version.campo,
