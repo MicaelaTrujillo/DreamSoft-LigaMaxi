@@ -3,6 +3,7 @@
 *{
     padding: 0;
     margin: 0;
+    font-family: Roboto;
   }  
 
 .contenedor-tarjeta{
@@ -35,6 +36,46 @@
   grid-template-columns: repeat(4, 4fr);
 
 }
+
+.contenedor-tarjetaFalta{
+    width: 850px;
+    height: 50px;
+    margin: 50px;
+   font-family: Roboto;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    display:grid;
+  grid-template-columns: repeat(3, 3fr);
+
+}
+
+.contenedor-subtitulos{
+    width: 850px;
+    height: 50px;
+    margin: 50px;
+   font-family: Roboto;
+    align-items: center;
+    justify-content: center;
+    display:grid;
+  grid-template-columns: repeat(3, 3fr);
+
+}
+
+.alineacion{
+    text-align: center !important;
+    align-items: left;
+    font-weight: 400;
+    font-size: 1.15rem;
+}
+
+.negrita{
+    font-weight: 600;
+}
+
 
 .nom-tarjeta{
     text-align: left !important;

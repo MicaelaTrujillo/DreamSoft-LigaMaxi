@@ -10,6 +10,10 @@ import Equipos from "./pages/Equipos";
 import InformacionJugador from "./pages/InformacionJugador";
 import CredencialJugador from "./pages/CredencialJugador";
 
+import FormularioPlanilla from "./pages/FormularioPlanilla";
+import FormularioFaltas from "./pages/FormularioFaltas";
+import FormularioAnotaciones from "./pages/FormularioAnotaciones";
+
 import './App.css';
 
 import Solicitudes from "./pages/Solicitudes";
@@ -19,11 +23,12 @@ import { UserContext } from '../src/context/userProvider';
 import { useContext } from 'react';
 import { GetRolUser } from "../src/utyls/getRolUser";
 import VistaInscripcion from "./pages/VistaInscripcion";
+import PlanillaPartidos from "./pages/PlanillaPartidos";
 
 function App() {
   const {user} = useContext(UserContext);
   const userRol = GetRolUser(user);
-  console.log("en app este es el usuario", user);
+  console.log("en app este es el usuario",userRol);
   return (
        <Routes>
           <Route path="/" element={<Home/>}></Route>
@@ -36,7 +41,7 @@ function App() {
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
              <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
              <Route path="/FormularioRegistroJugador/:equipo/:categoria" element={<FormularioRegistroJugador/>}></Route>
-             
+          
              <Route path="/Inscripciones" element={<VistaInscripcion/>}></Route>
              <Route path="/Inscripciones/FormularioInscripcion/:equipo/:categoria" element={<FormularioInscripcion/>}></Route>
              
@@ -45,11 +50,18 @@ function App() {
 
           <Route element={<PrivateRoute isAllowed={!!user && userRol==="Administrador"}/>}>
             <Route exact path='/Solicitudes' element={<Solicitudes/>}/>
-            
             <Route path="/FormularioCampeonato" element={<FormularioCampeonato/>}></Route>
+
+          </Route>
+
+          <Route element={<PrivateRoute isAllowed={!!user && userRol==="Apuntador"}/>}>
+            <Route exact path='/PlanillaPartidos' element={<PlanillaPartidos/>}/>
+      
+            <Route path="/FormularioPlanilla" element={<FormularioPlanilla/>}></Route>
+            <Route path="/FormularioFaltas/:equipoA/:equipoB/:partido" element={<FormularioFaltas/>}></Route>
+            <Route path="/FormularioAnotaciones/:equipoA/:equipoB/:partido" element={<FormularioAnotaciones/>}></Route>
           </Route>
           
-
         </Routes>
   );
 }
