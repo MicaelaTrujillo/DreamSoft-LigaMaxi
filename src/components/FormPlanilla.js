@@ -12,7 +12,7 @@ import { async } from '@firebase/util';
 import { UserContext } from '../context/userProvider';
 import {app} from '../Firebase/ConexionBD';
 
-function FormPlanilla(){
+function FormPlanilla({id, equipo1, equipo2}){
     
     const [puntosA, cambiarPuntosA] = useState({campo: "", valido: null});
     const [puntosB, cambiarPuntosB] = useState({campo: "", valido: null});
@@ -22,9 +22,9 @@ function FormPlanilla(){
         puntaje: /^\d{2,3}$/, // Máximo 3 numeros.
     }
     
-    const equipoA = "Los titanes"
-    const equipoB = "Los grandes"
-    const partido = "012511"
+    const equipoA = equipo1
+    const equipoB = equipo2
+    const partido = id
 
     var enlaceForm = "/"
     async function onSubmit(e){
