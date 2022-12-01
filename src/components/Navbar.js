@@ -34,10 +34,10 @@ const routes={
         },
         
     ],
-    apuntador:[
+    Apuntador:[
         {
-            name: 'Mesa',
-            path: '/FormularioPreInscripcion'
+            name: 'Planillas',
+            path: '/PlanillaPartidos'
         },
     ],
 }
@@ -57,7 +57,6 @@ function Navbar (){
                 <nav>
                     <Link to="/Equipos">Equipos</Link>
                 </nav>          
-                    
                 </div>
 
                 {user? 
