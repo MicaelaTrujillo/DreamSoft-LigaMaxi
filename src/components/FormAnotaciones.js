@@ -13,7 +13,7 @@ import { UserContext } from '../context/userProvider';
 import {app} from '../Firebase/ConexionBD';
 import ReactDOM from 'react-dom/client';
 function FormAnotaciones({equipoA, equipoB, partido}){
-
+    const enlaceForm = '/FormularioPlanilla'
     const [equipo, cambiarEquipo] = useState({campo: "", valido: null});
     const [jugador, cambiarJugador] = useState({campo: "", valido: null});
     const [numAnotaciones, cambiarNumAnotaciones] = useState({campo: "", valido: null});
@@ -29,7 +29,7 @@ cargarJugadores()
         //cambiarArregloJug({campo: jugadores})
         
     }, []);*/
-
+    var anotaciones = 0;
     async function onSubmit(e){
         e.preventDefault();
       await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Partidos", partido, "Anotaciones", jugador.campo), {
@@ -38,6 +38,21 @@ cargarJugadores()
         })
 
         alert("Anotaciones del jugador registradas exitosamente.")
+
+        console.log("recuperar", equipo.campo, jugador.campo)
+        const docRef = doc(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos", equipo.campo, "Jugadores", jugador.campo);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            anotaciones = parseInt(docSnap.data().NumAnotaciones) + parseInt(numAnotaciones.campo)
+            await updateDoc(docRef, {
+                NumAnotaciones: anotaciones
+                })
+                console.log("existe")
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        }
     }
 
     var jugadores = ["*Seleccione un jugador"]; 
@@ -101,6 +116,7 @@ return(
                             <Boton 
                                 texto='Guardar'
                                 manejarClic={onSubmit}
+                                enlace = {enlaceForm}
                                 />
                     </div>
                 </Form>

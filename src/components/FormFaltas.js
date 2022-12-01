@@ -30,20 +30,37 @@ function FormFaltas({equipoA, equipoB, partido}){
         //cambiarArregloJug({campo: jugadores})
         
     }, []);*/
-
+    var faltas = 0;
     async function onSubmit(e){
         e.preventDefault();
+        
       await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Partidos", partido, "Faltas", jugador.campo), {
         Equipo: equipo.campo,
         NumFaltas: numFaltas.campo
         })
-
         alert("Faltas del jugador registradas exitosamente.")
+
+        console.log("recuperar", equipo.campo, jugador.campo)
+        const docRef = doc(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos", equipo.campo, "Jugadores", jugador.campo);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            faltas = parseInt(docSnap.data().NumFaltas) + parseInt(numFaltas.campo)
+            await updateDoc(docRef, {
+                NumFaltas: faltas
+                })
+                console.log("existe")
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        }
     }
+    
 
     var jugadores = ["*Seleccione un jugador"]; 
 
     async function cargarJugadores(){
+        
         const querySnapshot = await getDocs(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos", equipo.campo, "Jugadores"));
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
