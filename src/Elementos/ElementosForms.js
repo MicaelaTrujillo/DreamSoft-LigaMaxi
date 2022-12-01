@@ -14,6 +14,7 @@ import { useState } from "react";
 function FormComboBox({label,arreglo, estado, cambiarEstado}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
+        console.log(estado.campo)
     }
 
     return(
@@ -482,6 +483,41 @@ function FormImagen({imagen}){
     )
 }
 
+function FormPuntaje({label, placeholder, estado, cambiarEstado, expresionRegular, alerta,id}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+    const validarNombre = () => {
+        res='w-100 xdx text-start ' 
+        if(expresionRegular){   
+            if(expresionRegular.test(estado.campo)){
+                console.log("correcto")
+                res='w-100  text-start alertaBien'+id
+                cambiarEstado({...estado,valido:'true'})
+            }else{
+                console.log("incorrecto")
+                res='w-100 text-start alertaMal'+id
+                cambiarEstado({...estado,valido:'false'})
+            }
+        }
+    }
+    return(
+        <Form.Group className="mb-3 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control
+                className="form-control"
+                type="text"
+                placeholder={placeholder}
+                value={estado.campo}
+                onChange={onChange}
+                onKeyUp={validarNombre}
+                onBlur={validarNombre}
+                valido={estado.valido}
+            />
+                <Form.Label className={res}>{alerta}</Form.Label>                  
+        </Form.Group>
+    )
+}
 
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen}
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen,FormPuntaje}
 
