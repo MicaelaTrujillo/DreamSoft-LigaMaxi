@@ -107,12 +107,16 @@ var enlaceForm=""
                              
                         />
 
-                        <div className='m-4 mt-0'>JUGADORES
+                        <div className='m-4'>JUGADORES
                             {
                                 jugadores.map((jugador) => (
-                                <div className="contenedor-tarjetaJugador">
-                                    <img src={jugador.Foto} width="45" height="45" className='text-start'/>
+                                <div className="cont-div-tarjeta">
+                                    <div className='w-25 text-start'>
+                                    <img src={jugador.Foto} width="45" height="45"/>
+                                    </div>
+                             
                                     <span className="nom-tarjeta">{jugador.nombreJugador}</span>
+                       
                                 </div>
                                 ))
                                             
