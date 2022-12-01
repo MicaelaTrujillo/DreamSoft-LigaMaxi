@@ -4,9 +4,12 @@ import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/firestore";
 import {Link} from 'react-router-dom'
 import "../styles sheet/infoEquipo.css";
+import { UserContext } from '../context/userProvider';
+import { useContext } from 'react';
 
 
 function InfoJugador({nombreE, nombreJ} ){
+    const {user} = useContext(UserContext);
     var nomJ="";
     var alt="";
     var pes="";
@@ -104,11 +107,20 @@ return (
             />
             
             <p></p>
+            <>
+            {user? 
             <Button
                 className='botonCred'
                 onClick="">
                 <Link to={`/CredencialJugador/${nombreE}/${nombreJ}`} >Generar credencial</Link>
             </Button>
+            : <p></p>
+            }
+            </>
+            
+            
+            
+            
         </div>
     </div>
     
