@@ -52,14 +52,14 @@ function App() {
             <Route exact path='/Solicitudes' element={<Solicitudes/>}/>
             <Route path="/FormularioCampeonato" element={<FormularioCampeonato/>}></Route>
 
-            <Route path="/FormularioPlanilla" element={<FormularioPlanilla/>}></Route>
-            <Route path="/FormularioFaltas/:equipoA/:equipoB/:partido" element={<FormularioFaltas/>}></Route>
-            <Route path="/FormularioAnotaciones/:equipoA/:equipoB/:partido" element={<FormularioAnotaciones/>}></Route>
           </Route>
 
           <Route element={<PrivateRoute isAllowed={!!user && userRol==="Apuntador"}/>}>
             <Route exact path='/PlanillaPartidos' element={<PlanillaPartidos/>}/>
       
+            <Route path="/FormularioPlanilla" element={<FormularioPlanilla/>}></Route>
+            <Route path="/FormularioFaltas/:equipoA/:equipoB/:partido" element={<FormularioFaltas/>}></Route>
+            <Route path="/FormularioAnotaciones/:equipoA/:equipoB/:partido" element={<FormularioAnotaciones/>}></Route>
           </Route>
           
         </Routes>
