@@ -13,7 +13,7 @@ export const GetRolUser = (user) =>{
             if(aux.includes('admin.com')){
                 res= 'Administrador'
             }else if(aux.includes('apuntador.com')){
-                res='apuntador'
+                res='Apuntador'
             }else {
                 getDel();
                 res=delegado;

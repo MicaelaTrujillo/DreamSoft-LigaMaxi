@@ -32,7 +32,7 @@ export const GetNameUser = (user) =>{
             if(aux.includes('admin.com')){
                 res= email
             }else if (aux.includes('apuntador.com')){
-                res='Apuntador de Mesa'
+                res=email
             }else{
                 getDel();
                 res=delegadoName;

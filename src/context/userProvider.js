@@ -24,7 +24,6 @@ const  UserProvider = ({children}) => {
     const loginUser = (email,  password) => signInWithEmailAndPassword(auth,email,password)
     const  signOutUser =()=> {
         signOut(auth)
-        return <Navigate to='/'/>
     }
     
 
