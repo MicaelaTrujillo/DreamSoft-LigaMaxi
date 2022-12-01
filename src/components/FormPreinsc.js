@@ -380,7 +380,10 @@ function FormPreinsc() {
                         />
                         <div className='botones pb-4'>
                             <Boton 
-                                texto='Cancelar'/>
+                                texto='Cancelar'
+                                manejarClic={""}
+                                enlace="/"
+                                />
 
                             <Boton 
                                 texto='Enviar'

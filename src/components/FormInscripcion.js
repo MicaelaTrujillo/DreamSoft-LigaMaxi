@@ -148,7 +148,7 @@ var enlaceForm=""
                             <Boton 
                                 texto='Cancelar'
                                 manejarClic=""
-                                enlace = {enlaceFom2}
+                                enlace = "/Inscripciones"
                                 />
                                 
     

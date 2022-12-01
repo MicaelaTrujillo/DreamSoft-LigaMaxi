@@ -386,11 +386,15 @@ function FormCampeonato() {
                         />
                         <div className='botones pb-4'>
                             <Boton 
-                                texto='Cancelar'/>
+                                texto='Cancelar'
+                                manejarClic={""}
+                                enlace="/"
+                                />
     
                             <Boton 
                                 texto='Guardar'
                                 manejarClic={onSubmit}
+                                enlace="/"
                                 />
                     </div>
                 </Form>

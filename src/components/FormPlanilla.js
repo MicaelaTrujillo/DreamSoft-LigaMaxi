@@ -1,16 +1,12 @@
 import '../styles sheet/formRegistro.css';
 import '../styles sheet/Boton.css';
 
-import {Boton,FormInputs,FormInputs2,FormInputs3,FormInputs4,FormArchivo, FormContraseña,AleFinal,Alert,FormPuntaje, FormComboBox,LabelForm,FormInputSinCambioEst} from '../Elementos/ElementosForms';
+import {Boton,FormPuntaje, LabelForm,FormInputSinCambioEst} from '../Elementos/ElementosForms';
 import { useContext, useState,useEffect } from 'react';
 import {Form, Table} from "react-bootstrap";
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc, updateDoc ,getDocs,  collection, getDoc} from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { async } from '@firebase/util';
-import { UserContext } from '../context/userProvider';
-import {app} from '../Firebase/ConexionBD';
+import { doc, updateDoc ,getDocs,  collection, getDoc} from "firebase/firestore";
+
 
 function FormPlanilla(){
     
@@ -314,8 +310,11 @@ return(
                        
                         <div className='botones pb-4'>
                             <Boton 
-                                texto='Cancelar'/>
-
+                                texto='Cancelar'
+                                manejarClic={""}
+                                enlace={enlaceForm}
+                                />
+                                
                             <Boton 
                                 texto='Guardar'
                                 manejarClic={onSubmit}
