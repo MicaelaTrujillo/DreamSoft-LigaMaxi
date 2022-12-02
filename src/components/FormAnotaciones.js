@@ -111,7 +111,10 @@ return(
                        
                         <div className='botones pb-4'>
                             <Boton 
-                                texto='Cancelar'/>
+                                texto='Cancelar'
+                                manejarClic={""}
+                                enlace={enlaceForm}
+                                />
 
                             <Boton 
                                 texto='Guardar'

@@ -1,16 +1,12 @@
 import '../styles sheet/formRegistro.css';
 import '../styles sheet/Boton.css';
 
-import {Boton,FormInputs,FormInputs2,FormInputs3,FormInputs4,FormArchivo, FormContraseña,AleFinal,Alert,FormPuntaje, FormComboBox,LabelForm} from '../Elementos/ElementosForms';
+import {Boton,FormPuntaje, LabelForm,FormInputSinCambioEst} from '../Elementos/ElementosForms';
 import { useContext, useState,useEffect } from 'react';
-import Form from "react-bootstrap/Form";
+import {Form, Table} from "react-bootstrap";
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc, updateDoc ,getDocs,  collection} from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { async } from '@firebase/util';
-import { UserContext } from '../context/userProvider';
-import {app} from '../Firebase/ConexionBD';
+import { doc, updateDoc ,getDocs,  collection, getDoc} from "firebase/firestore";
+
 
 function FormPlanilla(){
     
@@ -27,16 +23,142 @@ function FormPlanilla(){
     const partido = "012511"
 
     var enlaceForm = "/"
+    var finalPartidoG = ""
+    var finalPartidoP = ""
+
+
+    var PG1 = 0
+    var PP1 = 0
+    var PE1 = 0
+    var puntosAF1 = 0
+    var puntosEC1 = 0
+
+    var PG2 = 0
+    var PP2 = 0
+    var PE2 = 0
+    var puntosAF2 = 0
+    var puntosEC2 = 0
+
     async function onSubmit(e){
         e.preventDefault();
+        console.log("puntos", puntosA,puntosB)
+        if(puntosA.campo > puntosB.campo){
+            console.log("es mayor")
+            finalPartidoG = equipoA
+            finalPartidoP = equipoB
+            cambiarGanador({campo: equipoA})
+            cambiarPerdedor({campo: equipoB})
+            console.log(ganador.campo,perdedor.campo)
+
+        }else{
+            if(puntosA.campo < puntosB.campo){
+                finalPartidoG = equipoB
+            finalPartidoP = equipoA
+                cambiarGanador({campo: equipoB})
+                cambiarPerdedor({campo: equipoA})
+            }else{
+                finalPartidoG = equipoA
+            finalPartidoP = equipoA
+              
+            }
+        }
+console.log(finalPartidoG, finalPartidoP)
+        if(finalPartidoG == finalPartidoP){
+            console.log(ganador.campo,perdedor.campo)
+            const docRef = doc(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos", equipoA);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            PE1 = parseInt(docSnap.data().PEmpatados) + parseInt(1)
+            puntosAF1 = parseInt(docSnap.data().pAFavor) + parseInt(puntosA.campo)
+            puntosEC1 = parseInt(docSnap.data().pEContra) + parseInt(puntosB.campo)
+
+            await updateDoc(docRef, {
+                PEmpatados: PE1,
+                pAFavor: puntosAF1,
+                pEContra: puntosEC1
+                })
+                console.log("existe")
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        }
+
+        const docRef2 = doc(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos", equipoB);
+        const docSnap2 = await getDoc(docRef2);
+
+        if (docSnap2.exists()) {
+            PE2 = parseInt(docSnap2.data().PEmpatados) + parseInt(1)
+            puntosAF2 = parseInt(docSnap2.data().pAFavor) + parseInt(puntosB.campo)
+            puntosEC2 = parseInt(docSnap2.data().pEContra) + parseInt(puntosA.campo)
+
+            await updateDoc(docRef2, {
+                PEmpatados: PE2,
+                pAFavor: puntosAF2,
+                pEContra: puntosEC2
+                })
+                console.log("existe")
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        }
+
+        }else{
+            console.log(ganador.campo,perdedor.campo)
+        const docRef = doc(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos", finalPartidoG);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            PG1 = parseInt(docSnap.data().PGanados) + parseInt(1)
+            puntosAF1 = parseInt(docSnap.data().pAFavor) + parseInt(puntosA.campo)
+            puntosEC1 = parseInt(docSnap.data().pEContra) + parseInt(puntosB.campo)
+
+            await updateDoc(docRef, {
+                PGanados: PG1,
+                pAFavor: puntosAF1,
+                pEContra: puntosEC1
+                })
+                console.log("existe")
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        }
+
+        const docRef2 = doc(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos", finalPartidoP);
+        const docSnap2 = await getDoc(docRef2);
+
+        if (docSnap2.exists()) {
+            PP2 = parseInt(docSnap2.data().PPerdidos) + parseInt(1)
+            puntosAF2 = parseInt(docSnap2.data().pAFavor) + parseInt(puntosB.campo)
+            puntosEC2 = parseInt(docSnap2.data().pEContra) + parseInt(puntosA.campo)
+
+            await updateDoc(docRef2, {
+                PPerdidos: PP2,
+                pAFavor: puntosAF2,
+                pEContra: puntosEC2
+                })
+                console.log("existe")
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        }
+        }
+
+
+
+
+
+
+
       await updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Partidos", partido), {
-            EquipoGanador: ganador.campo,
-            EquipoPerdedor: perdedor.campo,
-            PuntajeGanador: puntosA.campo,
-            PuntajePerdedor: puntosB.campo
+           /* EquipoGanador: ganador.campo,
+            EquipoPerdedor: perdedor.campo,*/
+            PuntosE1: puntosA.campo,
+            PuntosE2: puntosB.campo
         })
 
         alert("Resultados del partido registrado exitosamente.")
+
     }
 
     var enlaceForm1=""
@@ -92,14 +214,12 @@ return(
                 <Form className="form text-center container col-8 ">
                     <h3 className="mb-5 mt-3">REGISTRO PUNTAJE DEL PARTIDO</h3>
                         
-                        <FormComboBox
-                            label="Equipo ganador: "
-                            arreglo = {["*Seleccione el equipo",equipoA, equipoB]}
-                            estado={ganador}
-                            cambiarEstado={cambiarGanador} 
+                    <FormInputSinCambioEst
+                            label="Equipo 1: "
+                            value = {equipoA}
                         />
                         <FormPuntaje
-                            label="Puntaje equipo ganador: "
+                            label="Puntaje equipo 1: "
                             placeholder="Ingrese el puntaje del equipo"
                             estado={puntosA}
                             cambiarEstado={cambiarPuntosA} 
@@ -107,14 +227,12 @@ return(
                             alerta="El puntaje solo contiene números"
                             id="1"
                         />
-                        <FormComboBox
-                            label="Equipo perdedor: "
-                            arreglo = {["*Seleccione el equipo",equipoA, equipoB]}
-                            estado={perdedor}
-                            cambiarEstado={cambiarPerdedor} 
+                        <FormInputSinCambioEst
+                            label="Equipo 2: "
+                            value = {equipoB}
                         />
                         <FormPuntaje
-                            label="Puntaje equipo perdedor: "
+                            label="Puntaje equipo 2: "
                             placeholder="Ingrese el puntaje del equipo"
                             estado={puntosB}
                             cambiarEstado={cambiarPuntosB} 
@@ -124,21 +242,25 @@ return(
                         />
 
                         <div className='m-4 mt-0 negrita'>FALTAS
-                        <div className="contenedor-subtitulos my-2">
-                            <span className="alineacion negrita">Jugador</span>
-                            <span className="alineacion negrita">Equipo</span>
-                            <span className="alineacion negrita">Faltas</span>
-                        </div>
-                            {
-                                faltas.map((falta) => (
-                                <div className="contenedor-tarjetaFalta my-2">
-                                    <span className="alineacion">{falta.id}</span>
-                                    <span className="alineacion">{falta.Equipo}</span>
-                                    <span className="alineacion">{falta.NumFaltas}</span>
-                                </div>
-                                ))
-                                            
-                            } 
+                        
+                            <Table striped bordered hover size="sm">
+                            <thead>
+                                <tr>
+                                <th>Jugador</th>
+                                <th>Equipo</th>
+                                <th>Faltas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {faltas.map((falta) => (
+                                    <tr>
+                                    <td>{falta.id}</td>
+                                    <td>{falta.Equipo}</td>
+                                    <td>{falta.NumFaltas}</td>
+                                </tr>
+                                ))}
+                            </tbody>
+                            </Table>
                         </div>
 
                         <LabelForm
@@ -154,21 +276,24 @@ return(
                         </div>
 
                         <div className='m-4 mt-0 negrita'>ANOTACIONES
-                        <div className="contenedor-subtitulos my-2">
-                            <span className="alineacion negrita">Jugador</span>
-                            <span className="alineacion negrita">Equipo</span>
-                            <span className="alineacion negrita">Faltas</span>
-                        </div>
-                            {
-                                anotaciones.map((anotacion) => (
-                                <div className="contenedor-tarjetaFalta my-2">
-                                    <span className="alineacion">{anotacion.id}</span>
-                                    <span className="alineacion">{anotacion.Equipo}</span>
-                                    <span className="alineacion">{anotacion.NumAnotaciones}</span>
-                                </div>
-                                ))
-                                            
-                            } 
+                        <Table striped bordered hover size="sm">
+                            <thead>
+                                <tr>
+                                <th>Jugador</th>
+                                <th>Equipo</th>
+                                <th>Anotaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {anotaciones.map((anotacion) => (
+                                    <tr>
+                                    <td>{anotacion.id}</td>
+                                    <td>{anotacion.Equipo}</td>
+                                    <td>{anotacion.NumAnotaciones}</td>
+                                </tr>
+                                ))}
+                            </tbody>
+                            </Table>
                         </div>
 
                         <LabelForm
@@ -185,14 +310,20 @@ return(
                        
                         <div className='botones pb-4'>
                             <Boton 
-                                texto='Cancelar'/>
-
+                                texto='Cancelar'
+                                manejarClic={""}
+                                enlace={enlaceForm}
+                                />
+                                
                             <Boton 
                                 texto='Guardar'
                                 manejarClic={onSubmit}
                                 enlace={enlaceForm}
                                 />
                     </div>
+
+
+
                 </Form>
         </div>
     

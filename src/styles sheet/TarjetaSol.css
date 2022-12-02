@@ -6,6 +6,7 @@
     font-family: Roboto;
   }  
 
+
 .contenedor-tarjeta{
     width: 700px;
     height: 100px;
@@ -35,6 +36,13 @@
     display:grid;
   grid-template-columns: repeat(4, 4fr);
 
+}
+.cont-div-tarjeta{
+    display: flex;
+    margin: 50px;
+    font-family: Roboto;
+    background-color: #fff;
+    border: black solid 1px;
 }
 
 .contenedor-tarjetaFalta{
