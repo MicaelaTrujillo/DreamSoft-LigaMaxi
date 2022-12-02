@@ -40,10 +40,7 @@ const routes={
             name: 'Planillas',
             path: '/PlanillaPartidos'
         },
-        {
-            name: 'Registro Planilla',
-            path: '/FormularioPlanilla'
-        },
+       
     ],
 }
 function Navbar (){

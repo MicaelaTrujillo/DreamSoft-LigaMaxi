@@ -52,7 +52,12 @@ var enlaceForm=""
             await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", nombre), {
                 NombreEquipo: nombre,
                 Categoria: categoria,
-                Entrenador: nombreEnt.campo
+                Entrenador: nombreEnt.campo,
+                PEmpatados: 0,
+                PGanados: 0,
+                PPerdidos:0,
+                pAFavor:0,
+                pEContra:0
             })
             await updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre), {
                 Inscrito: true

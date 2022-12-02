@@ -8,7 +8,7 @@ import { db } from "../Firebase/ConexionBD";
 import { doc, updateDoc ,getDocs,  collection, getDoc} from "firebase/firestore";
 
 
-function FormPlanilla(){
+function FormPlanilla({id, equipo1, equipo2}){
     
     const [puntosA, cambiarPuntosA] = useState({campo: "", valido: null});
     const [puntosB, cambiarPuntosB] = useState({campo: "", valido: null});
@@ -18,11 +18,12 @@ function FormPlanilla(){
         puntaje: /^\d{2,3}$/, // Máximo 3 numeros.
     }
     
-    const equipoA = "Los titanes"
-    const equipoB = "Los grandes"
-    const partido = "012511"
+    const equipoA = equipo1
+    const equipoB = equipo2
+    const partido = id
 
     var enlaceForm = "/"
+    var enlaceForm3= "/PlanillaPartidos"
     var finalPartidoG = ""
     var finalPartidoP = ""
 
@@ -312,13 +313,13 @@ return(
                             <Boton 
                                 texto='Cancelar'
                                 manejarClic={""}
-                                enlace={enlaceForm}
+                                enlace={enlaceForm3}
                                 />
                                 
                             <Boton 
                                 texto='Guardar'
                                 manejarClic={onSubmit}
-                                enlace={enlaceForm}
+                                enlace={enlaceForm3}
                                 />
                     </div>
 
