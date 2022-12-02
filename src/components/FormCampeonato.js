@@ -1,5 +1,5 @@
 
-import {FormInputs, Boton, FormArchivo, FormFecha, FormImagen} from '../Elementos/ElementosForms'
+import {FormInputs, Boton, FormArchivo, FormFecha, FormImagen,FormInputSinCambioEst} from '../Elementos/ElementosForms'
 import Form from "react-bootstrap/Form";
 import { useState, useEffect } from 'react';
 
@@ -21,6 +21,7 @@ function FormCampeonato() {
     var invitacion = "";
     var imagen1 = "";
     var imagen2 = "";
+    var categ = "";
 
 
     var fechaInicio2 = "";
@@ -33,6 +34,7 @@ function FormCampeonato() {
     const expresiones = {
         nombre: /^[a-zA-ZÀ-ÿ0-9\s]{5,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
         version: /^[0-9\s]{1,40}$/,
+        categoria: /^[0-9\s]{2}$/,
     }
     
     const [nombre, cambiarNombre] = useState({campo: "", valido: null});
@@ -45,7 +47,7 @@ function FormCampeonato() {
     const [qr1, cambiarQR1] = useState({campo: ""});
     const [qr2, cambiarQR2] = useState({campo: ""});
     const [invitacionPub, cambiarInvitacionPub] = useState({campo: ""});
-
+    const [categoria, cambiarCategoria] = useState({campo: "", valido: null});
     const [stringImage, setstringImage] = useState('');
   useEffect(() => {
     async function obtenerDatos() {
@@ -74,7 +76,10 @@ function FormCampeonato() {
           invitacion = docSnap.data().Invitacion;
           imagen1 = docSnap.data().qr1;
           imagen2 = docSnap.data().qr2;
-       
+          categ = docSnap.data().Categorias;
+       console.log("cat", categ)
+        categUnion = categ.toString() 
+        console.log("separadito",categUnion.split(","))
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -89,6 +94,7 @@ function FormCampeonato() {
        cambiarQR1({campo:imagen1})
        cambiarQR2({campo:imagen2})
        cambiarInvitacionPub({campo:invitacion})
+       cambiarCategoria({campo:categUnion})
         /*var qrGenerado = "";
         if (fecha >= fechaIniConvocatoria && fecha <= limitePreInsc) {
           console.log("imagen1");
@@ -120,9 +126,10 @@ function FormCampeonato() {
         validarFechas()
     }
 
-
     function validarFechas(){
-        
+        //categoria
+        var arreglo = categoria.campo.split (",")
+        console.log(arreglo) 
         //cambiarFecIni({campo:Date.parse(fecIni.campo)})
         fechaInicio2 = new Date(fecIni.campo)
         fechaFin2 = new Date(fecFin.campo)
@@ -144,7 +151,8 @@ function FormCampeonato() {
                                     FechaFin: fechaFin2,
                                     FechaIniConvocatoria: fechaIniConvocatoria2,
                                     LimitePreInsc: limitePreInsc2,
-                                    LimiteInscrip: limiteInscrip2
+                                    LimiteInscrip: limiteInscrip2,
+                                    Categorias: arreglo
                                     });
                                     alert("Cambios guardados exitosamente.")
                             }else{
@@ -299,7 +307,14 @@ function FormCampeonato() {
         uploadQR1()
         uploadQR2()
         uploadInvPub()
-
+        var categUnion = ""
+        /*const [categoria, cambiarCategoria] = useState({campo: "", valido: null});
+        for(var i = 0; i < categ.length; i++){
+            categUnion = categUnion + categ[i]
+            console.log("union", categUnion)
+           // cambiarCategoria({campo: categUnion})
+        }*/
+console.log(("30,40,50").split (","));
     return (
         <div className="row cont-main-form mt-5 mb-5 mx-0">
             
@@ -325,6 +340,18 @@ function FormCampeonato() {
                             alerta="Debe ingresar solo números"
                             id="1"
                             value = {version.campo}
+                             
+                        />
+
+                        <FormInputs
+                            label="Categoría: (Debe ingresar las categorías separadas por una coma. Ej: 30 años,40 años,50 años...) "
+                            placeholder="Ej: 30 años,40 años,50 años"
+                            estado={categoria}
+                            cambiarEstado={cambiarCategoria} 
+                            expresionRegular = {""}  
+                            alerta="Debe ingresar solo números"
+                            id="1"
+                            value = {categoria.campo}
                              
                         />
                         <FormFecha

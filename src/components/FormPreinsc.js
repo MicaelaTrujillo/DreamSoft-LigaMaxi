@@ -66,6 +66,7 @@ function FormPreinsc() {
    
 
     const [stringImage, setstringImage] = useState('');
+    const [categ, setCateg] = useState([]);
 
         var fecAct = ""
         var fecIniCon = ""
@@ -119,8 +120,22 @@ function FormPreinsc() {
       console.log(stringImage, "este es el 2");
     }
     generarQR();
+
+    var categorias = ["*Seleccione categoría"]
+      async function cat(){
+      const querySnapshot = await getDocs(collection(db, "Campeonato1"));
+      querySnapshot.forEach((doc) => {
+        categorias = doc.data().Categorias
+        categorias.unshift("*Seleccione categoría")
+        console.log("catego",categorias);
+      });
+      setCateg(categorias)
+    }
+    
+    cat()
   }, []);
 
+ 
 
     const expresiones = {
         nombreEquipo: /^[a-zA-ZÀ-ÿ0-9\s]{3,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
@@ -134,6 +149,8 @@ function FormPreinsc() {
             });
       }*/
       
+      
+
     async function onSubmit(e){
         e.preventDefault();
         //setTimeout(repetido,5000);
@@ -365,9 +382,10 @@ function FormPreinsc() {
                         />
                         <FormComboBox
                             label="Categoría: "
-                            arreglo = {["*Seleccione categoría","30 años", "35 años", "40 años"]}
+                            arreglo = {categ}
                             estado={categoria}
                             cambiarEstado={cambiarCategoria} 
+                            id = "categoria"
                         />
                         <FormQR 
                             imagen = {stringImage}
