@@ -31,15 +31,20 @@ function ContenedorPlanilla(props){
             });
         }, []);
         
+        /*for (var i = 0; i < equiposRivales.length; i++) {
+            const a= equiposRivales[index].FechaHora.toDate().getDate()
+          }
+          setFechas(a);*/
 
           const a = equiposRivales.map((rivales, index) => (
-            equiposRivales[index].FechaHora.toDate().getDate()+""+(equiposRivales[index].FechaHora.toDate().getMonth()+1)
+             //console.log("aqui si da",  equiposRivales[index])
+            //equiposRivales[index].FechaHora.toDate().getMonth()+1,
+            //equiposRivales[index].FechaHora.toDate().getDate(),
+           equiposRivales[index].FechaHora.toDate().getDate()+""+(equiposRivales[index].FechaHora.toDate().getMonth()+1)
 
           ));
           
-          useEffect(() => {
-            setFechas(a);
-          }, []);
+        
         
     return(
         <div className="container">
@@ -53,14 +58,14 @@ function ContenedorPlanilla(props){
                     index === 0 ? 
                         <>
                         <p className="fecha">{dias[rivales.FechaHora.toDate().getDay()]+", " +rivales.FechaHora.toDate().getDate()+" de "+ meses[rivales.FechaHora.toDate().getMonth()]}</p>
-                        <Rivales partido={rivales.id} equipo1={rivales.Equipo1} equipo2={rivales.Equipo2} puntos1={rivales.PuntosE1} puntos2={rivales.PuntosE2}/>
+                        <Rivales partido={rivales.id} registrado={rivales.PuntosR} equipo1={rivales.Equipo1} equipo2={rivales.Equipo2} puntos1={rivales.PuntosE1} puntos2={rivales.PuntosE2}/>
                         </>
                     : a[index-1] === equiposRivales[index].FechaHora.toDate().getDate()+""+(equiposRivales[index].FechaHora.toDate().getMonth()+1)?
-                        <Rivales partido={rivales.id} equipo1={rivales.Equipo1} equipo2={rivales.Equipo2} puntos1={rivales.PuntosE1} puntos2={rivales.PuntosE2}/>
+                        <Rivales partido={rivales.id} registrado={rivales.PuntosR} equipo1={rivales.Equipo1} equipo2={rivales.Equipo2} puntos1={rivales.PuntosE1} puntos2={rivales.PuntosE2}/>
                     :
                         <>
                         <p className="fecha">{dias[rivales.FechaHora.toDate().getDay()]+", " +rivales.FechaHora.toDate().getDate()+" de "+ meses[rivales.FechaHora.toDate().getMonth()]}</p>
-                        <Rivales partido={rivales.id} equipo1={rivales.Equipo1} equipo2={rivales.Equipo2} puntos1={rivales.PuntosE1} puntos2={rivales.PuntosE2}/>
+                        <Rivales partido={rivales.id} registrado={rivales.PuntosR} equipo1={rivales.Equipo1} equipo2={rivales.Equipo2} puntos1={rivales.PuntosE1} puntos2={rivales.PuntosE2}/>
                         </>
                         //console.log( "e", equiposRivales[index].FechaHora.toDate().getDate()+""+(equiposRivales[index].FechaHora.toDate().getMonth()+1))
                     

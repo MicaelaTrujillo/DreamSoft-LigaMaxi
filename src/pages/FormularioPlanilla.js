@@ -3,6 +3,7 @@ import FormPlanilla from '../components/FormPlanilla'
 import HomePage from '../components/homePage';
 import {useParams} from 'react-router-dom';
 
+
 function FormuPlanilla() {
     const partido = useParams();
     return (

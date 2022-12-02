@@ -155,7 +155,8 @@ console.log(finalPartidoG, finalPartidoP)
            /* EquipoGanador: ganador.campo,
             EquipoPerdedor: perdedor.campo,*/
             PuntosE1: puntosA.campo,
-            PuntosE2: puntosB.campo
+            PuntosE2: puntosB.campo,
+            PuntosR: true
         })
 
         alert("Resultados del partido registrado exitosamente.")
