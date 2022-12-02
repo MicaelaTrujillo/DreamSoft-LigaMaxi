@@ -13,7 +13,7 @@ import { UserContext } from '../context/userProvider';
 import {app} from '../Firebase/ConexionBD';
 import ReactDOM from 'react-dom/client';
 function FormFaltas({equipoA, equipoB, partido}){
-    const enlaceForm = '/FormularioPlanilla'
+    const enlaceForm = '/FormularioPlanilla/:partido/:equipoA/:equipoB'
     const [equipo, cambiarEquipo] = useState({campo: "", valido: null});
     const [jugador, cambiarJugador] = useState({campo: "", valido: null});
     const [numFaltas, cambiarNumFaltas] = useState({campo: "", valido: null});
