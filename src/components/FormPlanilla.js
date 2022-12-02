@@ -23,6 +23,7 @@ function FormPlanilla({id, equipo1, equipo2}){
     const partido = id
 
     var enlaceForm = "/"
+    var enlaceForm3= "/PlanillaPartidos"
     var finalPartidoG = ""
     var finalPartidoP = ""
 
@@ -318,7 +319,7 @@ return(
                             <Boton 
                                 texto='Guardar'
                                 manejarClic={onSubmit}
-                                enlace={enlaceForm}
+                                enlace={enlaceForm3}
                                 />
                     </div>
 

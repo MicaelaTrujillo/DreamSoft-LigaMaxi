@@ -51,10 +51,6 @@ function App() {
           <Route element={<PrivateRoute isAllowed={!!user && userRol==="Administrador"}/>}>
             <Route exact path='/Solicitudes' element={<Solicitudes/>}/>
             <Route path="/FormularioCampeonato" element={<FormularioCampeonato/>}></Route>
-<<<<<<< HEAD
-
-=======
->>>>>>> Aleyda
           </Route>
 
           <Route element={<PrivateRoute isAllowed={!!user && userRol==="Apuntador"}/>}>
