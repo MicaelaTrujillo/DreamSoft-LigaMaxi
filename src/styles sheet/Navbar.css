@@ -51,3 +51,31 @@ Link{
    
     text-align: center;
 }
+
+
+@media screen and (max-width:560px) {
+    .navbar-texto{
+        color: white;
+        font-size: 14px;
+        
+    }
+
+}
+
+@media screen and (max-width:1090px) {
+    .navbar-texto{
+        color: white;
+        font-size: 20px;
+        
+    }
+
+}
+
+@media screen and (max-width:480px) {
+    .navbar-texto{
+        color: white;
+        font-size: 13px;
+        
+    }
+
+}

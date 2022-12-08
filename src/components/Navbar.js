@@ -61,6 +61,12 @@ function Navbar (){
                 </nav>          
                 </div>
 
+                <div className='contenedor-texto navbar-texto'>   
+                <nav>
+                    <Link to="/TablaDePosiciones">Tabla de posiciones</Link>
+                </nav>          
+                </div>
+
                 {user? 
             
                 routes[userRol]?.map(({name, path}) => (
