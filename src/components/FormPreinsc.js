@@ -76,7 +76,7 @@ function FormPreinsc() {
   useEffect(() => {
     async function generarQR() {
       const fecha = new Date();
-      console.log("actual", fecha);
+      console.log("fecha de preinscripcion", fecha);
 
       const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
       const docSnap = await getDoc(docRef);
@@ -93,7 +93,7 @@ function FormPreinsc() {
         fecIniCon = docSnap.data().FechaIniConvocatoria.toDate();
         limPreIns = docSnap.data().LimitePreInsc.toDate();
         limIns = docSnap.data().LimiteInscrip.toDate();
-        // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
+         console.log("fechas bd", fechaIniConvocatoria,limitePreInsc,limiteInscrip)
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -112,7 +112,7 @@ function FormPreinsc() {
             const root = ReactDOM.createRoot(
                 document.getElementById('contenedor')
               );
-              const element = <h1 className="col-4 ">Está fuera de la fecha de inscripción de equipos para el campeonato.</h1>;
+              const element = <h1 className="col-4 ">Está fuera de la fecha de pre inscripción de equipos para el campeonato.</h1>;
               root.render(element);
         }
       }
@@ -201,6 +201,7 @@ function FormPreinsc() {
          console.log(controlar)
          if(controlar){
             console.log("entro")
+            //console.log("mmm",fecha);
             uploadFile(comprobante.campo);
             //subirImagen(comprobante.campo);
              await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre.campo), {
@@ -208,7 +209,9 @@ function FormPreinsc() {
                  Categoria: categoria.campo,
                  Habilitado: false,
                  Inscrito: false,
-                 Solicitante: user.uid
+                 Solicitante: user.uid,
+                 FechaSol: new Date()
+
                  })
                  //cambiarNombre({campo:'',valido:null});
                  //cambiarCategoria({campo:'',valido:null});
@@ -271,100 +274,6 @@ function FormPreinsc() {
     }
 
 
-
-    /*function subirImagen(file) {
-        const storage = getStorage();
-        const storageRef = ref(storage,"Comprobantes/" + file.name);
-        
-           var uploadTask = uploadFile(file)
-    
-       // Listen for state changes, errors, and completion of the upload.
-
-       uploadTask.on(
-        firebase.storage.TaskEvent.STATE_CHANGED,
-        (error) => {
-            // A full list of error codes is available at
-            // https://firebase.google.com/docs/storage/web/handle-errors
-            switch (error.code) {
-                case 'storage/unauthorized':
-                    // User doesn't have permission to access the object
-                    break;
-                case 'storage/canceled':
-                    // User canceled the upload
-                    break;
-                case 'storage/unknown':
-                    // Unknown error occurred, inspect error.serverResponse
-                    break;
-            }
-        },
-        () => {
-            // Upload completed successfully, now we can get the download URL
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                console.log('File available at', downloadURL);
-            });
-        });
-        
-    }*/
-
-   /* function subirArchivo() {
-        var comprob= "";
-        var nombreComp="";
-       
-            //cambiarEstado({...estado, campo: e.target.files[0]});
-            comprob= comprobante.campo;
-            //console.log(comprob)
-            nombreComp = comprobante.valor;
-            //nombreComp = nombreComp.slice(12);
-            //console.log(comprob)
-            uploadFile(comprob);
-       
-     }*/
-
-     /*
-     var qrGenerado2=""
-     async function generarQR(){
-        
-        // var fechaIniConvocatoria= ""
-         //var limitePreInsc= ""
-         //var limiteInscrip= ""
-         const fecha = new Date();
-         console.log("actual",fecha);
-     
-         const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
-         const docSnap = await getDoc(docRef);
-        
-         if (docSnap.exists()) {
-             console.log("si entra al exist", docSnap.data())
-             var fechaIniConvocatoria= docSnap.data().FechaIniConvocatoria.toDate();
-             var limitePreInsc= docSnap.data().LimitePreInsc.toDate();
-             var limiteInscrip= docSnap.data().LimiteInscrip.toDate();
-            var imagen1=docSnap.data().qr1
-            var imagen2=docSnap.data().qr2
-            // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
-         } else {
-           // doc.data() will be undefined in this case
-           console.log("No such document!");
-         }
-         console.log("fechas",fechaIniConvocatoria, limitePreInsc, limiteInscrip)
-         //Generamos qr
-         var qrGenerado=""
-         if(fecha >= fechaIniConvocatoria && fecha <= limitePreInsc){
-             console.log("imagen1")
-             qrGenerado = imagen1;
-         }else{
-             if(fecha > limitePreInsc && fecha <= limiteInscrip){
-                 console.log("imagen2")
-                 qrGenerado = imagen2;
-             }else{
-                 //AQUI SE CERRARIA FORMULARIO
-             }
-         }
-         qrGenerado2 = qrGenerado
-         console.log(qrGenerado2, "este es el 2")
-         return qrGenerado2
-      }
-        var gener = generarQR()
-      */
     return (
     <>
         <div id="contenedor" className="row cont-main-form mt-5 mb-5 mx-0">

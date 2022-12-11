@@ -7,12 +7,18 @@ import { doc, updateDoc} from "firebase/firestore";
 
 
 function ModalSol(props){
+    const meses=['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    const dias=[ 'Domingo','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+
     async function habilitarIns(){
         await updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", props.nombre), {
           Habilitado: true
           })
           //window.location.reload(true);
     }
+
+    console.log("fechitas", props.nombre, dias[props.fecha.toDate().getDay()]+", " +props.fecha.toDate().getDate()+" de "+ meses[props.fecha.toDate().getMonth()]);
+    
     return (
         <Modal
         show={props.show} onHide={props.onHide} animation={false}
@@ -33,6 +39,10 @@ function ModalSol(props){
                 <FormInputSinCambioEst
                     label="Categoría: "
                     value = {props.categoria}
+                />
+                <FormInputSinCambioEst
+                    label="Fecha de Solicitud: "
+                    value = {dias[props.fecha.toDate().getDay()]+", " +props.fecha.toDate().getDate()+" de "+ meses[props.fecha.toDate().getMonth()]}
                 />
                 <div>Comprobante: </div>
                 <FormImagen

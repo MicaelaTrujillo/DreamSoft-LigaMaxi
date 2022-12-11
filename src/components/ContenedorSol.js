@@ -46,7 +46,7 @@ function ContenedorSol(props){
                 <p className="sub-titulo">{props.subtitulo}</p>
                 {userRol==='Administrador'? 
                     equiposAdm.map((equipo) => (
-                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} imagen={equipo.UrlImagen} habilitado={equipo.Habilitado}/>
+                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} imagen={equipo.UrlImagen} habilitado={equipo.Habilitado} fecha={equipo.FechaSol}/>
                     ))
                     
                   : 

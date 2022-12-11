@@ -36,6 +36,7 @@ function TarjetaSol(props){
         data([])
         }, []);
 
+        //console.log("fechas en tarjeta sol", props.name, props.fecha);
         
     return (
         <>
@@ -60,7 +61,7 @@ function TarjetaSol(props){
         }
         </div>
 
-        <Modal show={modalShow} onHide={() => setModalShow(false)} deshabilitarBtn={()=> setHab(true)} nombre={props.name} categoria={props.categoria} imagen={props.imagen}/>
+        <Modal show={modalShow} onHide={() => setModalShow(false)} deshabilitarBtn={()=> setHab(true)} nombre={props.name} categoria={props.categoria} imagen={props.imagen} fecha={props.fecha}/>
         </>
         
     

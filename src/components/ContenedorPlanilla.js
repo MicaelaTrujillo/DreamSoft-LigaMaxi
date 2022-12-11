@@ -14,7 +14,7 @@ function ContenedorPlanilla(props){
     const {user} = useContext(UserContext);
     const userRol = GetRolUser(user);
     const meses=['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    const dias=['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+    const dias=[ 'Domingo','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
      
         useEffect (() => {
             const dataref= collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Partidos");
@@ -39,12 +39,12 @@ function ContenedorPlanilla(props){
           const a = equiposRivales.map((rivales, index) => (
              //console.log("aqui si da",  equiposRivales[index])
             //equiposRivales[index].FechaHora.toDate().getMonth()+1,
-            //equiposRivales[index].FechaHora.toDate().getDate(),
+            //equiposRivales[index].FechaHora.toDate().getDay()
            equiposRivales[index].FechaHora.toDate().getDate()+""+(equiposRivales[index].FechaHora.toDate().getMonth()+1)
 
           ));
           
-        
+        console.log("mmmm", a);
         
     return(
         <div className="container">
