@@ -35,13 +35,13 @@ const routes={
         },
         
     ],
-    Apuntador:[
+   /* Apuntador:[
         {
             name: 'Planillas',
             path: '/PlanillaPartidos'
         },
        
-    ],
+    ],*/
 }
 function Navbar (){
     const {user} = useContext(UserContext);
@@ -66,7 +66,11 @@ function Navbar (){
                     <Link to="/TablaDePosiciones">Tabla de posiciones</Link>
                 </nav>          
                 </div>
-
+                <div className='contenedor-texto navbar-texto'>   
+                <nav>
+                    <Link to="/PlanillaPartidos">Planillas</Link>
+                </nav>          
+                </div>
                 {user? 
             
                 routes[userRol]?.map(({name, path}) => (

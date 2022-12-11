@@ -6,11 +6,16 @@ import {Link} from 'react-router-dom'
 import { db } from "../Firebase/ConexionBD";
 import {getDoc, doc} from "firebase/firestore";
 import { useEffect } from "react";
+import { UserContext } from '../context/userProvider';
+import { useContext } from 'react';
+import { GetRolUser } from "../utyls/getRolUser";
 
 function Rivales({partido, registrado, equipo1, equipo2, puntos1, puntos2}){
     const [puntosR, setReg]= useState();
     const [p1, setP1]= useState();
     const [p2, setP2]= useState();
+    const {user} = useContext(UserContext);
+    const userRol = GetRolUser(user);
     useEffect (() => {
         const data= async () =>{
             const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Partidos", partido);
@@ -49,13 +54,22 @@ function Rivales({partido, registrado, equipo1, equipo2, puntos1, puntos2}){
                 </div>
                 </>
                 :
+                userRol==="Apuntador"?
                 <Button
-                    className='botonHabilitado'
-                    onClick="">
-                    <Link to={`/FormularioPlanilla/${partido}/${equipo1}/${equipo2}`} >Resultados</Link>
-            
-                 </Button>
+                className='botonHabilitado'
+                onClick="">
+                <Link to={`/FormularioPlanilla/${partido}/${equipo1}/${equipo2}`} >Resultados</Link>
+        
+                </Button>
+                :
                 
+                <>
+                <div className="container-points raw">
+                
+                <h2 className="text center"> No definido</h2>
+                
+                </div>
+                </>
                 
             }
         </div>

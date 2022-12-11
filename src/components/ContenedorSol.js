@@ -38,6 +38,7 @@ function ContenedorSol(props){
             });
         }, []);
 
+       
     return(
         <div className="container">
             <div className="main">
