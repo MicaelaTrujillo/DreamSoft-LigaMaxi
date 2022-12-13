@@ -26,6 +26,7 @@ import { GetRolUser } from "../src/utyls/getRolUser";
 import VistaInscripcion from "./pages/VistaInscripcion";
 import PlanillaPartidos from "./pages/PlanillaPartidos";
 
+import RolPartidos from "./pages/RolPartidos";
 function App() {
   const {user} = useContext(UserContext);
   const userRol = GetRolUser(user);
@@ -38,7 +39,7 @@ function App() {
           <Route path="/InformacionEquipo/:equipo" element={<InformacionEquipo/>}></Route>
           <Route path="/InformacionJugador/:equipo/:jugador" element={<InformacionJugador/>}></Route>
           <Route path="/TablaDePosiciones" element={<TablaDePosiciones/>}></Route> 
-                   
+          <Route path="/RolPartidos" element={<RolPartidos/>}></Route>         
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
              <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
