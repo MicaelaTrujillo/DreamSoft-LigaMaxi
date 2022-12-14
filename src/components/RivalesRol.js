@@ -22,13 +22,17 @@ function RivalesRol({partido, registrado, equipo1, equipo2, puntos1, puntos2}){
                     const year= b.getFullYear();
                     var mes= b.getMonth()+1;
                     var dia= b.getDate();
-                    if(dia <=9){dia="0"+dia};
-                    if(mes <=9){mes="0"+mes};
-                    const fechita= dia+"/"+mes+"/"+year;
-                    setFecha(fechita);
+                    var hora= b.getUTCHours();
+                    var min= b.getUTCMinutes();
+                    //if(dia <=9){dia="0"+dia};
+                    //if(mes <=9){mes="0"+mes};
+                    //const fechita= dia+"/"+mes+"/"+year;
+                    const horita=hora+":"+min;
+                    setFecha(horita);
 
                     //console.log("q pasa", equipo1,equipo2,puntos1,puntos2,fechita);
-                    console.log("dia mes anio ",a);
+                    console.log(b);
+                    console.log("unu",hora,min);
                 }
                 
               } else {
