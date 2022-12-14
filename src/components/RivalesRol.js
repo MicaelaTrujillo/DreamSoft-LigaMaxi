@@ -16,23 +16,21 @@ function RivalesRol({partido, registrado, equipo1, equipo2, puntos1, puntos2}){
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 //console.log("Document data:", docSnap.data());
-                if(docSnap.data().PuntosR){
                     var a= docSnap.data().FechaHora.toDate();
                     var b=new Date(a);
                     const year= b.getFullYear();
                     var mes= b.getMonth()+1;
                     var dia= b.getDate();
-                    var hora= b.getUTCHours();
-                    var min= b.getUTCMinutes();
-                    //if(dia <=9){dia="0"+dia};
-                    //if(mes <=9){mes="0"+mes};
+                    var hora= b.getHours();
+                    var min= b.getMinutes();
+                    if(hora <=9){hora="0"+hora};
+                    if(min <=9){min="0"+min};
                     //const fechita= dia+"/"+mes+"/"+year;
                     const horita=hora+":"+min;
                     setFecha(horita);
 
                     //console.log("q pasa", equipo1,equipo2,puntos1,puntos2,fechita);
-                    console.log(b);
-                    console.log("unu",hora,min);
+                    console.log("dia mes anio ",a);
                 }
                 
               } else {
