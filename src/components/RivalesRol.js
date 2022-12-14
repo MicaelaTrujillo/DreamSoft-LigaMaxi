@@ -31,7 +31,7 @@ function RivalesRol({partido, registrado, equipo1, equipo2, puntos1, puntos2}){
 
                     //console.log("q pasa", equipo1,equipo2,puntos1,puntos2,fechita);
                     console.log("dia mes anio ",a);
-                }
+                
                 
               } else {
                 // doc.data() will be undefined in this case
