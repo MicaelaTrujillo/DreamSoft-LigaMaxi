@@ -11,6 +11,7 @@ import InformacionJugador from "./pages/InformacionJugador";
 import CredencialJugador from "./pages/CredencialJugador";
 import TablaDePosiciones from "./pages/TablaDePosiciones";
 
+
 import FormularioPlanilla from "./pages/FormularioPlanilla";
 import FormularioFaltas from "./pages/FormularioFaltas";
 import FormularioAnotaciones from "./pages/FormularioAnotaciones";

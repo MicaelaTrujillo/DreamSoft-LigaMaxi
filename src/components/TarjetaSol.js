@@ -52,9 +52,9 @@ function TarjetaSol(props){
         :
             props.habilitado?
                 props.inscrito?
-                <Button className="botonVerInfo" variant="primary" disabled>Inscrito</Button>
+                <Button className="botonVerInfo" disabled>Inscrito</Button>
                 :
-                <Link to={`/Inscripciones/FormularioInscripcion/${props.name}/${props.categoria}`}><Button className="botonVerInfo">Inscribir</Button></Link>
+                <Link to={`/Inscripciones/FormularioInscripcion/${props.name}/${props.categoria}`}><Button className="botonVerInfo" btn-primary >Inscribir</Button></Link>
 
             :
             <Button className="botonHabilitado"  disabled>Inhabilitado</Button>
