@@ -11,6 +11,7 @@ import InformacionJugador from "./pages/InformacionJugador";
 import CredencialJugador from "./pages/CredencialJugador";
 import TablaDePosiciones from "./pages/TablaDePosiciones";
 
+
 import FormularioPlanilla from "./pages/FormularioPlanilla";
 import FormularioFaltas from "./pages/FormularioFaltas";
 import FormularioAnotaciones from "./pages/FormularioAnotaciones";
@@ -38,7 +39,7 @@ function App() {
           <Route path="/InformacionEquipo/:equipo" element={<InformacionEquipo/>}></Route>
           <Route path="/InformacionJugador/:equipo/:jugador" element={<InformacionJugador/>}></Route>
           <Route path="/TablaDePosiciones" element={<TablaDePosiciones/>}></Route> 
-                   
+                  
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
              <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>

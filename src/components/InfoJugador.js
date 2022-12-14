@@ -5,11 +5,13 @@ import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/fir
 import {Link} from 'react-router-dom'
 import "../styles sheet/infoEquipo.css";
 import { UserContext } from '../context/userProvider';
+import { GetRolUser } from "../utyls/getRolUser";
 import { useContext } from 'react';
 
 
 function InfoJugador({nombreE, nombreJ} ){
     const {user} = useContext(UserContext);
+    const userRol = GetRolUser(user);
     var nomJ="";
     var alt="";
     var pes="";
@@ -60,7 +62,18 @@ function InfoJugador({nombreE, nombreJ} ){
         setCi(ci)
         setFecNac(fecNac)
         setAnota(anot)
-        setFalta(fal)
+        if(anot!=null){
+            setAnota(anot)
+        }else{
+            setAnota(0)
+        }
+
+        if(fal!=null){
+            setFalta(fal)
+        }else{
+            setFalta(0)
+        }
+        
         setFoto(fotO)
         //console.log("Si daaaaaa", nomJ);
       }
@@ -126,7 +139,7 @@ return (
             
             <p></p>
             <>
-            {user? 
+            {userRol==='Administrador' || userRol==='Delegado'?   
             <Button
                 className='botonCred'
                 onClick="">

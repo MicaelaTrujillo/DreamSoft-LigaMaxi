@@ -100,6 +100,8 @@
     align-items: right !important;
     cursor: pointer;
     width: max-content;
+    margin:0 !important;
+    padding: 0;
     justify-content: end !important;
     align-content: end !important;
     font-weight: 450!important;
@@ -130,5 +132,14 @@
         font-weight: 400!important;
         font-size: 1rem !important;
     }
+
+    .botonVerInfo{
+        
+        font-size: 1.10rem !important;
+    }
+    .botonHabilitado{
+        
+        font-size: 1.10rem !important;
+    }    
     
 }
