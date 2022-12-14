@@ -519,5 +519,105 @@ function FormPuntaje({label, placeholder, estado, cambiarEstado, expresionRegula
     )
 }
 
-export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen,FormPuntaje}
+function FormFechaPartidos({label,estado, cambiarEstado,fMin,fMax}){
+   
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+    }
+    const fCampo = new Date(estado.campo);
+    const fechaActual = Date.now();  
+    const hoy= new Date (fechaActual);
+    const fechaCat=categoria.slice(0,-5);
+
+    let catEnMili= 1000*60*60*24*365*fechaCat;
+    var fechaRest = fechaActual-catEnMili;
+    
+
+    let cincoAEnMili= 1000*60*60*24*365*5;
+
+    var fechaCampoMili    = fCampo-0;
+
+    var f1= new Date(fechaRest);
+    var fn= new Date(fechaRest-cincoAEnMili);
+    var f2= new Date(fechaCampoMili);
+    //const fa= new Date(fMin);
+    //const fb= new Date(fMax);
+    const fM= f1.toISOString();   
+    return(
+        <Form.Group className="mb-4 d-block">
+            <Form.Label className="w-100 text-start">{label}</Form.Label>
+            <Form.Control className="form-control" type="datetime-local"value={estado.campo} max={fMax} min={fMin}
+                onChange={onChange}
+            />
+        </Form.Group>
+    )
+}
+
+function FormComboBoxEquipo1({label,arreglo, estado, cambiarEstado,actEquipo1}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+        //  console.log(e.target.value)
+        actEquipo1(e.target.value);
+    }
+
+    return(
+        <Form.Group className="mb-3 d-block">
+        <Form.Label className="w-100 text-start">{label}</Form.Label>
+        <Form.Select
+            value={estado.campo}
+            onChange={onChange}
+        >
+          {arreglo.map(dato => (
+            <option key={dato.toString()}>{dato}</option>
+          ) )}
+        </Form.Select>
+      </Form.Group>
+    )
+}
+
+function FormComboBoxEquipo2({label,arreglo, estado, cambiarEstado,actEquipo2}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+        //  console.log(e.target.value)
+        actEquipo2(e.target.value);
+    }
+
+    return(
+        <Form.Group className="mb-3 d-block">
+        <Form.Label className="w-100 text-start">{label}</Form.Label>
+        <Form.Select
+            value={estado.campo}
+            onChange={onChange}
+        >
+          {arreglo.map(dato => (
+            <option key={dato.toString()}>{dato}</option>
+          ) )}
+        </Form.Select>
+      </Form.Group>
+    )
+}
+
+function FormComboBoxPartidos({label,arreglo, estado, cambiarEstado,actualizar}){
+    const onChange = (e) => {
+        cambiarEstado({...estado, campo: e.target.value});
+        // console.log(e.target.value)
+        actualizar(e.target.value);
+    }
+
+    return(
+        <Form.Group className="mb-3 d-block">
+        <Form.Label className="w-100 text-start">{label}</Form.Label>
+        <Form.Select
+            value={estado.campo}
+            onChange={onChange}
+        >
+          {arreglo.map(dato => (
+            <option key={dato.toString()}>{dato}</option>
+          ) )}
+        </Form.Select>
+      </Form.Group>
+    )
+}
+    
+export {FormInputs,FormInputs2,FormInputs3,FormInputs4,FormInputs5,FormInputs6, FormComboBox, FormQR, FormArchivo, Boton, FormContraseña,AleFinal,FormInputSinCambioEst, FormFecha,FormFecha2,LabelForm, FormImagen,FormPuntaje,FormFechaPartidos,FormComboBoxEquipo1,FormComboBoxEquipo2,FormComboBoxPartidos}
 

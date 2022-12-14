@@ -21,7 +21,10 @@ const routes={
             name: 'Campeonato',
             path: '/FormularioCampeonato'
         },
-        
+        {
+            name: 'Partidos',
+            path: '/Partidos'
+        },
         
     ],
     Delegado:[
