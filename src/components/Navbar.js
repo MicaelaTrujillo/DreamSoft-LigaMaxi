@@ -21,7 +21,10 @@ const routes={
             name: 'Campeonato',
             path: '/FormularioCampeonato'
         },
-        
+        {
+            name: 'Partidos',
+            path: '/Partidos'
+        },
         
     ],
     Delegado:[
@@ -69,6 +72,10 @@ function Navbar (){
                 <div className='contenedor-texto navbar-texto'>   
                 <nav>
                     <Link to="/PlanillaPartidos">Planillas</Link>
+                </nav>          
+                </div>                <div className='contenedor-texto navbar-texto'>   
+                <nav>
+                    <Link to="/RolPartidos">Rol de Partidos</Link>
                 </nav>          
                 </div>
                 {user? 

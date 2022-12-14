@@ -25,7 +25,8 @@ import { useContext } from 'react';
 import { GetRolUser } from "../src/utyls/getRolUser";
 import VistaInscripcion from "./pages/VistaInscripcion";
 import PlanillaPartidos from "./pages/PlanillaPartidos";
-
+import Partidos from "./pages/Partidos";
+import RolPartidos from "./pages/RolPartidos";
 function App() {
   const {user} = useContext(UserContext);
   const userRol = GetRolUser(user);
@@ -39,7 +40,7 @@ function App() {
           <Route path="/InformacionJugador/:equipo/:jugador" element={<InformacionJugador/>}></Route>
           <Route path="/TablaDePosiciones" element={<TablaDePosiciones/>}></Route> 
           <Route exact path='/PlanillaPartidos' element={<PlanillaPartidos/>}/>
-                   
+          <Route path="/RolPartidos" element={<RolPartidos/>}></Route>         
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
              <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
@@ -54,6 +55,7 @@ function App() {
           <Route element={<PrivateRoute isAllowed={!!user && userRol==="Administrador"}/>}>
             <Route exact path='/Solicitudes' element={<Solicitudes/>}/>
             <Route path="/FormularioCampeonato" element={<FormularioCampeonato/>}></Route>
+            <Route exact path='/Partidos' element={<Partidos/>}/>
           </Route>
 
           <Route element={<PrivateRoute isAllowed={!!user && userRol==="Apuntador"}/>}>
@@ -62,6 +64,7 @@ function App() {
             <Route path="/FormularioPlanilla/:partido/:equipoA/:equipoB" element={<FormularioPlanilla/>}></Route>
             <Route path="/FormularioFaltas/:equipoA/:equipoB/:partido" element={<FormularioFaltas/>}></Route>
             <Route path="/FormularioAnotaciones/:equipoA/:equipoB/:partido" element={<FormularioAnotaciones/>}></Route>
+            
           </Route>
           
         </Routes>
