@@ -66,6 +66,7 @@ function Navbar (){
                     <Link to="/TablaDePosiciones">Tabla de posiciones</Link>
                 </nav>          
                 </div>
+        
                 <div className='contenedor-texto navbar-texto'>   
                 <nav>
                     <Link to="/PlanillaPartidos">Planillas</Link>

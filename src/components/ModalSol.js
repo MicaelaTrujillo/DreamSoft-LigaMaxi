@@ -17,7 +17,6 @@ function ModalSol(props){
           //window.location.reload(true);
     }
 
-    console.log("fechitas", props.nombre, dias[props.fecha.toDate().getDay()]+", " +props.fecha.toDate().getDate()+" de "+ meses[props.fecha.toDate().getMonth()]);
     
     return (
         <Modal

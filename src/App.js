@@ -25,6 +25,8 @@ import { useContext } from 'react';
 import { GetRolUser } from "../src/utyls/getRolUser";
 import VistaInscripcion from "./pages/VistaInscripcion";
 import PlanillaPartidos from "./pages/PlanillaPartidos";
+import ReporteFaltas from "./pages/ReporteFaltas";
+import ReporteAnotaciones from "./pages/ReporteAnotaciones";
 
 function App() {
   const {user} = useContext(UserContext);
@@ -39,6 +41,9 @@ function App() {
           <Route path="/InformacionJugador/:equipo/:jugador" element={<InformacionJugador/>}></Route>
           <Route path="/TablaDePosiciones" element={<TablaDePosiciones/>}></Route> 
           <Route exact path='/PlanillaPartidos' element={<PlanillaPartidos/>}/>
+          <Route exact path='/Reportes' element={<ReporteFaltas/>}/>
+          <Route exact path='/Reportes/Faltas' element={<ReporteFaltas/>}/>
+          <Route exact path='/Reportes/Anotaciones' element={<ReporteAnotaciones/>}/>
                    
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
