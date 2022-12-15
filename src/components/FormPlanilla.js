@@ -320,11 +320,9 @@ return(
                             <Boton 
                                 texto='Guardar'
                                 manejarClic={onSubmit}
-                                enlace={enlaceForm3}
+                                enlace={enlaceForm}
                                 />
                     </div>
-
-
 
                 </Form>
         </div>
