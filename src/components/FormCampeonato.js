@@ -1,5 +1,5 @@
 
-import {FormInputs, Boton, FormArchivo, FormFecha, FormImagen,FormInputSinCambioEst} from '../Elementos/ElementosForms'
+import {FormInputs, Boton, FormArchivo, FormFecha, FormImagen,FormInputSinCambioEst, FormInputs2,FormInputs3} from '../Elementos/ElementosForms'
 import Form from "react-bootstrap/Form";
 import { useState, useEffect } from 'react';
 
@@ -34,7 +34,8 @@ function FormCampeonato() {
     const expresiones = {
         nombre: /^[a-zA-ZÀ-ÿ0-9\s]{5,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
         version: /^[0-9\s]{1,40}$/,
-        categoria: /^[0-9\s]{2}$/,
+        categoria: /^[a-zA-ZÀ-ÿ0-9\s]{6,100}$/,
+        cat: /^[a-zA-ZÀ-ÿ0-9-,\s]{6,100}$/
     }
     
     const [nombre, cambiarNombre] = useState({campo: "", valido: null});
@@ -331,7 +332,7 @@ console.log(("30,40,50").split (","));
                             value = {nombre.campo}
                              
                         />
-                        <FormInputs
+                        <FormInputs2
                             label="Versión: "
                             placeholder="Ingrese la versión del campeonato"
                             estado={version}
@@ -343,29 +344,18 @@ console.log(("30,40,50").split (","));
                              
                         />
 
-                        <FormInputs
+                        <FormInputs3
                             label="Categoría: (Debe ingresar las categorías separadas por una coma. Ej: 30 años,40 años,50 años...) "
                             placeholder="Ej: 30 años,40 años,50 años"
                             estado={categoria}
                             cambiarEstado={cambiarCategoria} 
-                            expresionRegular = {""}  
-                            alerta="Debe ingresar solo números"
+                            expresionRegular = {expresiones.cat}  
+                            alerta="Debe seguir el formato"
                             id="1"
                             value = {categoria.campo}
                              
                         />
-                        <FormFecha
-                            label="Fecha de inicio del campeonato: "
-                            value = {fecIni.campo}
-                            estado = {fecIni}
-                            cambiarEstado = {cambiarFecIni}
-                        />
-                        <FormFecha
-                            label="Fecha de fin del campeonato: "
-                            value = {fecFin.campo}
-                            estado = {fecFin}
-                            cambiarEstado = {cambiarFecFin}
-                        />
+                        
                         <FormFecha
                             label="Fecha inicio pre-inscripción: "
                             value = {fecIniConvoc.campo}
@@ -401,6 +391,18 @@ console.log(("30,40,50").split (","));
                         />
                         <FormImagen
                             imagen = {qr2.campo}
+                        />
+                        <FormFecha
+                            label="Fecha de inicio del campeonato: "
+                            value = {fecIni.campo}
+                            estado = {fecIni}
+                            cambiarEstado = {cambiarFecIni}
+                        />
+                        <FormFecha
+                            label="Fecha de fin del campeonato: "
+                            value = {fecFin.campo}
+                            estado = {fecFin}
+                            cambiarEstado = {cambiarFecFin}
                         />
                         <FormArchivo
                             archivo="Invitación pública: "

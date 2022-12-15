@@ -20,7 +20,9 @@ a  {
     color: #ffff !important;
     text-decoration: none !important;
 }
-
+.color{
+    color: rgb(0, 0, 0) !important;
+}
 .contenedor-navbar{
     display: flex;
     align-items: center;

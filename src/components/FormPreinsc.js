@@ -109,11 +109,13 @@ function FormPreinsc() {
           console.log("imagen2");
           qrGenerado = imagen2;
         } else {
+            if(fecha > limiteInscrip || fecha < fechaIniConvocatoria){
             const root = ReactDOM.createRoot(
                 document.getElementById('contenedor')
               );
               const element = <h1 className="col-4 ">Está fuera de la fecha de pre inscripción de equipos para el campeonato.</h1>;
               root.render(element);
+            }
         }
       }
       setstringImage(qrGenerado)

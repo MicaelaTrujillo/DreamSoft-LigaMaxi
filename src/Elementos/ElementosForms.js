@@ -323,11 +323,11 @@ function FormInputs5({label, placeholder, estado, cambiarEstado, expresionRegula
                     console.log("correcto")
                     res5='w-100  text-start alertaBien'+id
                     cambiarEstado({...estado,valido:'true'})
-                } 
-            }else{
-                console.log("incorrecto")
-                res5='w-100 text-start alertaMal'+id
-                cambiarEstado({...estado,valido:'false'})
+                }else{
+                    console.log("incorrecto")
+                    res5='w-100 text-start alertaMal'+id
+                    cambiarEstado({...estado,valido:'false'}) 
+                }
             }
         }
     }

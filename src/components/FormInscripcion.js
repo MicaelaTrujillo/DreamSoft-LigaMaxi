@@ -98,7 +98,7 @@ var enlaceForm=""
     }, []);
 
     return (
-        <div className="row cont-main-form mt-2 mb-2 mx-0">
+        <div className="row cont-main-form mt-2 mb-2 mx-0" id='contenedor'>
             
                 <Form className="form text-center container col-8 ">
                     <h3 className="mb-5 mt-3">FORMULARIO DE INSCRIPCIÓN</h3>
