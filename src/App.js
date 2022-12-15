@@ -28,6 +28,9 @@ import VistaInscripcion from "./pages/VistaInscripcion";
 import PlanillaPartidos from "./pages/PlanillaPartidos";
 import Partidos from "./pages/Partidos";
 import RolPartidos from "./pages/RolPartidos";
+import ReporteFaltas from "./pages/ReporteFaltas";
+import ReporteAnotaciones from "./pages/ReporteAnotaciones";
+
 function App() {
   const {user} = useContext(UserContext);
   const userRol = GetRolUser(user);
@@ -41,7 +44,7 @@ function App() {
           <Route path="/InformacionJugador/:equipo/:jugador" element={<InformacionJugador/>}></Route>
           <Route path="/TablaDePosiciones" element={<TablaDePosiciones/>}></Route> 
           <Route exact path='/PlanillaPartidos' element={<PlanillaPartidos/>}/>
-          <Route path="/RolPartidos" element={<RolPartidos/>}></Route>         
+                   
           <Route element={<PrivateRoute isAllowed={!!user}/>}>
              <Route path="/FormularioPreInscripcion" element={<FormularioPreInscripcion/>} />
              <Route path="/FormularioInscripcion" element={<FormularioInscripcion/>}></Route>
