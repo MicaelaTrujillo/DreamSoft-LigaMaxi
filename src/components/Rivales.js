@@ -45,7 +45,7 @@ function Rivales({partido, registrado, equipo1, equipo2, puntos1, puntos2}){
                 <h2 className="text right"> {equipo2}</h2> 
             </div>
             {
-                puntosR?
+                registrado?
                 <>
                 <div className="container-points raw">
                 <h2 className="text"> {p1}</h2> 
