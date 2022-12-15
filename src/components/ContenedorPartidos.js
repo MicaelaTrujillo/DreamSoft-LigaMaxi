@@ -95,6 +95,7 @@ function ContenedorPartidos(props){
       //console.log("catego",categorias);
     });
     setCateg(categorias)
+    
   }
   
   cat()
@@ -126,7 +127,7 @@ const fechaActual = Date.now();
 const fasd= new Date(fechaActual);
 const fechaCat=fasd.toISOString();
 console.log("asd",fechaCat);
-fecha.campo=fechaCat;
+//fecha.campo=fechaCat;
 console.log("aaaaa",fecha.campo);
 
     return(
