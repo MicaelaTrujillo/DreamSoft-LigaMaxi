@@ -66,8 +66,8 @@ function Navbar (){
                 <div className='contenedor-texto navbar-texto'>   
                 <NavDropdown title="Reportes" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1"><Link to="/TablaDePosiciones" className='color'>Tabla de posiciones</Link></NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2"><Link to="/TablaDePosiciones" className='color'>Faltas</Link></NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3"><Link to="/TablaDePosiciones" className='color'>Anotaciones</Link></NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2"><Link to="/Reportes/Faltas" className='color'>Faltas</Link></NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.3"><Link to="/Reportes/Anotaciones" className='color'>Anotaciones</Link></NavDropdown.Item>
                 </NavDropdown>
                   </div>
                 
