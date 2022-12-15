@@ -40,6 +40,8 @@ function FormPlanilla({id, equipo1, equipo2}){
     var puntosAF2 = 0
     var puntosEC2 = 0
 
+    var pGan = 0
+    var pPer=0
     async function onSubmit(e){
         e.preventDefault();
         console.log("puntos", puntosA,puntosB)
@@ -47,6 +49,8 @@ function FormPlanilla({id, equipo1, equipo2}){
             console.log("es mayor")
             finalPartidoG = equipoA
             finalPartidoP = equipoB
+            pGan = puntosA.campo
+            pPer = puntosB.campo
             cambiarGanador({campo: equipoA})
             cambiarPerdedor({campo: equipoB})
             console.log(ganador.campo,perdedor.campo)
@@ -55,6 +59,8 @@ function FormPlanilla({id, equipo1, equipo2}){
             if(puntosA.campo < puntosB.campo){
                 finalPartidoG = equipoB
             finalPartidoP = equipoA
+            pGan = puntosB.campo
+            pPer = puntosA.campo
                 cambiarGanador({campo: equipoB})
                 cambiarPerdedor({campo: equipoA})
             }else{
@@ -111,8 +117,8 @@ console.log(finalPartidoG, finalPartidoP)
 
         if (docSnap.exists()) {
             PG1 = parseInt(docSnap.data().PGanados) + parseInt(1)
-            puntosAF1 = parseInt(docSnap.data().pAFavor) + parseInt(puntosA.campo)
-            puntosEC1 = parseInt(docSnap.data().pEContra) + parseInt(puntosB.campo)
+            puntosAF1 = parseInt(docSnap.data().pAFavor) + parseInt(pGan)
+            puntosEC1 = parseInt(docSnap.data().pEContra) + parseInt(pPer)
 
             await updateDoc(docRef, {
                 PGanados: PG1,
@@ -130,8 +136,8 @@ console.log(finalPartidoG, finalPartidoP)
 
         if (docSnap2.exists()) {
             PP2 = parseInt(docSnap2.data().PPerdidos) + parseInt(1)
-            puntosAF2 = parseInt(docSnap2.data().pAFavor) + parseInt(puntosB.campo)
-            puntosEC2 = parseInt(docSnap2.data().pEContra) + parseInt(puntosA.campo)
+            puntosAF2 = parseInt(docSnap2.data().pAFavor) + parseInt(pPer)
+            puntosEC2 = parseInt(docSnap2.data().pEContra) + parseInt(pGan)
 
             await updateDoc(docRef2, {
                 PPerdidos: PP2,

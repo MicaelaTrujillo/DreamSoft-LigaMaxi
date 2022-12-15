@@ -38,7 +38,7 @@ var enlaceForm=""
                 })
     }
     var enlaceFom2 =""
-    if(contador < 5){
+    if(contador < 3){
         enlaceFom2 = "/Inscripciones/FormularioInscripcion/"+ nombre + "/" + categoria
     }else{
         enlaceFom2 = "/Inscripciones"
@@ -46,7 +46,7 @@ var enlaceForm=""
     async function onSubmit2(e){
         e.preventDefault();
         console.log("onsubmit2")
-        if(contador < 5){
+        if(contador < 3){
             alert("Debe registrar al menos a 5 jugadores.")
         }else{
             await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", nombre), {

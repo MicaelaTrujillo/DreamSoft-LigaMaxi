@@ -214,12 +214,15 @@ const validar = (e) =>{
             <div className='botones'>
               <Boton 
                 texto='Cancelar'
-                
-                manejarClic={manejarClic2}/>
+                manejarClic={""}
+                enlace="/"
+                />
 
               <Boton type='submit'
                 texto='Registrar'
-                manejarClic={onSubmit}/>
+                manejarClic={onSubmit}
+                enlace="/"
+                />
             </div>
         </div>
       </div>

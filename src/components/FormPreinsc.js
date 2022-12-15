@@ -317,6 +317,7 @@ function FormPreinsc() {
                             <Boton 
                                 texto='Enviar'
                                 manejarClic={onSubmit}
+                                enlace="/"
                                 />
                     </div>
                 </Form>
