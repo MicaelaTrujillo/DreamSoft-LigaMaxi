@@ -78,7 +78,11 @@ const validar = (e) =>{
         Peso: peso.campo,
         Correo: correo.campo,
         CI: ci.campo,
-        FNac: fechaNac
+        FNac: fechaNac,
+        NumFaltas: 0,
+        NumAnotaciones: 0,
+        Categoria: equipo.categoria,
+        Equipo: equipo.equipo
         })
 
         alert("Jugador añadido exitosamente.")

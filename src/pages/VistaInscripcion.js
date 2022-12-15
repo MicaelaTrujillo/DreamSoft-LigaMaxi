@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 function VistaInscripcion (){
     const fecha = new Date();
     const [limite, setlimite] = useState('');
+    const [inicio, setinicio] = useState('');
     useEffect(() => {
     async function obtenerFecha() {
   
@@ -19,6 +20,7 @@ function VistaInscripcion (){
         if (docSnap.exists()) {
          
           setlimite(docSnap.data().LimiteInscrip.toDate());
+          setinicio(docSnap.data().FechaIniConvocatoria.toDate());
          
           // console.log(fechaIniConvocatoria,limitePreInsc,limiteInscrip)
         } else {
@@ -36,7 +38,7 @@ function VistaInscripcion (){
     return (
         <div>
             <HomePage/>
-            {fecha > limite ?
+            {fecha > limite || fecha < inicio?
             <div id="contenedor" className="row cont-main-form mt-5 mb-5 mx-0">
             <h1 className="col-4 ">Está fuera de la fecha de inscripción de equipos para el campeonato.</h1>
             </div>

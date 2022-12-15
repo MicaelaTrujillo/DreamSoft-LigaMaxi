@@ -1,5 +1,5 @@
 
-import {FormInputs, Boton, FormArchivo, FormFecha, FormImagen} from '../Elementos/ElementosForms'
+import {FormInputs, Boton, FormArchivo, FormFecha, FormImagen,FormInputSinCambioEst, FormInputs2,FormInputs3} from '../Elementos/ElementosForms'
 import Form from "react-bootstrap/Form";
 import { useState, useEffect } from 'react';
 
@@ -21,6 +21,7 @@ function FormCampeonato() {
     var invitacion = "";
     var imagen1 = "";
     var imagen2 = "";
+    var categ = "";
 
 
     var fechaInicio2 = "";
@@ -33,6 +34,8 @@ function FormCampeonato() {
     const expresiones = {
         nombre: /^[a-zA-ZÀ-ÿ0-9\s]{5,40}$/, // Letras, numeros y espacios, pueden llevar acentos.
         version: /^[0-9\s]{1,40}$/,
+        categoria: /^[a-zA-ZÀ-ÿ0-9\s]{6,100}$/,
+        cat: /^[a-zA-ZÀ-ÿ0-9-,\s]{6,100}$/
     }
     
     const [nombre, cambiarNombre] = useState({campo: "", valido: null});
@@ -45,7 +48,7 @@ function FormCampeonato() {
     const [qr1, cambiarQR1] = useState({campo: ""});
     const [qr2, cambiarQR2] = useState({campo: ""});
     const [invitacionPub, cambiarInvitacionPub] = useState({campo: ""});
-
+    const [categoria, cambiarCategoria] = useState({campo: "", valido: null});
     const [stringImage, setstringImage] = useState('');
   useEffect(() => {
     async function obtenerDatos() {
@@ -74,7 +77,10 @@ function FormCampeonato() {
           invitacion = docSnap.data().Invitacion;
           imagen1 = docSnap.data().qr1;
           imagen2 = docSnap.data().qr2;
-       
+          categ = docSnap.data().Categorias;
+       console.log("cat", categ)
+        categUnion = categ.toString() 
+        console.log("separadito",categUnion.split(","))
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -89,6 +95,7 @@ function FormCampeonato() {
        cambiarQR1({campo:imagen1})
        cambiarQR2({campo:imagen2})
        cambiarInvitacionPub({campo:invitacion})
+       cambiarCategoria({campo:categUnion})
         /*var qrGenerado = "";
         if (fecha >= fechaIniConvocatoria && fecha <= limitePreInsc) {
           console.log("imagen1");
@@ -120,23 +127,24 @@ function FormCampeonato() {
         validarFechas()
     }
 
-
     function validarFechas(){
-        
+        //categoria
+        var arreglo = categoria.campo.split (",")
+        console.log(arreglo) 
         //cambiarFecIni({campo:Date.parse(fecIni.campo)})
         fechaInicio2 = new Date(fecIni.campo)
         fechaFin2 = new Date(fecFin.campo)
         fechaIniConvocatoria2 = new Date(fecIniConvoc.campo)
         limitePreInsc2 = new Date(limPreInsc.campo)
         limiteInscrip2 = new Date(limInsc.campo)
-        var fechaFinalLimite = fechaInicio2
-        fechaFinalLimite = new Date(fechaFinalLimite.setDate(fechaFinalLimite.getDate() + 10))
-        console.log(fechaFinalLimite)
-            if(fechaIniConvocatoria2 > fechaActual || fechaIniConvocatoria2 < limitePreInsc2){
+       // var fechaFinalLimite = fechaInicio2
+       // fechaFinalLimite = new Date(fechaFinalLimite.setDate(fechaFinalLimite.getDate() + 10))
+        console.log(fechaIniConvocatoria2, limitePreInsc2, limiteInscrip2,fechaInicio2,fechaFin2)
+            if(fechaIniConvocatoria2 > fechaActual && fechaIniConvocatoria2 < limitePreInsc2){
                 if(limitePreInsc2 > fechaIniConvocatoria2){
                     if(limiteInscrip2 > limitePreInsc2){
                         if(fechaInicio2 > limiteInscrip2){
-                            if(fechaFin2 > fechaInicio2 && fechaFin2 <= fechaFinalLimite){
+                            if(fechaFin2 > fechaInicio2){
                                 updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf"), {
                                     NombreCampeonato: nombre.campo,
                                     Version: version.campo,
@@ -144,7 +152,8 @@ function FormCampeonato() {
                                     FechaFin: fechaFin2,
                                     FechaIniConvocatoria: fechaIniConvocatoria2,
                                     LimitePreInsc: limitePreInsc2,
-                                    LimiteInscrip: limiteInscrip2
+                                    LimiteInscrip: limiteInscrip2,
+                                    Categorias: arreglo
                                     });
                                     alert("Cambios guardados exitosamente.")
                             }else{
@@ -299,7 +308,14 @@ function FormCampeonato() {
         uploadQR1()
         uploadQR2()
         uploadInvPub()
-
+        var categUnion = ""
+        /*const [categoria, cambiarCategoria] = useState({campo: "", valido: null});
+        for(var i = 0; i < categ.length; i++){
+            categUnion = categUnion + categ[i]
+            console.log("union", categUnion)
+           // cambiarCategoria({campo: categUnion})
+        }*/
+console.log(("30,40,50").split (","));
     return (
         <div className="row cont-main-form mt-5 mb-5 mx-0">
             
@@ -316,7 +332,7 @@ function FormCampeonato() {
                             value = {nombre.campo}
                              
                         />
-                        <FormInputs
+                        <FormInputs2
                             label="Versión: "
                             placeholder="Ingrese la versión del campeonato"
                             estado={version}
@@ -327,18 +343,19 @@ function FormCampeonato() {
                             value = {version.campo}
                              
                         />
-                        <FormFecha
-                            label="Fecha de inicio del campeonato: "
-                            value = {fecIni.campo}
-                            estado = {fecIni}
-                            cambiarEstado = {cambiarFecIni}
+
+                        <FormInputs3
+                            label="Categoría: (Debe ingresar las categorías separadas por una coma. Ej: 30 años,40 años,50 años...) "
+                            placeholder="Ej: 30 años,40 años,50 años"
+                            estado={categoria}
+                            cambiarEstado={cambiarCategoria} 
+                            expresionRegular = {expresiones.cat}  
+                            alerta="Debe seguir el formato"
+                            id="1"
+                            value = {categoria.campo}
+                             
                         />
-                        <FormFecha
-                            label="Fecha de fin del campeonato: "
-                            value = {fecFin.campo}
-                            estado = {fecFin}
-                            cambiarEstado = {cambiarFecFin}
-                        />
+                        
                         <FormFecha
                             label="Fecha inicio pre-inscripción: "
                             value = {fecIniConvoc.campo}
@@ -375,6 +392,18 @@ function FormCampeonato() {
                         <FormImagen
                             imagen = {qr2.campo}
                         />
+                        <FormFecha
+                            label="Fecha de inicio del campeonato: "
+                            value = {fecIni.campo}
+                            estado = {fecIni}
+                            cambiarEstado = {cambiarFecIni}
+                        />
+                        <FormFecha
+                            label="Fecha de fin del campeonato: "
+                            value = {fecFin.campo}
+                            estado = {fecFin}
+                            cambiarEstado = {cambiarFecFin}
+                        />
                         <FormArchivo
                             archivo="Invitación pública: "
                             estado={invitacionPub}
@@ -386,11 +415,15 @@ function FormCampeonato() {
                         />
                         <div className='botones pb-4'>
                             <Boton 
-                                texto='Cancelar'/>
+                                texto='Cancelar'
+                                manejarClic={""}
+                                enlace="/"
+                                />
     
                             <Boton 
                                 texto='Guardar'
                                 manejarClic={onSubmit}
+                                enlace="/"
                                 />
                     </div>
                 </Form>

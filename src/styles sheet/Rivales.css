@@ -1,0 +1,42 @@
+.conteiner{
+    display: flex;
+}
+
+.container-text{
+    padding: 6px;
+    background-color: #FFFF;
+    border: 1rem;
+    text-align: start;
+    border: 1px solid #000;
+    width: 70%;
+    margin: 11px;
+    display: flex;
+}
+
+.container-points{
+    padding: 6px;
+    background-color: #FFFF;
+    border: 1rem;
+    border: 1px solid #000;
+    width: 15% ;
+    margin: 11px;
+    display: flex;
+    text-align: right;
+    
+}
+.raw{
+    width:15% ;
+}
+.text{
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 5px;
+    width: 80% !important;
+}
+
+.text.right{
+    text-align: right;
+}
+.text.center{
+    text-align:center;
+}

@@ -4,9 +4,14 @@ import { db } from "../Firebase/ConexionBD";
 import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/firestore";
 import {Link} from 'react-router-dom'
 import "../styles sheet/infoEquipo.css";
+import { UserContext } from '../context/userProvider';
+import { GetRolUser } from "../utyls/getRolUser";
+import { useContext } from 'react';
 
 
 function InfoJugador({nombreE, nombreJ} ){
+    const {user} = useContext(UserContext);
+    const userRol = GetRolUser(user);
     var nomJ="";
     var alt="";
     var pes="";
@@ -14,13 +19,18 @@ function InfoJugador({nombreE, nombreJ} ){
     var ci="";
     var fecNac="";
     var fotO="";
+    var fal="";
+    var anot="";
     const [nombreJug, setNomJ] = useState([]);
     const [altura, setAlt] = useState([]);
     const [peso, setPeso] = useState([]);
     const [correo, setCorreo] = useState([]);
     const [carnet, setCi] = useState([]);
     const [fechaNac, setFecNac] = useState([]);
+    const [faltas, setFalta] = useState([]);
+    const [anota, setAnota] = useState([]);
     const [foto, setFoto] = useState([]);
+
     useEffect(() => {
       async function obtenerDatos() {
         const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", nombreE,"Jugadores",nombreJ);
@@ -37,7 +47,8 @@ function InfoJugador({nombreE, nombreJ} ){
             //fecNac=(fecNac.getFullYear() + "-" + (fecNac.getMonth()+1 > 9? fecNac.getMonth()+1: "0" + (fecNac.getMonth()+1)) + "-" + (fecNac.getDate() > 9? fecNac.getDate(): "0" + fecNac.getDate()) + " "+ fecNac.toLocaleTimeString()).toString()
             //Formato empieza dia
             fecNac=((fecNac.getDate() > 9? fecNac.getDate(): "0" + fecNac.getDate())+ "/" + (fecNac.getMonth()+1 > 9? fecNac.getMonth()+1: "0" + (fecNac.getMonth()+1)) + "/" + fecNac.getFullYear()  ).toString()
-            
+            anot=docSnap.data().NumAnotaciones;
+            fal=docSnap.data().NumFaltas;
             fotO=docSnap.data().Foto;
         } else {
           // doc.data() will be undefined in this case
@@ -50,6 +61,19 @@ function InfoJugador({nombreE, nombreJ} ){
         setCorreo(correO)
         setCi(ci)
         setFecNac(fecNac)
+        setAnota(anot)
+        if(anot!=null){
+            setAnota(anot)
+        }else{
+            setAnota(0)
+        }
+
+        if(fal!=null){
+            setFalta(fal)
+        }else{
+            setFalta(0)
+        }
+        
         setFoto(fotO)
         //console.log("Si daaaaaa", nomJ);
       }
@@ -97,6 +121,16 @@ return (
                 <h2 className="text"> {fechaNac} </h2> 
             </div>
 
+            <h2 className="nombre">Número de anotaciones: </h2>
+            <div className="container-text">
+                <h2 className="text"> {anota} </h2> 
+            </div>
+
+            <h2 className="nombre">Número de faltas:</h2>
+            <div className="container-text">
+                <h2 className="text"> {faltas} </h2> 
+            </div>
+
             <h2 className="nombre">Foto:</h2>
             <img 
                 className="fotoJug img-thumbnail mx-auto d-block "
@@ -104,11 +138,20 @@ return (
             />
             
             <p></p>
+            <>
+            {userRol==='Administrador' || userRol==='Delegado'?   
             <Button
                 className='botonCred'
                 onClick="">
                 <Link to={`/CredencialJugador/${nombreE}/${nombreJ}`} >Generar credencial</Link>
             </Button>
+            : <p></p>
+            }
+            </>
+            
+            
+            
+            
         </div>
     </div>
     

@@ -36,6 +36,7 @@ function TarjetaSol(props){
         data([])
         }, []);
 
+        //console.log("fechas en tarjeta sol", props.name, props.fecha);
         
     return (
         <>
@@ -51,16 +52,16 @@ function TarjetaSol(props){
         :
             props.habilitado?
                 props.inscrito?
-                <Button className="botonVerInfo" variant="primary" disabled>Inscrito</Button>
+                <Button className="botonVerInfo" disabled>Inscrito</Button>
                 :
-                <Link to={`/Inscripciones/FormularioInscripcion/${props.name}/${props.categoria}`}><Button className="botonVerInfo">Inscribir</Button></Link>
+                <Link to={`/Inscripciones/FormularioInscripcion/${props.name}/${props.categoria}`}><Button className="botonVerInfo" btn-primary >Inscribir</Button></Link>
 
             :
             <Button className="botonHabilitado"  disabled>Inhabilitado</Button>
         }
         </div>
 
-        <Modal show={modalShow} onHide={() => setModalShow(false)} deshabilitarBtn={()=> setHab(true)} nombre={props.name} categoria={props.categoria} imagen={props.imagen}/>
+        <Modal show={modalShow} onHide={() => setModalShow(false)} deshabilitarBtn={()=> setHab(true)} nombre={props.name} categoria={props.categoria} imagen={props.imagen} fecha={props.fecha}/>
         </>
         
     

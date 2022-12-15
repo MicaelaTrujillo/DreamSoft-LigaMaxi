@@ -38,7 +38,7 @@ var enlaceForm=""
                 })
     }
     var enlaceFom2 =""
-    if(contador < 5){
+    if(contador < 3){
         enlaceFom2 = "/Inscripciones/FormularioInscripcion/"+ nombre + "/" + categoria
     }else{
         enlaceFom2 = "/Inscripciones"
@@ -46,13 +46,18 @@ var enlaceForm=""
     async function onSubmit2(e){
         e.preventDefault();
         console.log("onsubmit2")
-        if(contador < 5){
+        if(contador < 3){
             alert("Debe registrar al menos a 5 jugadores.")
         }else{
             await setDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Equipos", nombre), {
                 NombreEquipo: nombre,
                 Categoria: categoria,
-                Entrenador: nombreEnt.campo
+                Entrenador: nombreEnt.campo,
+                PEmpatados: 0,
+                PGanados: 0,
+                PPerdidos:0,
+                pAFavor:0,
+                pEContra:0
             })
             await updateDoc(doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf", "Solicitudes", nombre), {
                 Inscrito: true
@@ -93,7 +98,7 @@ var enlaceForm=""
     }, []);
 
     return (
-        <div className="row cont-main-form mt-2 mb-2 mx-0">
+        <div className="row cont-main-form mt-2 mb-2 mx-0" id='contenedor'>
             
                 <Form className="form text-center container col-8 ">
                     <h3 className="mb-5 mt-3">FORMULARIO DE INSCRIPCIÓN</h3>
@@ -107,12 +112,16 @@ var enlaceForm=""
                              
                         />
 
-                        <div className='m-4 mt-0'>JUGADORES
+                        <div className='m-4'>JUGADORES
                             {
                                 jugadores.map((jugador) => (
-                                <div className="contenedor-tarjetaJugador">
-                                    <img src={jugador.Foto} width="45" height="45" className='text-start'/>
+                                <div className="cont-div-tarjeta">
+                                    <div className='w-25 text-start'>
+                                    <img src={jugador.Foto} width="45" height="45"/>
+                                    </div>
+                             
                                     <span className="nom-tarjeta">{jugador.nombreJugador}</span>
+                       
                                 </div>
                                 ))
                                             
@@ -144,7 +153,7 @@ var enlaceForm=""
                             <Boton 
                                 texto='Cancelar'
                                 manejarClic=""
-                                enlace = {enlaceFom2}
+                                enlace = "/Inscripciones"
                                 />
                                 
     

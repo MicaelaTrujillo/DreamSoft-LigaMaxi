@@ -1,0 +1,44 @@
+.main-inf3{
+    width: 85% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    margin-left: 30% !important;
+    margin-right: 30% !important;
+    padding-bottom: 0;
+}
+
+.contenedor-Info3{
+    margin: 0;
+    background-color: #FAF9F7;
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 45px;
+    font-weight: 400;
+    text-align: center !important;
+    
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 1rem !important;
+}
+
+.tituloTab{
+    max-width: 940px;
+    font-size: 40px;
+    font-family: 'Bebas' !important;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 35px;
+    white-space: pre;
+    margin: 0 ;
+    margin-bottom: 0.625rem;
+    
+    text-align: center !important;
+}
+
+.cabeceraTabla{
+    background-color: #ee892b !important;
+}

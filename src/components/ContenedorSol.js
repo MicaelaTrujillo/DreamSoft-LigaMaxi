@@ -38,6 +38,7 @@ function ContenedorSol(props){
             });
         }, []);
 
+       
     return(
         <div className="container">
             <div className="main">
@@ -46,12 +47,12 @@ function ContenedorSol(props){
                 <p className="sub-titulo">{props.subtitulo}</p>
                 {userRol==='Administrador'? 
                     equiposAdm.map((equipo) => (
-                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} imagen={equipo.UrlImagen} habilitado={equipo.Habilitado}/>
+                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} imagen={equipo.UrlImagen} habilitado={equipo.Habilitado} fecha={equipo.FechaSol}/>
                     ))
                     
                   : 
                     equiposDel.map((equipo) => (
-                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} imagen={equipo.UrlImagen} habilitado={equipo.Habilitado} inscrito={equipo.Inscrito}/>
+                    <TarjetaSol key = {equipo.id} name={equipo.NombreEquipo} categoria={equipo.Categoria} imagen={equipo.UrlImagen} habilitado={equipo.Habilitado} inscrito={equipo.Inscrito} fecha={equipo.FechaSol}/>
                     ))
                     
                 }

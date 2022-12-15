@@ -7,7 +7,7 @@
 
 .navbar-texto{
     color: white;
-    font-size: 24px;
+    font-size: 21px;
     text-shadow: 1px 1px 1px  rgb(0 0 0 / 50%);
     /*padding-top: 11px;*/
    font-weight: 500;
@@ -20,7 +20,9 @@ a  {
     color: #ffff !important;
     text-decoration: none !important;
 }
-
+.color{
+    color: rgb(0, 0, 0) !important;
+}
 .contenedor-navbar{
     display: flex;
     align-items: center;
@@ -50,4 +52,32 @@ Link{
     /*padding-top: 11px;*/
    
     text-align: center;
+}
+
+
+@media screen and (max-width:560px) {
+    .navbar-texto{
+        color: white;
+        font-size: 14px;
+        
+    }
+
+}
+
+@media screen and (max-width:1090px) {
+    .navbar-texto{
+        color: white;
+        font-size: 20px;
+        
+    }
+
+}
+
+@media screen and (max-width:480px) {
+    .navbar-texto{
+        color: white;
+        font-size: 13px;
+        
+    }
+
 }

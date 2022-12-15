@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { UserContext } from '../context/userProvider';
 import { useContext } from 'react';
 import { GetRolUser } from '../utyls/getRolUser';
-
+import NavDropdown from 'react-bootstrap/NavDropdown';
 const routes={
     user:[
         {
@@ -21,6 +21,10 @@ const routes={
             name: 'Campeonato',
             path: '/FormularioCampeonato'
         },
+        {
+            name: 'Partidos',
+            path: '/Partidos'
+        },
         
     ],
     Delegado:[
@@ -34,12 +38,13 @@ const routes={
         },
         
     ],
-    apuntador:[
+   /* Apuntador:[
         {
-            name: 'Mesa',
-            path: '/FormularioPreInscripcion'
+            name: 'Planillas',
+            path: '/PlanillaPartidos'
         },
-    ],
+       
+    ],*/
 }
 function Navbar (){
     const {user} = useContext(UserContext);
@@ -57,9 +62,24 @@ function Navbar (){
                 <nav>
                     <Link to="/Equipos">Equipos</Link>
                 </nav>          
-                    
                 </div>
-
+                <div className='contenedor-texto navbar-texto'>   
+                <NavDropdown title="Reportes" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="#action/3.1"><Link to="/TablaDePosiciones" className='color'>Tabla de posiciones</Link></NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2"><Link to="/Reportes/Faltas" className='color'>Faltas</Link></NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.3"><Link to="/Reportes/Anotaciones" className='color'>Anotaciones</Link></NavDropdown.Item>
+                </NavDropdown>
+                  </div>
+                
+                <div className='contenedor-texto navbar-texto'>   
+                <nav>
+                    <Link to="/PlanillaPartidos">Planillas</Link>
+                </nav>          
+                </div>                <div className='contenedor-texto navbar-texto'>   
+                <nav>
+                    <Link to="/RolPartidos">Rol de Partidos</Link>
+                </nav>          
+                </div>
                 {user? 
             
                 routes[userRol]?.map(({name, path}) => (
