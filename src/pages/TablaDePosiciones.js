@@ -1,6 +1,6 @@
 import React from "react";
 import HomePage from "../components/homePage";
-import TablaPos from "../components/TablaPos";
+import ContenedorTabPos from "../components/ContenedorTabPos";
 import {useParams} from 'react-router-dom';
 
 function TablaDePosiciones(){
@@ -9,7 +9,7 @@ function TablaDePosiciones(){
 
        <div>
              <HomePage/>
-             <TablaPos/>
+             <ContenedorTabPos/>
        </div>
     );
     

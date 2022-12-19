@@ -1,27 +1,55 @@
 import React, { useEffect, useState, useRef } from "react";
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc,getDocs,  collection, getDoc, updateDoc,where, query} from "firebase/firestore";
+import { doc, setDoc,getDocs,  collection,where, query} from "firebase/firestore";
 import "../styles sheet/tablaPos.css";
 import Table from 'react-bootstrap/Table';
 
-function TablaPos( ){
+function TablaPos(props ){
+    const cat= props.categoria;
+    cat.toString();
     
     const [equipoos, setEquipos] = useState([]);
  
         useEffect (() => {
-            getDocs(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos")).then(
-                (querySnapshot) => {
-                    const datos = querySnapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }));
-                    //console.log("datoos",datos);  
-                    setEquipos(datos);
+            
+            const q = query(collection(db, "Campeonato1","OKfiQOn7WhvKSck3A4Tf","Equipos"), where('Categoria', '==', cat));
+            getDocs(q).then((querySnapshot) =>{
+                const equiposCinfo = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));  
+                setEquipos(equiposCinfo);
+            
+              
             });
+                
+            
         }, []);
 
     var pos=0;
-/*
+    
+    /*var cate = "";
+const [categ, setCateg] = useState('');
+
+  useEffect(() => {
+    async function obtenerCate() {
+      const docRef = doc(db, "Campeonato1", "OKfiQOn7WhvKSck3A4Tf");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        cat = docSnap.data().Categorias;
+        var categSep = cat.toString() 
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+     
+      setCateg(categSep)
+    }
+    obtenerCate();
+  }, []);
+
+    /*
     const [equiposCJ, setEquiposCJ] = useState([]);
     const [equiposSnJ, setEquiposSnJ] = useState([]);
         useEffect (() => {
@@ -60,13 +88,15 @@ function TablaPos( ){
       /*Dividir en 2 arreglos para definir quienes si tienen puntaje */
       for (let i = 0; i < equipoos.length; i++) {
         //const { valor } = equipoos[i]
-        if(equipoos[i].pAFavor!=null){
+        if((equipoos[i].PPerdidos+equipoos[i].PGanados+ equipoos[i].PEmpatados)>0 ){
             equiposJug.push(equipoos[i]);
         }else{
             equiposSJ.push(equipoos[i]);
         }
         
       }
+
+     
 
       /*Ordenar los equipos para definir posicion */
       equiposJug.sort( (a, b) => {
@@ -85,23 +115,19 @@ function TablaPos( ){
         return 0;
       });
 
-      /*console.log(equiposJug);
-*/
       //console.log(equiposJug);
 
+      //console.log(equiposJug);
+
+      function actualizarPos(i){
+        pos=i;
+      }
 
 return (
     
-    <div className="container">
-        
-        <div className="main-info3 mt-5 mb-5 mx-0 " >
-
-            <div className="contenedor-Info3 row cont-main mt-5 mb-5 mx-0">
-
-                <h2 className="tituloTab">Tabla de posiciones</h2>
-
-      {        
                     <div>
+                        <h4>Categoría: {props.categoria}</h4>
+
                     <Table responsive="md" bordered hover>
                         <thead className="cabeceraTabla">
                         <tr>
@@ -118,9 +144,10 @@ return (
                         </tr>
                         </thead>
                         <tbody>
-                        {equiposJug.map((equipo) => (
+                            
+                        {equiposJug.map((equipo, index) => (
                         <tr>
-                            <td>{pos=pos+1}</td>
+                            <td>{index+1}</td>
                             <td>{equipo.NombreEquipo}</td>
                             <td>{equipo.PGanados+equipo.PEmpatados+equipo.PPerdidos}</td>
                             <td>{equipo.PGanados}</td>
@@ -130,10 +157,11 @@ return (
                             <td>{equipo.pEContra}</td>
                             <td>{equipo.pAFavor-equipo.pEContra}</td>
                             <td>{equipo.PGanados*3+equipo.PEmpatados*1}</td>
+                            {actualizarPos(index+1)}
                         </tr> ))
                         
                         }
-
+                        
                         {equiposSJ.map((equipo) => (
                         <tr>
                             <td>{pos=pos+1}</td>
@@ -147,12 +175,7 @@ return (
                     </Table>
                     </div>
                     
-        }
-      
-            </div>
-    
-        </div>
-    </div>
+        
 );
 
 }
