@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom/client';
 import {Link} from 'react-router-dom'
 
 import { db } from "../Firebase/ConexionBD";
-import { doc, setDoc, getDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import { doc, setDoc,getDocs,  collection, getDoc, updateDoc} from "firebase/firestore";
+import { wait } from "@testing-library/user-event/dist/utils";
 import QR from '../assets/qr.jpeg'
 import QRwebsis from '../assets/qrWebsis.png'
 import { useState } from "react";
@@ -401,14 +401,50 @@ function FormFecha({label,value,estado, cambiarEstado}){
     )
 }
 
+
+var categorias = ["*Seleccione categoría"]
+var prim=0;
+var cat1="";
+var cat2="";
+var dif=5;
+      async function Cat(){
+      const querySnapshot = await getDocs(collection(db, "Campeonato1"));
+      querySnapshot.forEach((doc) => {
+        categorias = doc.data().Categorias
+        categorias.unshift("*Seleccione categoría")
+        //console.log("catego",categorias);
+      });
+      console.log("categorias1: ",categorias)
+      categorias.shift();//quitamos el seleccione categoria
+        cat1=categorias.shift();//obtenemos la primera categoria
+        cat2= categorias.shift();//Obtenemos la segunda categoria
+      prim=1;
+    }
+Cat();
 function FormFecha2({label,value,estado, cambiarEstado}){
     const onChange = (e) => {
         cambiarEstado({...estado, campo: e.target.value});
     }
-
-    const fCampo = new Date(estado.campo);
     
-    console.log("FCampo: ",fCampo);
+    const fCampo = new Date(estado.campo);
+    if(prim==1){
+        wait();
+        console.log("categorias: ",categorias)
+        
+        console.log("categ1:",cat1)
+        console.log("categ2:",cat2)
+
+        cat1.slice(1,-5)
+        cat2.slice(1,-5)
+
+        console.log("cccateg1:",cat1.slice(0,-5))
+        console.log("cccateg2:",cat2.slice(0,-5))
+
+        dif=cat2.slice(0,-5)-cat1.slice(0,-5)
+        console.log("dif es:",dif)
+    }
+    
+    //onsole.log("FCampo: ",fCampo);
 
 
     const fechaActual = Date.now();
@@ -417,18 +453,18 @@ function FormFecha2({label,value,estado, cambiarEstado}){
 
     //console.log("hoy: "+hoy)
     const fechaCat=categoria.slice(0,-5);
-    console.log("fechaCat: "+ fechaCat);
+   // console.log("fechaCat: "+ fechaCat);
 
     let catEnMili= 1000*60*60*24*365*fechaCat;
     var fechaRest = fechaActual-catEnMili;
-    
+    let unSeg = 1000*60*60*24*365;
 
-    let cincoAEnMili= 1000*60*60*24*365*5;
+    let difcat= 1000*60*60*24*365*dif;
 
     var fechaCampoMili    = fCampo-0;
 
-    var f1= new Date(fechaRest);
-    var fn= new Date(fechaRest-cincoAEnMili);
+    var f1= new Date(fechaRest-unSeg);
+    var fn= new Date(fechaRest-difcat);
     var f2= new Date(fechaCampoMili);
 
     const fMax= f1.toISOString();
@@ -437,8 +473,8 @@ function FormFecha2({label,value,estado, cambiarEstado}){
     const fMin= fn.toISOString();
     const fMin2= "1"+fMin.slice(1,-8);
     
-    console.log("MAXIMO" ,fMax2);
-    console.log("minimo" ,fMin2)
+   // console.log("MAXIMO" ,fMax2);
+    //console.log("minimo" ,fMin2)
 
 
     return(
