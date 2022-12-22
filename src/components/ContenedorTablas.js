@@ -38,7 +38,7 @@ function ContenedorTablas(props){
     cat()
     }, []);
 
-      console.log("categorias01", categorias);
+      console.log("categorias", categorias);
 return (
     
     <div className="container">

@@ -8,6 +8,7 @@ import { db } from "../Firebase/ConexionBD";
 import { doc, updateDoc ,getDocs,  collection, getDoc} from "firebase/firestore";
 
 
+
 function FormPlanilla({id, equipo1, equipo2}){
     
     const [puntosA, cambiarPuntosA] = useState({campo: "", valido: null});
@@ -160,6 +161,7 @@ console.log(finalPartidoG, finalPartidoP)
         })
 
         alert("Resultados del partido registrado exitosamente.")
+      
 
     }
 
