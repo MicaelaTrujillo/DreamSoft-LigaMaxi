@@ -39,10 +39,25 @@ function ModalSol(props){
                     label="Categoría: "
                     value = {props.categoria}
                 />
+                { props.fecha=== undefined?
+                      <FormInputSinCambioEst
+                      label="Fecha de Solicitud: "
+                     
+          
+                    
+                      value = "error"
+                  />
+                    :
+                    
+                    
                 <FormInputSinCambioEst
                     label="Fecha de Solicitud: "
+                   
+        
+                  
                     value = {dias[props.fecha.toDate().getDay()]+", " +props.fecha.toDate().getDate()+" de "+ meses[props.fecha.toDate().getMonth()]}
                 />
+                }
                 <div>Comprobante: </div>
                 <FormImagen
                     archivo="Comprobante: "
